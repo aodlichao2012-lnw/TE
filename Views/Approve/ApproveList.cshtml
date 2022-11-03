@@ -308,6 +308,7 @@
                             "<td>" + data[i].REQUEST_NAME + "</td><td>" + data[i].REQUEST_NAME + "</td><td>" + filstList + "</td>" +
                             "<td>" + data[i].ISSUE_NAME + "</td><td>" + date.toLocaleDateString("th-TH") + "</td> " +
                             "<td class='text-center'><a target='_Blank' href='@Url.Action("InformationFormat", "Approve")/" + data[i].ID +"'><img src='@Url.Content("~/Image/file.svg")' width='20' title='View Details'/></a></td> </tr>";
+                        
                         $('#tbody').append(html);
                     }
                 }
@@ -537,7 +538,7 @@
         $('#btnFollow').attr('disabled', 'disabled');
         $('#btnUnfollow').attr('disabled', 'disabled');
     }
-
+  
 </script>
 
 

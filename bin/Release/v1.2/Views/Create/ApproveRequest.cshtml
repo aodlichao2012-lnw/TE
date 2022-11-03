@@ -1,0 +1,442 @@
+﻿@model Information_System.Models.RequestDocModel
+@{
+    ViewBag.Title = "ApproveRequest";
+    string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<style>
+    .bddd {
+        border: solid;
+        border-width: 1px;
+    }
+
+    .bd {
+        border-top: solid;
+        border-right: solid;
+        border-left: solid;
+        border-width: 1px;
+    }
+
+    .hrb {
+        border-bottom: solid;
+        border-width: 1px;
+    }
+
+    .hrr {
+        border-right: solid;
+        border-width: 1px;
+    }
+
+    .hrl {
+        border-left: solid;
+        border-width: 1px;
+    }
+
+
+</style>
+<div style="background-color: white; padding: 16px;" class="mt-2">
+    @*@if (TempData["successApprove"] != null)
+    {*@
+        <div id="createRequestDoc" class="" role="alert" style="display:none;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong id="text"></strong>
+        </div>
+    @*}*@
+    <h2>REQUIREMENT AND INFORMATION DOCUMENT</h2>
+
+    <div class="pl-3 pr-3 mt-3">
+        <div class="row">
+            <div class="col-lg-1">
+                <b style="margin-left: -14px;">Objective :  </b>
+            </div>
+            <div class="col-lg-9">
+                <div  style="margin-left: -24px;">The preliminary data. BOM master operator to change and save The changes causes</div>
+                <div  style="margin-left: -24px;">This document will be issued by concerned section. </div>
+            </div>
+            <div class="col-lg-2 bd">
+                <div class="pt-1" style="display: flex;">
+                    <b>No :  </b>
+                    <label class="ml-1">@Model.IS_NO</label>
+                </div>
+                <div style="display: flex;">
+                    <b>Issue Date :  </b>
+                    <label class="ml-1">@Model.ISSUE_DATE.ToString("dd-MMM-yyyy")</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bd">
+            <div class="col-lg-6 align-self-center">
+                <b>SUBJECT :</b>
+                <label class="ml-1">@Model.SUBJECT</label>
+            </div>
+            <div class="col-lg-3 align-self-center text-center pt-2 hrl hrr">
+                <div><b>INFORMATION BY :</b></div>
+                <div><label>@Model.ISSUE_NAME</label></div>
+            </div>
+            <div class="col-lg-3 align-self-center text-center pt-2">
+                <div><b>APPROVED :</b></div>
+                <div><label></label></div>
+            </div>
+        </div>
+        <div class="row bd">
+            <div class="align-self-center" style="width: 20%;">
+                <b class="pl-3">DOCUMENT or DATA OF CHANGE :</b>
+            </div>
+            <div id="dataOff" class="col-lg-9 mt-1">
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Drawing" disabled><b> Drawing</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="BOM Master" disabled><b> BOM Master</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="PO" disabled><b> PO</b></label>
+                <label class="col-lg-4 checkbox-inline"><input type="checkbox" value="Method (WI)" disabled><b> Method (WI)</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="PDM" disabled><b> PDM</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="SAP" disabled><b> SAP</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Production Plan" disabled><b> Production Plan</b></label>
+                <label class="col-lg-5 checkbox-inline">
+                    <input type="checkbox" value="Other" id="other" onclick="disableBtn();" disabled><b> Other</b>
+                    <input type="text" class="col-lg-8 " id="txtOther" disabled />
+                </label>
+            </div>
+        </div>
+        <div class="row bd">
+            <div class="col-lg-6 hrr">
+                <div class="form-group mt-1">
+                    <label for="txtPartCode"><b>PARTS CODE :</b></label>
+                    <textarea class="form-control" style="min-width: 100%" id="txtPartCode" name="PARTS_CODE" disabled rows="3">@Model.PARTS_CODE</textarea>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-1">
+                <div class="form-group">
+                    <label for="txtWatchCode"><b>WATCH CODE :</b></label>
+                    <textarea class="form-control" style="min-width: 100%" id="txtWatchCode" name="WATCH_CODE" disabled rows="3">@Model.WATCH_CODE</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row bd">
+            <b class="mt-1 pl-3">START REQUIRE PRODUCTION MONTH : </b>
+            <label class="ml-2 mt-1">@Model.START_PROD_MONTH</label>
+        </div>
+        <div class="row bd">
+            <p class="col-12 mt-1" style="text-align: center"><b>CLASSIFICATION FOR CHANGING :</b></p>
+            <div class="col-12" id="Clas">
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Change Order" disabled><b> Change Order</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Save Cost" disabled><b> Save Cost</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Change Process" disabled><b> Change Process</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Standardization" disabled><b> Standardization</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Common" disabled><b> Common</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Mistake Order" disabled><b> Mistake Order</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Change Specification" disabled><b> Change Specification</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Reduct for Stock" disabled><b> Reduct for Stock</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Qualitty Upgrade" disabled><b> Qualitty Upgrade</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Mistake Write" disabled><b> Mistake Write</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="For Defective" disabled><b> For Defective</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="For Improved" disabled><b> For Improved</b></label>
+                <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Market Request" disabled><b> Market Request</b></label>
+                <label class="col-lg-5 checkbox-inline">
+                    <input type="checkbox" value="Other" id="otherClas" onclick="disableBtnClas();" disabled><b> Other</b>
+                    <input type="text" class="col-lg-9 " id="txtOtherClas" disabled />
+                </label>
+            </div>
+        </div>
+        <div class="row bd hrb">
+            <div class="col-lg-12 text-center mt-1">
+                <p><b>DESCRIPTION</b></p>
+            </div>
+            <div class="col-lg-12">
+                <b>Reason Explain</b> 
+                <label>@Model.REASON_EXPLAIN</label>
+            </div>
+            @{ int i = 1;}
+            @foreach (var m in Model.GET_FILE_LIST)
+            {
+                int n = m.LastIndexOf(".");
+                var img = m.Substring(n + 1);
+                if (img == "jpg" || img == "png" || img == "JPG" || img == "PNG")
+                {
+                    <div class="bd hrb" style="width: 100%;margin: 20px; border-radius: 8px;">
+                        <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
+                        <p style="margin-top: 15px; margin-left: 15px;">@m</p>
+                        <img src="~/Temp_File/@m" alt="@m" width="250" style="margin: 24px;">
+                    </div>
+                }
+                else
+                {
+                    <div class="bd hrb" style="width: 100%;height:100px; margin: 20px; border-radius: 8px;">
+                        <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
+                        <p style="margin-top: 15px; margin-left: 15px;">
+                            <a target="_blank" href="~/Temp_File/@m">@m</a>
+                        </p>
+                    </div>
+                }
+                i++;
+
+            }
+
+        </div>
+        <div class="row">
+            <div class="col-lg-1 mt-2">
+                <p><b>Remark :</b></p>
+            </div>
+            <div class="col-lg-11 mt-2" style="margin-left: -24px;">
+                <div>Please report the cause and the result was later changed. For complete details</div>
+                <div>Change maker of parts must have price before and after change</div>
+            </div>
+
+        </div>
+        <div id="btnDiv" class="row justify-content-end pb-4">
+            <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
+            <button type="button" class="btn btn-success mr-2" style="width: 150px;" data-toggle="modal" data-target="#approveModel">Approve</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectModel">Reject</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#SuccesstModel" hidden="hidden" data-backdrop="static" data-keyboard="false">Reject</button>
+        </div>
+
+    </div>
+
+    @*<div class="row">
+        <div class="col-lg-2">
+            <b>No. :</b>
+            <label>DE-REQ-20081</label>
+        </div>
+        <div class="col-lg-2">
+            <b>Issue Date :</b>
+            <label>27 June 2020</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <b>SUBJECT :</b>
+            <label>Change spring bar code</label>
+        </div>
+        <div class="col-lg-2">
+            <b>INFORMATION BY :</b>
+            <label>Mr.Pramin</label>
+        </div>
+        <div class="col-lg-2">
+            <b>APPROVED :</b>
+            <label>27 June 2020</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <b>No. :</b>
+            <label>DE-REQ-20081</label>
+        </div>
+        <div class="col-lg-3">
+            <b>Issue Date :</b>
+            <label>27 June 2020</label>
+        </div>
+    </div>*@
+
+</div>
+
+<div class="modal fade" id="approveModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Do you want to approve?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <b for="txtComment">Comment</b>
+                    <div class="mt-2">
+                        <textarea class="form-control" style="min-width: 100%" id="txtCommentApprove" name="txtCommentApprove" rows="3" placeholder="Enter Comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="approve('@Model.IS_ID','APPROVED')">Yes, I'm Approve</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rejectModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Do you want to reject?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <b for="txtComment">Comment</b>
+                    <div class="mt-2">
+                        <textarea class="form-control" style="min-width: 100%" id="txtCommentReject" name="txtCommentReject" rows="3" placeholder="Enter Comment"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="approve('@Model.IS_ID','REJECT')">Yes, I'm Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="SuccesstModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="justify-content-lg-center">
+                    <img src="~/Image/success_icon.png" width="150">
+                </div>
+                <h4>Great!</h4>
+                <p>You have successfully the transaction.</p>
+                <button class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="loadingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog" style="top: 30%;" role="document">
+        <div>
+            <div style="align-items: center;">
+                <div class="loader-cycle" style="margin:0 auto;"></div>
+                <h4 class="mt-3" style="color:#3498db; text-align:center; text-shadow: 1px 1px #000000;">In-Progress</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const status = "@Model.APPROVE_STATUS";
+    var createRequestDoc = document.getElementById("createRequestDoc");
+    if (status == "APPROVED") {
+        document.getElementById("text").innerText = "This document has been approved.";
+        createRequestDoc.style.display = "block";
+        createRequestDoc.className = "alert alert-success";
+        document.getElementById("btnDiv").style.display = "none";
+    } else if (status == "REJECT") {
+        document.getElementById("text").innerText = "This document has been reject.";
+        createRequestDoc.style.display = "block";
+        createRequestDoc.className = "alert alert-danger";
+        document.getElementById("btnDiv").style.display = "none";
+    } else if (status == "TE-REJECT") {
+        document.getElementById("text").innerText = "This document has been reject from Technical Department.";
+        createRequestDoc.style.display = "block";
+        createRequestDoc.className = "alert alert-danger";
+        document.getElementById("btnDiv").style.display = "none";
+    }
+
+    function setClassification() {
+        var checked = 0;
+        var tbl = document.getElementById("Clas");
+        var chks = tbl.getElementsByTagName("INPUT");
+        for (var i = 0; i < chks.length; i++) {
+            var index = chks[i].value;
+            var str = "@Model.CLASSIFICATION";
+            if (str.indexOf(index) != -1) {
+                chks[i].checked = true;
+                if (str.indexOf("Other") != -1) {
+                    var active = str.slice(str.lastIndexOf('Other') + 6);
+                    document.getElementById("txtOtherClas").value = unescape(active);
+
+                }
+            }
+        }
+    }
+
+    function unescape(string) {
+        return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
+    }
+
+    setClassification();
+
+    function setDataChange() {
+
+        var checked = 0;
+        var tbl = document.getElementById("dataOff");
+        var chks = tbl.getElementsByTagName("INPUT");
+        for (var i = 0; i < chks.length; i++) {
+            var index = chks[i].value;
+            var str = "@Model.DOCUMENT_DATA_OF_CHANGE";
+            if (str.indexOf(index) != -1) {
+                chks[i].checked = true;
+                if (str.indexOf("Other") != -1) {
+                    var active = str.slice(str.lastIndexOf('Other') + 6);
+                    document.getElementById("txtOther").value = unescape(active)
+                }
+            }
+        }
+    }
+
+    setDataChange();
+
+    function approve(IS_ID, status) {
+        $('#loadingModel').modal('show');
+        $('#approveModel').modal('hide');
+        $('#rejectModel').modal('hide');
+
+        var txtComment;
+        if (status == 'APPROVED') {
+            txtComment = document.getElementById("txtCommentApprove").value;
+        } else {
+            txtComment = document.getElementById("txtCommentReject").value;
+        }
+
+        var file = @Html.Raw(Json.Encode(@Model.GET_FILE_LIST));
+        var fileArr = [];
+        for (var i = 0; i < file.length; i++) {
+            var index = file[i];
+            fileArr.push(index);
+        }
+
+        var txtPartCode = document.getElementById("txtPartCode").value;
+        var txtWatchCode = document.getElementById("txtWatchCode").value;
+
+        var postData = {
+            IS_ID: IS_ID,
+            SUBJECT: unescape("@Model.SUBJECT"),
+            ISSUE_DATE: "@Model.ISSUE_DATE",
+            REASON_EXPLAIN: unescape("@Model.REASON_EXPLAIN"),
+            START_PROD_MONTH: unescape("@Model.START_PROD_MONTH"),
+            DOCUMENT_DATA_OF_CHANGE: unescape("@Model.DOCUMENT_DATA_OF_CHANGE"),
+            PARTS_CODE: txtPartCode,
+            WATCH_CODE: txtWatchCode,
+            CLASSIFICATION: unescape("@Model.CLASSIFICATION"),
+            APPROVE_STATUS: status,
+            ISSUE_EMAIL: "@Model.ISSUE_EMAIL",
+            APPROVE_NAME: "@Model.APPROVE_NAME",
+            ISSUE_NAME: "@Model.ISSUE_NAME",
+            FILE_LIST: fileArr,
+            APPROVE_COMMENT: txtComment
+        };
+        
+        $.ajax({
+                type: "POST",
+                data: postData,
+                url: "@Url.Action("ApproveRequest", "Create")",
+                success: function (data) {
+                    if (data == "True") {
+                        $('#SuccesstModel').modal('show');
+                        window.location.reload();
+                    }
+                    else
+                    {
+                        hideLoadingModal();
+                        document.getElementById("err").style.display = "block";
+                    }
+                }
+            });
+    }
+
+    function hideLoadingModal() {
+        $('#loadingModel').on('shown.bs.modal', function () {
+            $('#loadingModel').modal('hide');
+        });
+    }
+
+    function unescape(string) {
+        return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
+    }
+
+</script>

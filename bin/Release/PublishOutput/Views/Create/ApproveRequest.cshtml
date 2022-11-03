@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ApproveRequest";
     string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
 }
 
 <style>
@@ -31,17 +32,92 @@
         border-left: solid;
         border-width: 1px;
     }
+    
+    /*TimeLine*/
+    .timeline {
+      list-style-type: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .li {
+      transition: all 200ms ease-in;
+    }
+
+    .timestamp {
+      margin-bottom: 20px;
+      padding: 0px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-weight: 100;
+    }
+
+    .status {
+      padding: 0px 40px;
+      display: flex;
+      justify-content: center;
+      border-top: 2px solid #D6DCE0;
+      position: relative;
+      transition: all 200ms ease-in;
+    }
+    .status h5 {
+      font-weight: 600;
+      margin-top: 10px;
+      margin-left: -10px;
+    }
+    .status:before {
+      content: "";
+      width: 25px;
+      height: 25px;
+      background-color: white;
+      border-radius: 25px;
+      border: 1px solid #ddd;
+      position: absolute;
+      top: -15px;
+      left: 42%;
+      transition: all 200ms ease-in;
+    }
+
+    .li.complete .status {
+      border-top: 2px solid #66DC71;
+    }
+    .li.complete .status:before {
+      background-color: #66DC71;
+      border: none;
+      transition: all 200ms ease-in;
+    }
+    .li.complete .status h5 {
+      color: #66DC71;
+    }
+
+    .li.reject .status {
+      border-top: 2px solid red;
+    }
+    .li.reject .status:before {
+      background-color: red;
+      border: none;
+      transition: all 200ms ease-in;
+    }
+    .li.reject .status h5 {
+      color: red;
+    }
 
 
 </style>
 <div style="background-color: white; padding: 16px;" class="mt-2">
     @*@if (TempData["successApprove"] != null)
-    {*@
-        <div id="createRequestDoc" class="" role="alert" style="display:none;">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong id="text"></strong>
-        </div>
+        {*@
+    <div id="createRequestDoc" class="" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong id="text"></strong>
+    </div>
     @*}*@
+
+    @*@if (Model.SUBJECT != null)
+        {*@
+
     <h2>REQUIREMENT AND INFORMATION DOCUMENT</h2>
 
     <div class="pl-3 pr-3 mt-3">
@@ -50,8 +126,8 @@
                 <b style="margin-left: -14px;">Objective :  </b>
             </div>
             <div class="col-lg-9">
-                <div  style="margin-left: -24px;">The preliminary data. BOM master operator to change and save The changes causes</div>
-                <div  style="margin-left: -24px;">This document will be issued by concerned section. </div>
+                <div style="margin-left: -24px;">The preliminary data. BOM master operator to change and save The changes causes</div>
+                <div style="margin-left: -24px;">This document will be issued by concerned section. </div>
             </div>
             <div class="col-lg-2 bd">
                 <div class="pt-1" style="display: flex;">
@@ -68,7 +144,7 @@
         <div class="row bd">
             <div class="col-lg-6 align-self-center">
                 <b>SUBJECT :</b>
-                <label class="ml-1">@Model.SUBJECT</label>
+                <label class="ml-1" id="lbSebject">@Model.SUBJECT</label>
             </div>
             <div class="col-lg-3 align-self-center text-center pt-2 hrl hrr">
                 <div><b>INFORMATION BY :</b></div>
@@ -142,8 +218,20 @@
                 <p><b>DESCRIPTION</b></p>
             </div>
             <div class="col-lg-12">
-                <b>Reason Explain</b> 
+                <b>Reason Explain :</b>
                 <label>@Model.REASON_EXPLAIN</label>
+            </div>
+            <div class="col-lg-12">
+                <b>Details :</b>
+                <label>@Model.DETAILS</label>
+            </div>
+            <div class="col-lg-12">
+                <b>Warning Date :</b>
+                @if (Model.WARNING_DATE != null)
+                {
+                    <label class="ml-1">@Model.WARNING_DATE.Value.ToString("dd-MMM-yyyy")</label>
+                }
+
             </div>
             @{ int i = 1;}
             @foreach (var m in Model.GET_FILE_LIST)
@@ -155,7 +243,14 @@
                     <div class="bd hrb" style="width: 100%;margin: 20px; border-radius: 8px;">
                         <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
                         <p style="margin-top: 15px; margin-left: 15px;">@m</p>
-                        <img src="~/Temp_File/@m" alt="@m" width="250" style="margin: 24px;">
+                        @if (Model.APPROVE_STATUS == "APPROVED")
+                        {
+                            <img src="http://10.145.163.10/cloud/IS/@m" alt="@m" width="250" style="margin: 24px;">
+                        }
+                        else
+                        {
+                            <img src="~/Temp_File/@m" alt="@m" width="250" style="margin: 24px;">
+                        }
                     </div>
                 }
                 else
@@ -163,12 +258,18 @@
                     <div class="bd hrb" style="width: 100%;height:100px; margin: 20px; border-radius: 8px;">
                         <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
                         <p style="margin-top: 15px; margin-left: 15px;">
-                            <a target="_blank" href="~/Temp_File/@m">@m</a>
+                            @if (Model.APPROVE_STATUS == "APPROVED")
+                            {
+                                <a target="_blank" href="http://10.145.163.10/cloud/IS/@m">@m</a>
+                            }
+                            else
+                            {
+                                <a target="_blank" href="~/Temp_File/@m">@m</a>
+                            }
                         </p>
                     </div>
                 }
                 i++;
-
             }
 
         </div>
@@ -182,6 +283,13 @@
             </div>
 
         </div>
+
+        <div class="row mt-4" style="margin: 0 auto;">
+            <ul class="timeline" id="timeline">
+               
+            </ul>
+        </div>
+
         <div id="btnDiv" class="row justify-content-end pb-4">
             <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
             <button type="button" class="btn btn-success mr-2" style="width: 150px;" data-toggle="modal" data-target="#approveModel">Approve</button>
@@ -190,43 +298,11 @@
         </div>
 
     </div>
-
-    @*<div class="row">
-        <div class="col-lg-2">
-            <b>No. :</b>
-            <label>DE-REQ-20081</label>
-        </div>
-        <div class="col-lg-2">
-            <b>Issue Date :</b>
-            <label>27 June 2020</label>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-3">
-            <b>SUBJECT :</b>
-            <label>Change spring bar code</label>
-        </div>
-        <div class="col-lg-2">
-            <b>INFORMATION BY :</b>
-            <label>Mr.Pramin</label>
-        </div>
-        <div class="col-lg-2">
-            <b>APPROVED :</b>
-            <label>27 June 2020</label>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-2">
-            <b>No. :</b>
-            <label>DE-REQ-20081</label>
-        </div>
-        <div class="col-lg-3">
-            <b>Issue Date :</b>
-            <label>27 June 2020</label>
-        </div>
-    </div>*@
+    @*}
+        else
+        {
+            <p style="color: red">Fail, Please try agian!</p>
+        }*@  
 
 </div>
 
@@ -321,11 +397,44 @@
         createRequestDoc.className = "alert alert-danger";
         document.getElementById("btnDiv").style.display = "none";
     } else if (status == "TE-REJECT") {
-        document.getElementById("text").innerText = "This document has been reject from Technical Department.";
+        document.getElementById("text").innerText = "This document has been rejected by TE.";
         createRequestDoc.style.display = "block";
         createRequestDoc.className = "alert alert-danger";
         document.getElementById("btnDiv").style.display = "none";
     }
+
+    if ("@Model.CURRENT_APPROVE_STATUS" != "WAITING") {
+        if ("@Model.CURRENT_APPROVE_STATUS" == "APPROVED") {
+            document.getElementById("text").innerText = "This document has been approved by you.";
+            createRequestDoc.style.display = "block";
+            createRequestDoc.className = "alert alert-success";
+        }
+        document.getElementById("btnDiv").style.display = "none";
+    }
+
+    function getApproveList() {
+        var html = "";
+        @for(int s =0; s <Model.APPROVE_LIST.Count; s++)
+        {
+            string complete = "", date = "";
+            int index = s + 1;
+            if (Model.APPROVE_LIST[s].STATUS == "APPROVED") { complete = "licomplete"; } else if (Model.APPROVE_LIST[s].STATUS == "REJECT") { complete = "lireject"; } else { complete = "cli"; }
+            if (Model.APPROVE_LIST[s].APPROVE_DATE == "") { date = "(Waiting)"; } else { date = Model.APPROVE_LIST[s].APPROVE_DATE; }
+            @Html.Raw(" html += '<li "+ complete + "><div timestamp><span author>"+ Model.APPROVE_LIST[s].APPROVE_NAME + "</span>'; ");
+            @Html.Raw(" html += '<span date>"+ date + "</span></div> '; ");
+            @Html.Raw(" html += '<div status><h5>" + index + "</h5></div></li>'; ");
+        }
+
+        html = html.replace(/timestamp/g, "class='timestamp'");
+        html = html.replace(/author/g, "class='author'");
+        html = html.replace(/date/g, "class='date'");
+        html = html.replace(/status/g, "class='status'");
+        html = html.replace(/licomplete/g, "class='li complete'");
+        html = html.replace(/lireject/g, "class='li reject'");
+        html = html.replace(/cli/g, "class='li'");
+        $('#timeline').append(html)
+    }
+    getApproveList()
 
     function setClassification() {
         var checked = 0;
@@ -392,24 +501,33 @@
 
         var txtPartCode = document.getElementById("txtPartCode").value;
         var txtWatchCode = document.getElementById("txtWatchCode").value;
+        var IS_NO = "";
+        if ("@Model.IS_NO" != "") {
+            IS_NO = "@Model.IS_NO";
+        }
+        var subject = document.getElementById('lbSebject').textContent
 
+        var model = @Html.Raw(Json.Encode(Model));
         var postData = {
             IS_ID: IS_ID,
-            SUBJECT: "@HttpUtility.JavaScriptStringEncode(Model.SUBJECT)",
+            IS_NO: IS_NO,
+            SUBJECT: subject,
             ISSUE_DATE: "@Model.ISSUE_DATE",
-            REASON_EXPLAIN: "@HttpUtility.JavaScriptStringEncode(Model.REASON_EXPLAIN)",
-            START_PROD_MONTH: "@HttpUtility.JavaScriptStringEncode(Model.START_PROD_MONTH)",
-            DOCUMENT_DATA_OF_CHANGE: "@HttpUtility.JavaScriptStringEncode(Model.DOCUMENT_DATA_OF_CHANGE)",
+            REASON_EXPLAIN: model.REASON_EXPLAIN,
+            START_PROD_MONTH: model.START_PROD_MONTH,
+            DOCUMENT_DATA_OF_CHANGE: model.DOCUMENT_DATA_OF_CHANGE,
             PARTS_CODE: txtPartCode,
             WATCH_CODE: txtWatchCode,
-            CLASSIFICATION: "@HttpUtility.JavaScriptStringEncode(Model.CLASSIFICATION)",
+            CLASSIFICATION: unescape("@Model.CLASSIFICATION"),
             APPROVE_STATUS: status,
             ISSUE_EMAIL: "@Model.ISSUE_EMAIL",
             APPROVE_NAME: "@Model.APPROVE_NAME",
             ISSUE_NAME: "@Model.ISSUE_NAME",
             FILE_LIST: fileArr,
-            APPROVE_COMMENT: txtComment
-        };
+            APPROVE_COMMENT: txtComment,
+            DETAILS: model.DETAILS,
+            APPROVE_LEVEL: "@Model.APPROVE_LEVEL",
+            APPROVE_EMAIL: "@Model.APPROVE_EMAIL"       };
 
         $.ajax({
                 type: "POST",
@@ -417,14 +535,19 @@
                 url: "@Url.Action("ApproveRequest", "Create")",
                 success: function (data) {
                     if (data == "True") {
-                        $('#SuccesstModel').modal('show');
+                        setTimeout(function (e) {
+                            $('#SuccesstModel').modal('show');
+                            $('#loadingModel').modal('hide');
+                        }, 9000)
                         window.location.reload();
+                        
                     }
                     else
                     {
                         hideLoadingModal();
                         document.getElementById("err").style.display = "block";
                     }
+                    
                 }
             });
     }
@@ -433,6 +556,10 @@
         $('#loadingModel').on('shown.bs.modal', function () {
             $('#loadingModel').modal('hide');
         });
+    }
+
+    function unescape(string) {
+        return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
     }
 
 </script>

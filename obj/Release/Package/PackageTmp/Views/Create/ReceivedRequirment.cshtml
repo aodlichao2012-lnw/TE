@@ -85,13 +85,16 @@
                 <b>SUBJECT :</b>
                 <label class="ml-1 tcb">@Model.SUBJECT</label>
             </div>
-            <div class="col-lg-3 align-self-center text-center pt-2 hrl hrr">
+            <div class="col-lg-2 align-self-center text-center pt-2 hrl hrr">
                 <div><b>INFORMATION BY :</b></div>
                 <div><label class="tcb">@Model.ISSUE_NAME</label></div>
             </div>
-            <div class="col-lg-3 align-self-center text-center pt-2">
+            <div class="col-lg-4 align-self-center text-center pt-2">
                 <div><b>APPROVED :</b></div>
-                <div><label class="tcb">@Model.APPROVE_NAME</label></div>
+                <div><label class="tcb">@Model.APPROVE_NAME</label></div> 
+                
+                <div><b>APPROVED EMAIL:</b></div>
+                <div><label class="tcb">@Model.APPROVE_EMAIL</label></div>
             </div>
         </div>
         <div class="row bd">
@@ -157,20 +160,39 @@
                 <p><b>DESCRIPTION</b></p>
             </div>
             <div class="col-lg-12">
-                <b>Reason Explain</b>
+                <b>Reason Explain : </b>
                 <label class="tcb">@Model.REASON_EXPLAIN</label>
+            </div>
+            <div class="col-lg-12">
+                <b>Details : </b>
+                <label class="tcb">@Model.DETAILS</label>
+            </div>
+            <div class="col-lg-12">
+                <b>Warning Date : </b>
+                @if (Model.WARNING_DATE != null)
+                {
+                    <label class="tcb">@Model.WARNING_DATE.Value.ToString("dd/MMM/yyyy hh:mm")</label>
+                }
+
             </div>
             @{ int i = 1;}
             @foreach (var m in Model.GET_FILE_LIST)
             {
                 int n = m.LastIndexOf(".");
                 var img = m.Substring(n + 1);
-                if (img == "jpg" || img == "png")
+                if (img == "jpg" || img == "png" || img == "JPG" || img == "PNG")
                 {
                     <div class="bd hrb" style="width: 100%;margin: 20px; border-radius: 8px;">
                         <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
                         <p style="margin-top: 15px; margin-left: 15px;">@m</p>
-                        <img src="http://10.145.163.10/cloud/IS/@m" alt="@m" width="250" style="margin: 24px;">
+                        @if (Model.APPROVE_STATUS == "APPROVED")
+                        {
+                            <img src="http://10.145.163.10/cloud/IS/@m" alt="@m" style="margin: 24px; max-width: 600px;">
+                        }
+                        else
+                        {
+                            <img src="~/Temp_File/@m" alt="@m" width="250" style="margin: 24px; max-width: 600px;">
+                        }
                     </div>
                 }
                 else
@@ -178,7 +200,14 @@
                     <div class="bd hrb" style="width: 100%;height:100px; margin: 20px; border-radius: 8px;">
                         <p style="margin-top: 15px; margin-left: 15px;">Docurment detail : #@i</p>
                         <p style="margin-top: 15px; margin-left: 15px;">
-                            <a target="_blank" href="http://10.145.163.10/cloud/IS/@m">@m</a>
+                            @if (Model.APPROVE_STATUS == "APPROVED")
+                            {
+                                <a target="_blank" href="http://10.145.163.10/cloud/IS/@m">@m</a>
+                            }
+                            else
+                            {
+                                <a target="_blank" href="~/Temp_File/@m">@m</a>
+                            }
                         </p>
                     </div>
                 }
@@ -189,9 +218,22 @@
         </div>
 
         <div class="row bd hrb">
-            <div class="form-group mt-2 ml-3" style="width: 98%" >
+            <div class="form-group mt-2 ml-3" style="width: 98%">
                 <label for="txtRequirmentComment"><b>REQUIREMENT APPROVER COMMENT : </b></label>
-                <textarea class="form-control tcb" style="min-width: 100%" id="txtRequirmentComment" name="txtRequirmentComment" disabled rows="3">@Model.APPROVE_COMMENT</textarea>
+                @*<textarea class="form-control tcb" style="min-width: 100%" id="txtRequirmentComment" name="txtRequirmentComment" disabled rows="3">@Model.APPROVE_COMMENT</textarea>*@
+                <table class="table">
+                    <thead style="background-color: #D6EAF8;">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Command</th>
+                            <th class="text-center">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body" id="Appbody">
+
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -283,14 +325,43 @@
 
 <script>
 
+    function getApproveList() {
+        var html = "";
+        @for(int i = 0; i < Model.APPROVE_LIST.Count; i++)
+        {
+            @Html.Raw(" html += '<tr><td txtcenter>" + Model.APPROVE_LIST[i].APPROVE_ID + "</td>'; ");
+            @Html.Raw(" html += '<td txtcenter>" + Model.APPROVE_LIST[i].APPROVE_NAME + "</td>'; ");
+            @Html.Raw(" html += '<td >" + Json.Encode(Model.APPROVE_LIST[i].COMMENT) + "</td>'; ");
+            @Html.Raw(" html += '<td txtcenter>" + Model.APPROVE_LIST[i].APPROVE_DATE + "</td></tr>'; ");
+        }
+        html = html.replace(/txtcenter/g, "class='text-center'");
+        html = html.replace(/"/g, "");
+        $('#Appbody').append(html)
+    }
+    getApproveList()
+
+    function unescape(string) {
+        return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
+    }
+
     function rejectRequirement(id) {
+        var file = @Html.Raw(Json.Encode(@Model.GET_FILE_LIST));
+        var fileArr = [];
+        for (var i = 0; i < file.length; i++) {
+                var index = file[i];
+                fileArr.push(index);
+        }
+
         document.getElementById("err").style.display = "none";
         $('#rejectModel').modal('hide');
         $('#loadingModel').modal('show');
         var postData = {
             id: id,
             comment: document.getElementById("txtCommentReject").value,
+            FILE_LIST: fileArr,
+            APPROVE_EMAIL: "@Model.APPROVE_EMAIL",
         }
+        
 
         $.ajax({
             type: "POST",
@@ -303,6 +374,7 @@
                 }
                 else
                 {
+                    window.location.reload();
                     hideLoadingModal();
                     document.getElementById("err").style.display = "block";
                 }
@@ -339,7 +411,6 @@
     function unescape(string) {
         return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
     }
-
 
     setClassification();
 

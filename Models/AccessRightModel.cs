@@ -36,6 +36,8 @@ namespace Information_System.Models
         public bool IS_APP_LEVEL1 { get; set; }
         public bool IS_APP_LEVEL2 { get; set; }
         //public bool IS_APPROVE { get; set; }
+        public bool IS_TE { get; set; }
+        public bool IS_IT { get; set; }
 
     }
     

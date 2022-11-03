@@ -73,19 +73,19 @@
                 <div class="row">
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtNo">IS No.</label>
-                        <input type="text" class="form-control" id="txtNo" name="txtNo" placeholder="Enter No.">
+                        <input type="text" class="form-control" id="txtNo" name="txtNo" onkeyup="getRequirementInfoList();" placeholder="Enter No.">
                     </div>
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtRequestID">Issue ID</label>
-                        <input type="text" class="form-control" id="txtRequestID" name="txtRequestID" placeholder="Enter ID">
+                        <input type="text" class="form-control" id="txtRequestID" name="txtRequestID" onkeyup="getRequirementInfoList();" placeholder="Enter ID">
                     </div>
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtApproveID">Approve ID</label>
-                        <input type="text" class="form-control" id="txtApproveID" name="txtApproveID" placeholder="Enter ID">
+                        <input type="text" class="form-control" id="txtApproveID" name="txtApproveID" onkeyup="getRequirementInfoList();" placeholder="Enter ID">
                     </div>
                     <div class="form-group ml-3" style="width: 240px;">
                         <label for="optDep">Department</label>
-                        <select class="form-control" id="optDep" name="optDep">
+                        <select class="form-control" id="optDep" name="optDep" onchange="getRequirementInfoList();">
                             <option value="">All</option>
                             @foreach (var list in ViewData["DepList"] as List<Information_System.Models.Department>)
                             {
@@ -154,19 +154,19 @@
                 <div class="row">
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtIDNo">No.</label>
-                        <input type="text" class="form-control" id="txtIDNo" name="txtIDNo" placeholder="Enter No.">
+                        <input type="text" class="form-control" id="txtIDNo" name="txtIDNo" onkeyup="getInfoList();" placeholder="Enter No.">
                     </div>
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtIDRequestID">Requirement No.</label>
-                        <input type="text" class="form-control" id="txtIDRequestID" name="txtIDRequestID" placeholder="Enter Requirement No.">
+                        <input type="text" class="form-control" id="txtIDRequestID" name="txtIDRequestID" onkeyup="getInfoList()" placeholder="Enter Requirement No.">
                     </div>
                     <div class="form-group ml-3" style="width: 180px;">
                         <label for="txtIDRequestBy">Request By</label>
-                        <input type="text" class="form-control" id="txtIDRequestBy" name="txtIDRequestBy" placeholder="Enter Request ID">
+                        <input type="text" class="form-control" id="txtIDRequestBy" name="txtIDRequestBy" onkeyup="getInfoList();" placeholder="Enter Request ID">
                     </div>
                     <div class="form-group ml-3" style="width: 240px;">
                         <label for="optIDDep">Department</label>
-                        <select class="form-control" id="optIDDep" name="optIDDep">
+                        <select class="form-control" id="optIDDep" name="optIDDep" onchange="getInfoList();">
                             <option value="">All</option>
                             @foreach (var list in ViewData["DepList"] as List<Information_System.Models.Department>)
                             {
@@ -305,12 +305,13 @@ else
                             status_style = " style='color: #dc3545; font-weight:500;'";
                         }
 
+                        var parameter = json[i].REQUEST_ID + "REQinfo_id=" + json[i].ID;
                         if (json[i].STATUS == "Tech-reject") {
-                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='20' src='@Url.Content("~/Image/writing.svg")' title='Edit Information' /></a> ";
+                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")/" + parameter + "'><img width='20' src='@Url.Content("~/Image/writing.svg")' title='Edit Information' /></a> ";
                         } else if (json[i].STATUS == "Tech-approve") {
-                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='18' src='@Url.Content("~/Image/floppy-disk.svg")' title='Save and Send Information' /></a> ";
+                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")/" + parameter + "'><img width='18' src='@Url.Content("~/Image/floppy-disk.svg")' title='Save and Send Information' /></a> ";
                         } else {
-                            iconHtml =" <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='20' src='@Url.Content("~/Image/file.svg")' title='View Detail' /></a> ";
+                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")/" + parameter + "'><img width='20' src='@Url.Content("~/Image/file.svg")' title='View Detail' /></a> ";
                         }
 
                         var html = "";
@@ -319,6 +320,7 @@ else
                             " <td class='text-center' style='cursor: pointer;'>" + iconHtml + "</td> </tr> ";
                         html = html.replace('?', '\"');
                         html = html.replace('+', '\"');
+                        html = html.replace('REQ', '?');
                         $('#Infobody').append(html)
                     }
                 }

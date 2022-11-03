@@ -1,0 +1,318 @@
+﻿
+@{
+    ViewBag.Title = "Report";
+    string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+    //string statusParam = HttpContext.Current.Request.Params["STATUS"];
+}
+<link href="~/Content/GlobalStyle.css" rel="stylesheet" type="text/css" />
+
+<style>
+    tr.hide-table-padding td {
+        padding: 0;
+    }
+
+    .expand-button {
+        position: relative;
+    }
+
+    .accordion-toggle .expand-button:after {
+        position: absolute;
+        left: 1.75rem;
+        top: 50%;
+        transform: translate(0, -50%);
+        content: "▲";
+    }
+
+    .accordion-toggle.collapsed .expand-button:after {
+        content: "▼";
+    }
+
+    .fb-1 {
+       font-size: 18px;
+       font-weight: 600;
+    }
+
+</style>
+
+
+<div style="background-color: white; padding: 16px;" class="mt-2">
+    <div class="tab-pane" id="Information">
+        <div class="row">
+            <div class="col-lg-10 mt-2">
+                <h2>Report</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="txtIDNo">No.</label>
+                <input type="text" class="form-control" id="txtIDNo" name="txtIDNo" placeholder="Information No.">
+            </div>
+
+
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="opIDtStatus">Document Flow</label>
+                <select class="form-control" id="txtDocumentFlow" name="txtDocumentFlow">
+                    <option value="">All</option>
+                    @foreach (var aplist in ViewData["app_list"] as List<Information_System.Models.ApproveGroup>)
+                    {
+                        <option value="@aplist.ID">@aplist.NAME</option>
+                    }
+                </select>
+            </div>
+
+
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="txtIDRequestID">Requirement No.</label>
+                <input type="text" class="form-control" id="txtIDRequestID" name="txtIDRequestID" placeholder="Requirement No.">
+            </div>
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="txtIDRequestBy">Request By</label>
+                <input type="text" class="form-control" id="txtIDRequestBy" name="txtIDRequestBy" placeholder="Request ID">
+            </div>
+            @*<div class="form-group ml-3" style="width: 240px;">
+                <label for="optIDDep">Department</label>
+                <select class="form-control" id="optIDDep" name="optIDDep">
+                    <option value="">All</option>
+                    @foreach (var list in ViewData["DepList"] as List<Information_System.Models.Department>)
+                    {
+                        <option value="@list.DEP_ID">@list.DEP_NAME</option>
+                    }
+                </select>
+            </div>*@
+
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="opIDtStatus">Status</label>
+                <select class="form-control" id="opIDtStatus" name="opIDtStatus">
+                    <option value="">All</option>
+                    <option value="CREATE">Create</option>
+                    <option value="TECH-APPROVE">Tech-approve</option>
+                    <option value="IN-PROGRESS">In-progress</option>
+                    <option value="APPROVED">Approved</option>
+                    <option value="REJECT">Reject</option>
+                </select>
+            </div>
+
+            <div class="form-group ml-3" style="width: 180px;">
+                <label for="optIDMaxResult">Max Result</label>
+                <select class="form-control" id="optIDMaxResult" name="optIDMaxResult">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-2">
+                <button type="button" style="width: 180px; margin-top: 30px;" class="btn btn-primary" onclick="getInfoList()"><img src="~/Image/search.svg" style="margin-top: -5px;" />Search</button>
+            </div>
+
+        </div>
+
+        <div id="isInfoLoading" class="loader" style="display: none;"></div>
+
+        <div id="noInfoRes" style="display: none;">
+            <p>No Result.</p>
+        </div>
+
+        <div class="table-responsive" id="InfoTable" style="display: none;">
+            <table class="tb-radius table table-hover table-striped">
+                <thead style="background-color: #1F618D; color: white;">
+                    <tr>
+                        <th>No.</th>
+                        <th>Requirement No</th>
+                        <th>Request Name</th>
+                        <th>Plant/Department</th>
+                        <th>Issue Name</th>
+                        <th>Issue Date</th>
+                        <th>Status</th>
+                        <th class="text-center">Report</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="Infobody">
+                </tbody>
+            </table>
+        </div>
+        
+        </div>
+
+</div>
+
+
+<script>
+    function getInfoList() {
+        var isLoading = document.getElementById("isInfoLoading");
+        isLoading.style.display = "";
+        const NO = document.getElementById("txtIDNo").value;
+        const RequestID = document.getElementById("txtIDRequestID").value;
+        const RequestBy = document.getElementById("txtIDRequestBy").value;
+        const MAXRESULT = document.getElementById("optIDMaxResult").value;
+        const DocumentFlow = document.getElementById("txtDocumentFlow").value;
+
+        var STATUS = document.getElementById("opIDtStatus").value;
+
+        const indexStatus = sessionStorage.getItem("indexStatus");
+        sessionStorage.removeItem("indexStatus");
+        if (indexStatus != null && indexStatus != "") {
+            $("#opIDtStatus").val(indexStatus);
+        }
+
+        if (STATUS =="" || STATUS == null) {
+            STATUS = indexStatus;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+                $('#Infobody').empty();
+                var json = JSON.parse(xhr.responseText);
+
+                if (json.length === 0) {
+                    document.getElementById("noInfoRes").style.display = "";
+                    document.getElementById("InfoTable").style.display = "none";
+                }
+                else
+                {
+                    document.getElementById("noInfoRes").style.display = "none";
+                    document.getElementById("InfoTable").style.display = "";
+                    var iconHtml = "";
+
+                    for (var i = 0; i < json.length; i++) {
+                        var status_style;
+                        if (json[i].STATUS == "Approved") {
+                            status_style = " style='color: #28a745; font-weight:500;'";
+                        } else if (json[i].STATUS == "Create") {
+                            status_style = " style='color: #2E4053; font-weight:500;'";
+                        } else if (json[i].STATUS == "Tech-approve") {
+                            status_style = " style='color: #2471A3; font-weight:500;'";
+                        } else if (json[i].STATUS == "In-progress") {
+                            status_style = " style='color: #E67E22; font-weight:500;'";
+                        } else {
+                            status_style = " style='color: #dc3545; font-weight:500;'";
+                        }
+
+                        if (json[i].STATUS == "Tech-reject") {
+                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='20' src='@Url.Content("~/Image/writing.svg")' title='Edit Information' /></a> ";
+                        } else if (json[i].STATUS == "Tech-approve") {
+                            iconHtml = " <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='18' src='@Url.Content("~/Image/floppy-disk.svg")' title='Save and Send Information' /></a> ";
+                        } else {
+                            iconHtml =" <a target='_Blank' href='" + "@Url.Action("CreateInfoDoc", "Create")" + "/" + json[i].REQUEST_ID + "'><img width='20' src='@Url.Content("~/Image/file.svg")' title='View Detail' /></a> ";
+                        }
+
+                        var html = "";
+                        html += "<tr class='accordion-toggle collapsed' data-toggle='collapse' href='#A" + json[i].ID + "' onclick='getInfoByID(!" + json[i].ID +"!);' >  <td><b>" + json[i].INFO_NO + "<b></td><td><a title='View Detail' target='_Blank' href='" + "@Url.Action("ReceivedRequirment", "Create")" + "/" + json[i].REQUEST_ID + "'>" + json[i].REQUEST_NO + "<a></td> " +
+                            "<td>" + json[i].REQUEST_NAME + "</td> <td> " + json[i].PLANT_DEP + "</td> <td> " + json[i].ISSUE_NAME + "</td>  <td>" + formatDate(new Date(Math.floor(subDateStr(json[i].ISSUE_DATE)))) + "</td><td " + status_style+">" + json[i].STATUS + "</td>" +
+                            " <td style='text-align: center;' ><a title='View Report' href='@Url.Action("InformationFormat","Approve")/" + json[i].ID + "' target='_blank'><img src='@Url.Content("~/Image/journal-text.svg")' /></a></td> <td class='expand-button text-center'></td> </tr> " +
+                            " <tr class='hide-table-padding'> " +
+                            " <td colspan='9'> " +
+                            " <div id='A" + json[i].ID + "' class='collapse in p-3' style='margin: 8px'>  " +
+                            " <div id='ld" + json[i].ID + "' class='loader' style='display: none;'></div> " +
+                            " <p class='fb-1'>Details:</p><div id='" + json[i].ID + "'></div>" +
+                            " </div></td></tr> ";
+                        html = html.replace(/!/g, '\"');
+                        $('#Infobody').append(html)
+                    }
+                }
+                isLoading.style.display = "none";
+            }
+
+        };
+        xhr.open("GET", "@Url.Action("getInfoList", "Report")" + "?NO=" + NO + "&RequestID=" + RequestID + "&RequestBy=" + RequestBy + "&MAXRESULT=" + MAXRESULT + "&NO=" + NO + "&STATUS=" + STATUS + "&DocumentFlow=" + DocumentFlow , true);
+        xhr.send();
+
+    }
+    getInfoList();
+
+    function getInfoByID(id) {
+        var ldid = "ld" + id;
+        document.getElementById(ldid).style.display = "";
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var divID = "#" + id;
+                $(divID).empty();
+                var json = JSON.parse(xhr.responseText);
+                var html;
+                html = " <div class='row'><div class='form-group col-lg-3'><div class='fs'>Information No.</div><p><strong>" + json.INFO_NO + "</strong></p></div><div class='form-group col-lg-3'> " +
+                    " <div class='fs'>Plant/Department</div><p><strong>" + json.PLANT_DEP + "</strong></p></div> <div class='form-group col-lg-3'><div class='fs'>Issue Name</div> " +
+                    " <p><strong>" + json.ISSUE_NAME + "</strong></p></div><div class='form-group col-lg-3'><div class='fs'>Document Type</div><p><strong>" + json.DOC_TYPE + "</strong></p></div></div> " +
+                    " <div class='row'><div class='form-group col-lg-3'><div class='fs'>Document flow</div><p><strong>" + json.DOC_FLOW_TEXT + "</strong></p></div> " +
+                    " <div class='form-group col-lg-3'><div class='fs'>Document subject</div><p><strong>" + json.DOC_SUBJECT + "</strong></p></div><div class='form-group col-lg-3'><div class='fs'>Reson Explain</div>" +
+                    " <p><strong>" + json.REASON_EXPLAIN + "</strong></p></div><div class='form-group col-lg-3'><div class='fs'>Detail Reference</div><p><strong>" + json.REQUEST_NO + "</strong></p></div></div>" +
+                    " <div class='row'><div class='form-group col-lg-3'><div class='fs'>Document Detail</div><p><strong>" + json.DOC_DETAIL + "</strong></p></div> " +
+                    " <div class='form-group col-lg-3'><div class='fs'>Effective</div><p><strong>" + json.EFFECTIVE + "</strong></p></div><div class='form-group col-lg-3'><div class='fs'>Add order no</div><p><strong>" + json.ADD_ORDER_NO + "</strong></p> " +
+                    " </div><div class='form-group col-lg-3'><div class='fs'>Relation system</div><p><strong>" + json.RELATION_TEXT + "</strong></p></div></div> " +
+                    " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Picture reference</div><p><strong>Detail #1:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_1) + "'>&nbsp;" + json.txt_PIC_REF_1 + "</a></p>" +
+                    " <p><strong>Detail #2:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_2) + "'>&nbsp;" + json.txt_PIC_REF_2 + "</a></p></div></div> " +
+                    " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Attacched document</div><p><strong>Purchase request form:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + json.txt_ATT_DOC_PURCHASE + "'>&nbsp; " + json.txt_ATT_DOC_PURCHASE + "</a></p> " +
+                    " <p><strong>Requirement document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_REQUIRE) + "'>&nbsp; " + json.txt_ATT_DOC_REQUIRE + "</a></p><p><strong>Other:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_OTHER) + "'>&nbsp; " + json.txt_ATT_DOC_OTHER + "</a></p></div></div></div>" +
+                    " <b>Approve list</b><div class='row'><div class='table-responsive col-lg-10' id='AppTable'><table class='tb-radius table table-hover table-striped'><thead style='background-color: #D6EAF8;'> " +
+                    " <tr><th class='text-center'>Approved ID</th><th class='text-center'>Approved Name</th><th class='text-center'>Approved Status</th><th class='text-center'>Approved Command</th>" +
+                    " <th class='text-center'>Approved Date</th></tr></thead><tbody class='table-body' id='Appbody'> ";
+                var approve_list = json.TE_APPROVE_LIST;
+                for(var i = 0; i < approve_list.length; i++) {
+                    html += " <tr><td class='text-center'>" + approve_list[i].APPROVE_ID +"</td> ";
+                    html += " <td class='text-center'>" + approve_list[i].APPROVE_NAME +"</td> ";
+                    html += " <td class='text-center'>" + approve_list[i].STATUS +"</td> ";
+                    html += " <td>" + approve_list[i].COMMENT + "</td> ";
+                    if (approve_list[i].APPROVE_DATE != "" && approve_list[i].APPROVE_DATE != null) {
+                        html += " <td class='text-center'>" + formatDate(new Date(Math.floor(subDateStr(approve_list[i].APPROVE_DATE)))) + "</td></tr> ";
+                    }
+                    else {
+                        html += " <td class='text-center'>-</td></tr> ";
+                    }
+
+                }
+                html += " </tbody></table></div></div> ";
+
+                if (json.MAIL_GRP != null) {
+                    html += "<div class='mt-4'><b>Acknowlage</b></div><div class='row'><div class='table-responsive col-lg-5' id='CCTable'><table class='tb-radius table table-hover table-striped'> " +
+                        " <thead style='background-color: #E8DAEF;'><tr><th class='text-center'>For Acknowlage only</th><th class='text-center'>Acknowlage e-mail</th></tr></thead> " +
+                        " <tbody class='table-body' id='CCbody'>"
+                    var cc_list = json.MAIL_GRP;
+                    for (var i = 0; i < cc_list.length; i++) {
+                        html += " <tr><td class='text-center'>" + cc_list[i].EMP_NAME + "</td> ";
+                        html += " <td class='text-center'>" + cc_list[i].EMP_EMAIL + "</td> </tr> ";
+                    }
+                    html += "</tbody></table></div></div>";
+                }
+
+                html += " </div></td></tr> ";
+                $(divID).append(html)
+
+            };
+            document.getElementById(ldid).style.display = "none";
+        }
+        xhr.open("get", "@Url.Action("getInformation", "report")/"+ id, true);
+        xhr.send();
+    }
+
+    function formatDate(date) {
+        //var d = new Date(date),
+        //    month = '' + (d.getMonth() + 1),
+        //    day = '' + d.getDate(),
+        //    year = d.getFullYear();
+
+        //if (month.length < 2)
+        //    month = '0' + month;
+        //if (day.length < 2)
+        //    day = '0' + day;
+
+        //return [day, month, year].join('-') + ' ' + date.getHours() + ":" + date.getMinutes();
+
+        //d = date.getFullYear() + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + ('0' + date.getDate()).slice(-2) + " " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+        d = ('0' + date.getDate()).slice(-2) + "-" + ('0' + (date.getMonth() + 1)).slice(-2) + "-" + date.getFullYear() + " " + ('0' + date.getHours()).slice(-2) + ":" + ('0' + date.getMinutes()).slice(-2);
+        return d;
+    }
+
+    function subDateStr(Str) {
+        var dateStr = Str.substring(
+            Str.lastIndexOf("(") + 1,
+            Str.lastIndexOf(")")
+        );
+        return dateStr;
+    }
+
+</script>
+

@@ -171,6 +171,7 @@
     </Compile>
     <Compile Include="InFunction.cs" />
     <Compile Include="Models\AccessRightModel.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\DashboardModel.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\DocInfoModel.cs" />
@@ -195,12 +196,16 @@
     </Content>
     <Content Include="Image\bi-exclamation-circle.svg" />
     <Content Include="Image\complete.png" />
+    <Content Include="Image\diary-2.png" />
+    <Content Include="Image\diary.png" />
+    <Content Include="Image\edit_admin.png" />
     <Content Include="Image\excel.svg" />
     <Content Include="Image\file.svg" />
     <Content Include="Image\floppy-disk.svg" />
     <Content Include="Image\is_logo.ico" />
     <Content Include="Image\journal-check.svg" />
     <Content Include="Image\journal-text.svg" />
+    <Content Include="Image\journal.png" />
     <Content Include="Image\pen.svg" />
     <Content Include="Image\pencil-square.svg" />
     <Content Include="Image\reject.png" />
@@ -362,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Temp_Comment\" />
     <Folder Include="Temp_File\" />
   </ItemGroup>
   <ItemGroup>

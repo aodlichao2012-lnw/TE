@@ -31,7 +31,7 @@
             <table class="tb-radius table table-hover table-striped">
                 <thead style="background-color: #1F618D; color: white;">
                     <tr>
-                        <th class="text-center"><input type="checkbox" id="chkAll" /></th>
+                        @*<th class="text-center"><input type="checkbox" id="chkAll" /></th>*@
                         <th>Subject</th>
                         <th>Reason Explain</th>
                         <th>Issue By</th>
@@ -44,7 +44,7 @@
                     @foreach (var l in d)
                     {
                         <tr>
-                            <td class="text-center"><input type="checkbox" onclick="chkSelectd();" id="@l.IS_ID" /></td>
+                            @*<td class="text-center"><input type="checkbox" onclick="chkSelectd();" id="@l.IS_ID" /></td>*@
                             <td>@l.SUBJECT</td>
                             <td>@l.REASON_EXPLAIN</td>
                             <td>@l.ISSUE_NAME</td>

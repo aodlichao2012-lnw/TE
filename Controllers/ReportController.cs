@@ -6,11 +6,14 @@ using System.Web.Mvc;
 using System.Data.SqlClient;
 using System.Text;
 using Information_System.Models;
+using Newtonsoft.Json;
+using System.Globalization;
 
 namespace Information_System.Controllers
 {
     public class ReportController : Controller
     {
+        static string pagglistsql = null;
         InFunction Fn = new InFunction();
         // GET: Report
         public ActionResult ReportList()
@@ -39,6 +42,7 @@ namespace Information_System.Controllers
                         }
                     }
                 }
+                pagging("5");
                 ViewData["app_list"] = apList;
 
                 return View();
@@ -46,7 +50,87 @@ namespace Information_System.Controllers
         }
 
         [HttpGet]
-        public JsonResult getInfoList(string NO, string RequestID, string RequestBy, string MAXRESULT, string STATUS, string ID, string DocumentFlow)
+        public void pagging(string max)
+        {
+            int[] count10;
+            int count = 0;
+            int sum = 0;
+            int maxs = int.Parse(max);
+            using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(null, con))
+                {
+                    SqlDataReader dr = null;
+                    cmd.CommandText = $@" SELECT COUNT(D.ID) FROM TBL_TECH_IS_DOCINFO D   JOIN TBL_TECH_IS_REQUEST R ON D.REQUEST_NO = R.IS_ID 
+                         JOIN[db_employee].[dbo].[tbl_employee] EMP ON D.ISSUE_ID = EMP.empId
+                         JOIN[db_employee].[dbo].[tbl_employee] EMPI ON R.ISSUE_ID = EMPI.empId
+                         JOIN[db_employee].[dbo].[tbl_Dept] DEP ON R.DEPARTMENT = DEP.Dept_ID
+                         JOIN[db_employee].[dbo].[tbl_plant] P ON P.plant_id = R.PLANT group by D.REQUEST_NO";
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        count += int.Parse( dr[0].ToString());
+                    }
+                    count10 = new int[count / maxs];
+                    for(int i =0; i < count / maxs; i += 1)
+                    {
+                        count10[i] += maxs + sum;
+                        sum += maxs;
+                    }
+                }
+            }
+            
+           TempData["Countpag"] = JsonConvert.SerializeObject(count10);
+           ViewData["Countpagtotal"] = JsonConvert.SerializeObject(count);
+        }
+
+        [HttpGet]
+        public string pagginto_list(string page , string max)
+        {
+            string sql = string.Empty;
+            if (pagglistsql == null)
+            {
+                sql = "";
+            }
+            else
+            {
+                sql = pagglistsql;
+            }
+         
+            sql += $@"OFFSET {page} ROWS FETCH NEXT { max} ROWS ONLY";
+            List<DocInfoModel> res = new List<DocInfoModel>();
+            using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    var reader = cmd.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while(reader.Read())
+                        {
+                            DocInfoModel doc = new DocInfoModel();
+                            doc.ISSUE_NAME = reader["ISSUE_NAME"].ToString();
+                            doc.ISSUE_DATE = Convert.ToDateTime(reader["ISSUE_DATE"].ToString() , new CultureInfo("en-En"));
+                            doc.REQUEST_NO = reader["IS_NO"].ToString();
+                            doc.REQUEST_ID = reader["IS_ID"].ToString();
+                            doc.REQUEST_NAME = reader["REQUESY_NAME"].ToString();
+                            doc.STATUS = reader["STATUS"].ToString();
+                            doc.INFO_NO = reader["INFO_NO"].ToString();
+                            doc.PLANT_DEP = reader["DEP"].ToString();
+                            doc.ID = reader["DOC_ID"].ToString();
+                            res.Add(doc);
+                        }
+                    }
+                }
+            }
+            pagging(max);
+            return JsonConvert.SerializeObject(res);
+        }
+
+        [HttpGet]
+        public JsonResult getInfoList(string NO, string RequestID, string RequestBy, string MAXRESULT, string STATUS, string ID, string DocumentFlow, string Details)
         {
             List<DocInfoModel> res = new List<DocInfoModel>();
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
@@ -55,8 +139,14 @@ namespace Information_System.Controllers
                 using (SqlCommand cmd = new SqlCommand(null, con))
                 {
                     StringBuilder sql = new StringBuilder();
-                    sql.AppendLine(" SELECT TOP " + MAXRESULT + " R.ISSUE_DATE, R.IS_NO, R.IS_ID, CONCAT(P.plant_mark,'/', DEP.Dept_Remark) DEP, CONCAT(EMP.empTitleEng,' ', UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng)))) AS ISSUE_NAME ");
-                    sql.AppendLine(" ,D.ID DOC_ID, D.INFO_NO, UPPER(LEFT(D.STATUS,1))+LOWER(SUBSTRING(D.STATUS,2,LEN(D.STATUS))) STATUS ");
+                    string sqlnontop = $@"TOP(" + MAXRESULT + ")";
+                    TempData["top"] = sqlnontop;
+                    sql.AppendLine(" SELECT "+ sqlnontop + "  R.IS_NO, R.IS_ID, CONCAT(P.plant_mark,'/', DEP.Dept_Remark) DEP, CONCAT(EMP.empTitleEng,' ', UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng)))) AS ISSUE_NAME ");
+                    sql.AppendLine($@" ,D.ID DOC_ID, D.INFO_NO , CASE
+                                 WHEN
+                                     D.INFO_NO IS NULL THEN  R.ISSUE_DATE
+                                ELSE D.ISSUE_DATE
+                                END as ISSUE_DATE, UPPER(LEFT(D.STATUS,1))+LOWER(SUBSTRING(D.STATUS,2,LEN(D.STATUS))) STATUS ");
                     sql.AppendLine(" , CONCAT(EMPI.empTitleEng,' ',  UPPER(LEFT(EMPI.empNameEng,1))+LOWER(SUBSTRING(EMPI.empNameEng,2,LEN(EMPI.empNameEng)))) AS REQUESY_NAME ");
                     sql.AppendLine(" FROM TBL_TECH_IS_DOCINFO D ");
                     sql.AppendLine(" JOIN TBL_TECH_IS_REQUEST R ON D.REQUEST_NO = R.IS_ID ");
@@ -82,7 +172,7 @@ namespace Information_System.Controllers
                     {
                         if (STATUS == "WATTING")
                         {
-                            sql.AppendLine(" AND STATUS NOT IN ('APPROVED','REJECT') ");
+                            sql.AppendLine(" AND STATUS NOT IN ('APPROVED','REJECT','REVISE') ");
                         }
                         else
                         {
@@ -94,7 +184,13 @@ namespace Information_System.Controllers
                         sql.AppendLine(" AND DOC_FLOW_ID =" + Fn.getSQL(DocumentFlow));
                     }
 
-                    sql.AppendLine(" order by INFO_NO desc ");
+                    if(Details != "" && Details != null)
+                    {
+                        sql.AppendLine(" AND (R.PARTS_CODE like '%" + Details + "%' or R.WATCH_CODE like '%" + Details + "%' or R.REASON_EXPLAIN like '%" + Details + "%' or R.DETAILS like '%" + Details + "%') ");
+                    }
+
+                    sql.AppendLine(" order by INFO_NO desc");
+              
                     cmd.CommandText = sql.ToString();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -111,9 +207,12 @@ namespace Information_System.Controllers
                         doc.ID = reader["DOC_ID"].ToString();
                         res.Add(doc);
                     }
+                    pagglistsql = sql.Remove(sql.ToString().IndexOf(sqlnontop), sqlnontop.Length).ToString();
+                    TempData["MAXLEGHT"] = MAXRESULT;
 
                 }
                 con.Close();
+                pagging(MAXRESULT);
             }
             return Json(res, JsonRequestBehavior.AllowGet);
         }
@@ -122,17 +221,18 @@ namespace Information_System.Controllers
         public JsonResult getInformation(string id)
         {
             DocInfoModel res = new DocInfoModel();
-            using(SqlConnection con = new SqlConnection(Fn.conRTCStr))
+            string REQUEST_ID = "";
+            using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
             {
                 con.Open();
                 using(SqlCommand cmd = new SqlCommand(null, con))
                 {
-                    StringBuilder sql = new StringBuilder();
+                     StringBuilder sql = new StringBuilder();
                     sql.Clear();
-                    sql.AppendLine(" SELECT TOP 1 D.CC_GRP, D.ID, D.INFO_NO, CONCAT(P.plant_mark,'/', DEP.Dept_Remark) DEP, ");
+                    sql.AppendLine(" SELECT TOP 1 D.STATUS STATUS_ALL, D.CC_GRP, D.ID, D.INFO_NO, CONCAT(P.plant_mark,'/', DEP.Dept_Remark) DEP, ");
                     sql.AppendLine(" CONCAT(EMP.empTitleEng,' ',UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng)))) AS ISSUE_NAME ");
-                    sql.AppendLine(" , D.DOC_TYPE, MG.NAME DOC_FLOW, R.SUBJECT, R.REASON_EXPLAIN, R.IS_NO, D.DOC_DETAIL, D.EFFECTIVE, D.ADD_ORDER_NO, RL.DETAILS RELATION_TEXT ");
-                    sql.AppendLine(" , D.PIC_REF_1, D.PIC_REF_2, ATT_DOC_PURCHASE, ATT_DOC_REQUIRE, ATT_DOC_OTHER");
+                    sql.AppendLine(" , D.DOC_TYPE, MG.NAME DOC_FLOW, R.IS_ID RID, R.SUBJECT, R.REASON_EXPLAIN, R.IS_NO, D.DOC_DETAIL,  D.EFFECTIVE, D.ADD_ORDER_NO, RL.DETAILS RELATION_TEXT ");
+                    sql.AppendLine(" , D.PIC_REF_1, D.PIC_REF_2, ATT_DOC_PURCHASE, ATT_DOC_REQUIRE, ATT_DOC_OTHER , ATT_DOC_IMPORTANT");
                     sql.AppendLine(" FROM TBL_TECH_IS_DOCINFO D ");
                     sql.AppendLine(" JOIN TBL_TECH_IS_MAILGRP MG ON MG.ID = D.DOC_FLOW_ID ");
                     sql.AppendLine(" JOIN TBL_TECH_IS_REQUEST R ON D.REQUEST_NO = R.IS_ID ");
@@ -162,15 +262,22 @@ namespace Information_System.Controllers
                         res.txt_PIC_REF_1 = dr["PIC_REF_1"].ToString();
                         res.txt_PIC_REF_2 = dr["PIC_REF_2"].ToString();
                         res.txt_ATT_DOC_PURCHASE = dr["ATT_DOC_PURCHASE"].ToString();
+                        res.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                         res.txt_ATT_DOC_REQUIRE = dr["ATT_DOC_REQUIRE"].ToString();
-                        res.txt_ATT_DOC_OTHER = dr["ATT_DOC_OTHER"].ToString();
+                  
+                        REQUEST_ID = dr["RID"].ToString();
+                        res.STATUS_ALL = dr["STATUS_ALL"].ToString();
+
+                        //res.txt_ATT_DOC_OTHER = dr["ATT_DOC_OTHER"].ToString();
+
+                   
                     }
 
                     dr.Close();
 
                     List<DocInfoApprove> doc = new List<DocInfoApprove>();
                     sql.Clear();
-                    sql.AppendLine(" SELECT A.*, CONCAT(EMP.empTitleEng,' ',UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng)))) NAME FROM TBL_TECH_IS_DOCINFO_APPROVE A ");
+                    sql.AppendLine(" SELECT A.*, UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng))) NAME FROM TBL_TECH_IS_DOCINFO_APPROVE A ");
                     sql.AppendLine(" JOIN [db_employee].[dbo].[tbl_employee] EMP ON EMP.empId = A.APPROVE_ID ");
                     sql.AppendLine(" WHERE DOCINFO_ID = " + Fn.getSQL(id));
                     cmd.CommandText = sql.ToString();
@@ -212,7 +319,53 @@ namespace Information_System.Controllers
                             cc_list.Add(m);
                         }
                         res.MAIL_GRP = cc_list.ToList();
-                    }                 
+                    }
+
+                    //if (res.STATUS_ALL == "REVISE")
+                    //{
+                        List<RevDoc> revDoc = new List<RevDoc>();
+                        dr.Close();
+                        cmd.CommandText = " SELECT INFO_NO, ID, STATUS from TBL_TECH_IS_DOCINFO WHERE REQUEST_NO = " + Fn.getSQL(REQUEST_ID) +
+                                          " AND ID <> " + Fn.getSQL(id) + " ORDER BY INFO_NO ASC ";
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            RevDoc rev = new RevDoc();
+                            rev.INFO_ID = dr["ID"].ToString();
+                            rev.INFO_NAME = dr["INFO_NO"].ToString();
+                            rev.STATUS = dr["STATUS"].ToString();
+                            revDoc.Add(rev);
+                        }
+                        res.RevDoc = revDoc.ToList();
+
+                    dr.Close();
+                  
+                    int count = 0;
+                    cmd.CommandText = $@"SELECT TOP (4) [PATCH]
+                                      FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{res.ID}' AND [PATCH] is not null ";
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        res.txt_ATT_DOC_OTHER = new string[5];
+                        while (dr.Read())
+                        {
+
+                            if (count < 5)
+                            {
+
+                                res.txt_ATT_DOC_OTHER[count] = dr[0].ToString();
+                                count++;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                        }
+
+                    }
+                    dr.Close();
+                    //}
 
                 }
                 con.Close();
