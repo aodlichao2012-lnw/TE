@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="icon" type="image/gif/png" href="~/Image/is_logo.ico">
+    <link href="~/Content/GlobalStyle.css?v=1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    @Styles.Render("~/Content/GlobalStyle.css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @{ 
+        Information_System.Models.AccessRightModel p = null;
+        p = Session["permission"] as Information_System.Models.AccessRightModel;
+        string userName = Session["login_name"].ToString();
+        System.Globalization.TextInfo textInfo = new System.Globalization.CultureInfo("en-US", false).TextInfo;
+        string u = textInfo.ToTitleCase(userName.ToLower());
+    }
+    <style>
+        .container2 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .hr {
+            border-bottom-style: solid;
+            border-bottom-color: #E1E1E1;
+            border-width: 1px;
+        }
+
+        .bg {
+            background: rgb(255,203,225);
+            background: linear-gradient(128deg, rgba(255,203,225,1) 0%, rgba(205,221,255,1) 73%, rgba(163,194,255,1) 100%);
+        }
+
+    </style>
+</head>
+<body style="background-color: #F1F1F1;">
+    @*<div class="navbar navbar-inverse navbar-fixed-top fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>*@
+ 
+    <div class="container body-content fixed-top col-md-12 col-lg-10">
+        <nav class="navbar navbar-expand-lg navbar-light hr" style="height: 75px; background-color: #FEFEFE;">
+            <a class="navbar-brand" href="@Url.Action("Index","Home")" onclick="Highlight('home')"><b>INFORMATION SYSTEM</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"> @*navbar*@
+                <ul class="navbar-nav ml-auto" style="height: 75px;">
+                    <li id="Index" class="nav-item active" >
+                        <a class="nav-link mt-lg-3" href="@Url.Action("Index","Home")" onclick="Highlight('home')"><b>HOME</b>  </a>
+                    </li>
+                    <li class="nav-item" id="CreateRequirementDoc">
+                        <a class="nav-link mt-lg-3" href="@Url.Action("CreateRequirementDoc","Create")" onclick="Highlight('create')"><b>CREATE DOC.</b>  </a>
+                    </li>
+                    
+                    @*@if (p.IS_APP_LEVEL1 || p.IS_APP_LEVEL2 || p.IS_APPROVE)
+                    {
+                        <li class="nav-item" id="ApproveList">
+                            <a class="nav-link mt-lg-3" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')"><b>APPROVE LIST</b>  </a>
+                        </li>
+                    }*@
+
+                    <li class="nav-item dropdown" id="approve">
+                            <a class="nav-link dropdown-toggle mt-lg-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Highlight('approve')">
+                                <b>APPROVE</b>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -12px;">
+                                @*@if (p.IS_APP_LEVEL1 || p.IS_APP_LEVEL2 || p.IS_APPROVE)
+                                {
+                                    <a class="dropdown-item" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')">APPROVE LIST</a>
+                                }*@
+                                <a class="dropdown-item" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')">APPROVE LIST</a>
+                                <a class="dropdown-item" href="@Url.Action("ApproveRequirement","Approve")">APPROVE REQUIREMENT</a>
+                            </div>
+                    </li>
+
+                    @*@if (p.IS_ADMIN)
+                    {*@
+                        @*<li class="nav-item dropdown" id="approve">
+                            <a class="nav-link dropdown-toggle mt-lg-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Highlight('approve')">
+                                <b>APPROVE</b>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>*@
+                        <li class="nav-item" id="ReportList">
+                            <a class="nav-link mt-lg-3" onclick="Highlight('ReportList')" href="@Url.Action("ReportList","Report")"><b>REPORT</b>  </a>
+                        </li>
+                    @*}*@
+                    
+                    <li class="nav-item">
+                        <a class="nav-link mt-lg-3" data-toggle="modal" data-target="#logoutModel"><b>SIGN OUT</b> </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </div>
+    <div class="container body-content mt-4 col-md-12 col-lg-10">
+        @RenderBody()
+        @*<hr />*@
+        <footer class="fixed-bottom" style="background-color:#F1F1F1;">
+            <p class="text-center">Sign in with <b>@u</b> account</p>
+            @*<p class="text-center">&copy; @DateTime.Now.Year - All rights reserved. Designed by Technician, Developed by IT Department of RTC</p>*@
+        </footer>
+    </div>
+
+    @*Logout Model*@
+    <div class="modal fade" id="logoutModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign Out</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Do you want to sign out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="signout();">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        function Highlight(id) {
+            const arr = ['Index', 'CreateRequirementDoc', 'ReportList', 'ApproveList']; //, 'approve'
+            for (var i = 0; i < arr.length; i++) {
+                if (id != arr[i]) {
+                    document.getElementById(arr[i]).style.backgroundColor = null;
+                } else {
+                    document.getElementById(id).style.backgroundColor = '#F08080';
+                }
+            }
+        }
+
+        var str = window.location.pathname;
+        var active = str.slice(str.lastIndexOf('/') + 1);
+        if (active == '' || active == null) {
+            Highlight('Index');
+        } else {
+            Highlight(active);
+        }
+
+        function signout() {
+            window.location = '@Url.Action("Logout","Home")';
+        }
+
+    </script>
+
+    
+
+
+</body>
+</html>
