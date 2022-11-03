@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/GlobalStyle.css" />
+    <title>@ViewBag.Title - Information System</title>
+    <link rel="icon" type="image/gif/png" href="~/Image/is_logo.ico">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .container {
+            position: absolute;
+            left: 50%;
+            top: 42%;
+            transform: translate(-50%,-50%);
+            border-radius: 16px;
+            background-color: white;
+            width: 400px;
+            box-shadow: 1px 1px 5px 0px #888888;
+        }
+
+        .bg {
+            background: rgb(255,203,225);
+            background: linear-gradient(128deg, rgba(255,203,225,1) 0%, rgba(205,221,255,1) 73%, rgba(163,194,255,1) 100%);
+        }
+
+        .bd {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg">
+
+    <div class="container col-sm-8">
+        <div style="margin: 24px;">
+            <h3 style="text-align:center;">Sign In</h3>
+            <h4 style="text-align:center; margin-bottom: 30px;">Information System </h4>
+            
+            <div class="form-group" style="margin-left: 24px;">
+                <label for="txtUsername">Username</label>
+                <input type="text" width="120" class="form-control bd" id="txtUsername" placeholder="Enter Username" name="username" required />
+            </div>
+            <div class="form-group" style="margin-left: 24px;">
+                <label for="txtPsd">Password</label>
+                <input type="password" id="txtPsd" class="form-control bd" placeholder="Enter Password" name="password" required />
+                <small id="invalidPass" style="display: none; color:red;" class="form-text text-muted">username or password incorrect!</small>
+            </div>
+            <div style="text-align: center; margin-top: 35px;">
+                <button id="btnLogin" class="btn btn-outline-primary" style="border-radius: 24px; width: 120px;" type="submit" onclick="checkLogin()">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        var input = document.getElementById("txtPsd");
+        input.addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                document.getElementById("btnLogin").click();
+            }
+        });
+        
+        function checkLogin() {
+            const user = document.getElementById("txtUsername").value;
+            const psd = document.getElementById("txtPsd").value;
+            var myData = new FormData();
+            myData.append("username", user);
+            myData.append("password", psd);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "@Url.Action("checkLogin", "Home")");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.responseText == "Y") {
+                        var url = "@Url.Action("Index", "Home")";
+                        var currentURL = window.location;
+                        if (currentURL.toString().indexOf("/Create/ApproveRequest/") != -1 || currentURL.toString().indexOf("Approve/InformationFormat") != -1 || currentURL.toString().indexOf("Create/ReceivedRequirment/") != -1 || currentURL.toString().indexOf("Create/CreateRequirementDoc") != -1 || currentURL.toString().indexOf("Create/CreateInfoDoc") != -1) {
+                            url = window.location.toString();
+                        }
+                        window.location.href = url;
+                        
+                    } else {
+                        document.getElementById("invalidPass").style.display = "";
+                    }
+                    //console.log("xhr", xhr);
+                }
+            }
+            xhr.send(myData);
+        }
+
+    </script>
+</body>
+
+
+
+</html>

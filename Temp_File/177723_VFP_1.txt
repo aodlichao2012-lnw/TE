@@ -1,0 +1,24 @@
+SET TALK OFF 
+SET DELETED ON
+SET CENTURY ON 
+SET DATE TO ANSI
+SET EXCLUSIVE OFF 
+SET ENGINEBEHAVIOR 70
+
+Table 1
+USE p:\ssim_dial\quotation\data\quotation.dbf SHARED
+SET ORDER TO MATNO   && MAT_NO+UPPER(MAIN_PRO)+UPPER(SUB_PRO)
+
+Table 2
+USE p:\ssim_dial\quotation\data\sale_rate.dbf SHARED
+SET ORDER TO MATGP   && MAT_GP+MAT_NO
+
+HD
+SELECT Mat_GP,Mat_No,Sale_Rate FROM Sale_Rate WHERE Mat_GP="6 " AND DTOC(Crt_Date,1)>="2021"
+
+DT
+SELECT Mat_No,Main_Pro,Sub_Pro,Mat_Cost,P_Currency,Time_No FROM quotation WHERE Mat_No="6-R030812"
+
+
+
+DELETE record crt+t, delete

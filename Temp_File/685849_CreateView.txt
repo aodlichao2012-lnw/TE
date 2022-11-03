@@ -1,0 +1,307 @@
+@model List<Dar_System.Models.CreateFormModel>
+@model Dar_System.Models.CreateFormModel
+@{
+    ViewBag.Title = "DOCUMENT ACTION REQUEST";
+    DateTime date = Convert.ToDateTime(DateTime.Now);
+    ViewData["DateNow"] = date.ToString("yyyy-MM-dd");
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+
+        .ml-0 {
+            margin-left: 0px;
+        }
+
+        .mt-1 {
+            margin-top: 20px;
+        }
+
+        .tr-0 {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3>Create Document Action Request</h3>
+        <p>Enter information in the text box.</p>
+        <form role="form" method="post" action="CreateDarForm" enctype="multipart/form-data">
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <label for="txtDocNo">Document No.</label>
+                    @{
+                        if (ViewData["DocNo"] == null)
+                        {
+                            <input type="text" class="form-control" id="txtDocNo" name="dar_no" value="@Model.dar_no" readonly>
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control" id="txtDocNo" name="dar_no" value="@ViewData["DocNo"]" readonly>
+                        }
+                    }
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label for="txtReqDate">Request Date</label>
+                    <input type="text" class="form-control" id="txtReqDate" value="@ViewData["DateNow"]" readonly>
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label for="txtDocnum">Document Number</label>
+                    <input type="text" class="form-control" id="txtDocnum" name="doc_num" maxlength="20" value="@Model.doc_num" required placeholder="Enter Document Number">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label for="txtSubject">Subject</label>
+                    <input type="text" class="form-control" id="txtSubject" name="doc_subject" style="min-width: 100%" value="@Model.doc_subject" maxlength="255" required placeholder="Enter Subject">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <label for="optCategory">Document Category</label>
+                    <select class="form-control" id="optCategory" name="doc_category" onclick="showCateOther()">
+                        <option value="Manual (คู่มือ)">Manual (คู่มือ)</option>
+                        <option value="Procedure (ระเบียบปฏิบัติงาน)">Procedure (ระเบียบปฏิบัติงาน)</option>
+                        <option value="Work instruction (วิธีการทำงาน)">Work instruction (วิธีการทำงาน)</option>
+                        <option value="Form (แบบฟอร์ม)">Form (แบบฟอร์ม)</option>
+                        <option value="Other">อื่นๆ</option>
+                    </select>
+                </div>
+                <div id="divCate" style="display: none;" class="form-group col-lg-3">
+                    <label for="txtCate">Other Category</label>
+                    <input type="text" class="form-control" id="txtCate" name="other_category" placeholder="Enter Category">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-3">
+                    <label for="optProcess">Request to proceed</label>
+                    <select class="form-control" id="optProcess" name="doc_type" onclick="showProceedOther()">
+                        <option value="จัดทำครั้งแรก">จัดทำครั้งแรก</option>
+                        <option value="แก้ไขเอกสาร">แก้ไขเอกสาร</option>
+                        <option value="ยกเลิกเอกสาร">ยกเลิกเอกสาร</option>
+                        <option value="ขอเพิ่ม/ลดสำเนา เอกสารควบคุม">ขอเพิ่ม/ลดสำเนา เอกสารควบคุม</option>
+                        <option value="ขอสำเนา เอกสารไม่ควบคุม">ขอสำเนา เอกสารไม่ควบคุม</option>
+                        <option value="Other">อื่นๆ</option>
+                    </select>
+                </div>
+                <div id="divProceed" style="display: none;" class="form-group col-lg-3">
+                    <label for="txtOtherProceed">Other</label>
+                    <input type="text" class="form-control" id="txtOtherProceed" name="other_type" placeholder="Enter Request">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label for="txtDescription">Reason for action</label>
+                    <textarea class="form-control" style="min-width: 100%" id="txtDescription" name="description" rows="3" required placeholder="Enter Description"></textarea>
+                </div>
+            </div>
+
+            <p class="bold">Department to receive copy of documents (amount)</p>
+            <div class="row ml-0">
+                <p>RTC</p>
+                <div id="RTC"></div>
+            </div>
+
+            <div class="row ml-0">
+                <p>CWMT</p>
+                <div id="CWMT"></div>
+            </div>
+            <div class="row mt-0">
+                <div class="form-group col-lg-3">
+                    <label for="optCategory">Select Routing</label>
+                    <select class="form-control" id="routing" name="routing" onclick="GetApproveRouting()" required>
+                        @{
+                            foreach (var list in ViewData["RoutingList"] as List<string>)
+                            {
+                                <option value="@list">@list</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label for="optCategory">Reviewer</label>
+                    <input type="text" class="form-control" id="txtReview" value="" readonly>
+                    <input type="text" class="form-control" id="reviewed_by" name="reviewed_by" style="display:none;">
+                </div>
+
+                <div class="form-group col-lg-3">
+                    <label for="optCategory">Approver</label>
+                    <input type="text" class="form-control" id="txtApprove" value="" readonly>
+                    <input type="text" class="form-control" id="approved_by" name="approved_by" style="display:none;">
+                </div>
+            </div>
+
+            <div class="row ml-0">
+                <label for="docAttach">Document attachment</label>
+                <input type="file" id="fileUpload" name="fileUpload" required />
+            </div>
+
+            <div class="row" style="margin: 20px 0 0 0px">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        var tempCat = "@Model.doc_category";
+        const arrCat = ["Manual (คู่มือ)", "Procedure (ระเบียบปฏิบัติงาน)", "Work instruction (วิธีการทำงาน)", "Form (แบบฟอร์ม)"];
+        var mySelect = document.getElementById('optCategory');
+        if (arrCat.indexOf(tempCat) != -1) {
+            for (var i, j = 0; i = mySelect.options[j]; j++) {
+                if (i.value == tempCat) {
+                    mySelect.selectedIndex = j;
+                    break;
+                }
+            }
+        } else
+        {
+            mySelect.selectedIndex = 4;
+            document.getElementById("divCate").style.display = "block";
+            document.getElementById("txtCate").value = "@Model.doc_category";
+        }
+
+        var tempType = "@Model.doc_type";
+        const arrType = ["จัดทำครั้งแรก", "แก้ไขเอกสาร", "ยกเลิกเอกสาร", "ขอเพิ่ม/ลดสำเนา เอกสารควบคุม", "ขอสำเนา เอกสารไม่ควบคุม"];
+        var optProcess = document.getElementById('optProcess');
+        if (arrType.indexOf(tempType) != -1) {
+            for (var i, j = 0; i = optProcess.options[j]; j++) {
+                if (i.value == tempType) {
+                    optProcess.selectedIndex = j;
+                    break;
+                }
+            }
+        } else
+        {
+            optProcess.selectedIndex = 5;
+            document.getElementById("divProceed").style.display = "block";
+            document.getElementById("txtOtherProceed").value = "@Model.doc_type";
+        }
+
+        var optRouting = document.getElementById('routing');
+        var tempRout = "TEST-IT-0002";
+        for (var i, j = 0; i = optRouting.options[j]; j++) {
+            if (i.value == tempRout) {
+                optRouting.selectedIndex = j;
+                break;
+            }
+        }
+
+
+
+    </script>
+
+    <script>
+
+        document.getElementById("fileUpload").onchange = function () {
+            //alert($("#fileUpload").val());
+        };
+
+        function loopRTCDOC() {
+            var rtcdoc = ["AC", "BA", "BC", "CA", "HR", "IT", "PC", "QA", "TE", "WA", "CM"];
+            var rtcdocCount = [@Model.rtc_AC, @Model.rtc_BA, @Model.rtc_BC, @Model.rtc_CA,@Model.rtc_HR,@Model.rtc_IT,@Model.rtc_PC,@Model.rtc_QA,@Model.rtc_TE,@Model.rtc_WA,@Model.rtc_CM];//
+            var RTC = document.getElementById("RTC");
+
+            for (var i = 0; i < rtcdoc.length; i++) {
+                var div = document.createElement("div");
+                div.className = "form-group col-lg-1";
+
+                var input = document.createElement("input");
+                input.type = "number";
+                input.id = "rtc_" + rtcdoc[i];
+                input.name = "rtc_" + rtcdoc[i];
+                input.min = 0;
+                input.value = rtcdocCount[i]; //
+                input.placeholder = rtcdoc[i];
+                input.className = "form-control col-lg-1";
+                div.appendChild(input);
+
+                RTC.appendChild(div);
+            }
+        }
+        loopRTCDOC();
+
+        function loopCWMTDOC() {
+            var cwdoc = ["AC", "FC", "HR", "PD", "PV", "CM"];
+            var cwdocCount = [@Model.cwmt_AC, @Model.cwmt_FC, @Model.cwmt_HR, @Model.cwmt_PV,@Model.cwmt_PD,@Model.cwmt_CM];//
+            var CWMT = document.getElementById("CWMT");
+
+            for (var i = 0; i < cwdoc.length; i++) {
+                var div = document.createElement("div");
+                div.className = "form-group col-lg-1";
+
+                var input = document.createElement("input");
+                input.type = "number";
+                input.min = 0;
+                input.value = cwdocCount[i]; //
+                input.id = "cwmt_" + cwdoc[i];
+                input.name = "cwmt_" + cwdoc[i];
+                input.placeholder = cwdoc[i];
+                input.className = "form-control col-lg-1";
+                div.appendChild(input);
+
+                CWMT.appendChild(div);
+            }
+        }
+        loopCWMTDOC(CWMT);
+
+        function showCateOther() {
+            var otpCategoryValue = document.getElementById("optCategory").value;
+            var divCates = document.getElementById("divCate");
+            if (otpCategoryValue === "Other") {
+                divCates.style.display = "";
+            } else {
+                divCates.style.display = "none";
+                document.getElementById("txtCate").value = "";
+            }
+        }
+
+        function showProceedOther() {
+            var otpCategoryValue = document.getElementById("optProcess").value;
+            var divCates = document.getElementById("divProceed");
+            if (otpCategoryValue === "Other") {
+                divCates.style.display = "";
+            } else {
+                divCates.style.display = "none";
+                document.getElementById("txtOtherProceed").value = "";
+            }
+        }
+        function GetApproveRouting() {
+                const routing = document.getElementById("routing").value;
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        var list = JSON.parse(xhr.responseText);
+                        document.getElementById("approved_by").value = list[1].emp_id;
+                        document.getElementById("txtApprove").value = list[1].firstname + " " + list[1].lastname;
+                        document.getElementById("reviewed_by").value = list[0].emp_id;
+                        document.getElementById("txtReview").value = list[0].firstname + " " + list[0].lastname;
+                    }
+                }
+
+
+                xhr.open("GET", "@Url.Action("GetApprove", "CreateForm")" + "?routing=" + routing, true);
+                xhr.send(null);
+        }
+
+
+        GetApproveRouting()
+
+    </script>
+
+</body>
+
+</html>

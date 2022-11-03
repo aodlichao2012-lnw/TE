@@ -1,0 +1,736 @@
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Documents\Visual Studio 2017\Projects\Information_System\Information_System\obj\Release\Information_System.csprojResolveAssemblyReference.cache
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\built-test-27.4.21\Information_System\Information_System\obj\Release\Information_System.csprojResolveAssemblyReference.cache
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\27.4.21-V1\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\29.4.21\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\30.4.21\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\04.5.21\Information_System\Information_System\obj\Release\Information_System.csprojResolveAssemblyReference.cache
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\obj\Release\Information_System.csprojResolveAssemblyReference.cache
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\11.5.21\Information_System\Information_System\obj\Release\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ApplicationInsights.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\csc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\csc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\csc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\csi.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\csi.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\vbc.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\vbc.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\vbc.rsp
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Information_System.dll.config
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Information_System.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Antlr3.Runtime.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ClosedXML.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.Core.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ExcelNumberFormat.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Newtonsoft.Json.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Quartz.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Helpers.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Mvc.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Optimization.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\WebGrease.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ClosedXML.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ClosedXML.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.Core.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Common.Logging.Core.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\ExcelNumberFormat.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Quartz.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Quartz.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Helpers.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Mvc.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Optimization.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Newtonsoft.Json.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\obj\Release\Information_System.dll
+C:\Users\yutida\Desktop\TE-InformationSystem\backup\24.5.21\Information_System\Information_System\obj\Release\Information_System.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ApplicationInsights.config
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\csc.exe
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\csc.exe.config
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\csc.rsp
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\csi.exe
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\csi.rsp
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.CSharp.Core.targets
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\Microsoft.VisualBasic.Core.targets
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.AppContext.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.Collections.Immutable.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.Diagnostics.StackTrace.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.IO.FileSystem.Primitives.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\System.Reflection.Metadata.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\vbc.exe
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\vbc.exe.config
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\vbc.rsp
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\roslyn\VBCSCompiler.exe.config
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Information_System.dll.config
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Information_System.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Information_System.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Antlr3.Runtime.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ClosedXML.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.Core.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\DocumentFormat.OpenXml.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ExcelNumberFormat.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.Agent.Intercept.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.PerfCounterCollector.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.Web.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.ApplicationInsights.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.Web.Infrastructure.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Newtonsoft.Json.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Quartz.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Helpers.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Mvc.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Optimization.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Razor.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.Deployment.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.Razor.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\WebGrease.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ClosedXML.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ClosedXML.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.Core.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Common.Logging.Core.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\DocumentFormat.OpenXml.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\ExcelNumberFormat.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Quartz.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Quartz.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Helpers.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Mvc.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Optimization.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.Razor.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.Deployment.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\System.Web.WebPages.Razor.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Antlr3.Runtime.pdb
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Newtonsoft.Json.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.ApplicationInsights.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.DependencyCollector.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.WindowsServer.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\bin\Microsoft.AI.Web.xml
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\obj\Release\Information_System.csproj.AssemblyReference.cache
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\obj\Release\Information_System.csproj.CoreCompileInputs.cache
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\obj\Release\Information_System.csproj.CopyComplete
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\obj\Release\Information_System.dll
+I:\08 Information System Department\03 Development Section\00_ALL_FILE_PROJECT\TE-IS\Information_System\Information_System\obj\Release\Information_System.pdb

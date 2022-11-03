@@ -1,0 +1,178 @@
+﻿@model Information_System.Models.DocInfoModel
+@{
+    ViewBag.Title = "InformationFormat";
+}
+
+<style>
+    .fw-500 {
+        font-weight: 500;
+    }
+    .form {
+        font-size: 18px;
+    }
+    .bg-form {
+        background-color: #AEB6BF; /*#F6F6F6*/
+    }
+
+    .br-r {
+        border-radius: 8px;
+    }
+
+    .br {
+        /*border: solid;*/
+        border-width: 1px;
+        background-color: white;
+    }
+
+    .br-s {
+        border: solid;
+        border-width: 1px;
+    }
+
+</style>
+
+<div style="background-color: white; padding: 16px;" class="mt-2">
+    <h2>Information</h2>
+    @if (Model.ID == null || Model.ID =="")
+    {
+        <p style="color: red;">No Result. Please try again!</p>
+    }
+    else
+    {
+    <div class="form">
+        <div class="row" style="height: 54px;margin-right:16px; text-align: center;">
+            <div class="col-lg-9"></div>
+            <div class="col-lg-3 pt-2" style="font-size: 20px; border-top-left-radius: 8px; border-top-right-radius: 8px; background-color:#1F618D; color:white;">
+                    <label for="staticEmail2" class="fw-500">Information No:</label>
+                    <label type="text" id="staticEmail2">@Model.INFO_NO</label>
+            </div>
+        </div>
+        @*<div class="bg-form">*@
+        <div class="row bg-form" style="margin-right: 16px; margin-left: 16px;">
+            <div class="col-lg-7 bg-form">
+                <div class="br br-r" style="margin:16px 0px 16px;">
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Subject: </label><label type="text" id="staticEmail2">&nbsp; @Model.DOC_SUBJECT</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Plant/Dept: </label><label type="text" id="staticEmail2">&nbsp; @Model.PLANT_DEP</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Reson Explain: </label><label type="text" id="staticEmail2">&nbsp;@Model.REASON_EXPLAIN</label></div> 
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Detail Reference: </label>
+                        @if (Model.DETAIL_REF == null || Model.DETAIL_REF == "" || Model.DETAIL_REF == "-")
+                        {
+                            <label type="text" id="staticEmail2">&nbsp;@Model.DETAIL_REF</label>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ReceivedRequirment","Create")/@Model.REQUEST_ID" target="_blank" id="staticEmail2">@Model.DETAIL_REF</a>
+                        }                        
+                    </div> 
+                </div>
+            </div>
+            <div class="col-lg-5 bg-form">
+                <div class="br br-r" style="margin:16px 0px 16px;">
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Issue date: </label><label type="text" id="staticEmail2">&nbsp; @Model.ISSUE_DATE.ToShortDateString()</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Prepare by: </label><label type="text" id="staticEmail2">&nbsp;@Model.ISSUE_NAME</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Check by: </label><label type="text" id="staticEmail2">&nbsp; @Model.REVIEW_NAME</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Approved by: </label><label type="text" id="staticEmail2">&nbsp; @Model.APPROVE_NAME</label></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row bg-form mb-4" style="margin:0px 16px 0px 16px;">
+            <div class="br br-r" style="width: 100%; margin:0px 16px 16px 16px;">
+                <div class="br br-s br-r bg-form" style="width: 98%; margin:16px 16px 16px 16px; height: 180px;">
+                    &nbsp;<u>Document Detail:</u>
+                    <p class="ml-1 mr-1">@Model.DOC_DETAIL</p>
+                </div>
+
+                <div class="br br-s br-r bg-form" style="width: 98%; margin:16px 16px 16px 16px;">
+                    &nbsp;<u>Picture referance:</u>
+                    <div class="row mt-1 mb-3">
+                        <div class="col-lg-6" style="text-align: center;">
+                            @if (Model.txt_PIC_REF_1 != null && Model.txt_PIC_REF_1 != "")
+                            {
+                                <img src="~/Temp_File/@Model.txt_PIC_REF_1" style="border:solid;border-width: 0.5px; height: 350px;" />
+                            }
+                        </div>
+                        <div class="col-lg-6" style="text-align: center;">
+                            @if (Model.txt_PIC_REF_2 != null && Model.txt_PIC_REF_2 != "")
+                            {
+                                <img src="~/Temp_File/@Model.txt_PIC_REF_2" style="border:solid;border-width: 0.5px; height: 350px;" />
+                            }
+                        </div>
+                    </div>                    
+                </div>
+
+                <div class="br br-s br-r bg-form" style="width: 98%; margin:16px 16px 16px 16px;">
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Effective: </label><label type="text" id="staticEmail2">&nbsp; @Model.EFFECTIVE</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Add order no: </label><label type="text" id="staticEmail2">&nbsp; @Model.ADD_ORDER_NO</label></div>
+                    <div><label for="staticEmail2" class="fw-500">&nbsp;Relation system: </label><label type="text" id="staticEmail2">&nbsp; @Model.RELATION_ID (@Model.RELATION_TEXT)</label></div>
+                </div>
+
+                <div class="br br-s br-r bg-form" style="width: 98%; margin:16px 16px 16px 16px;">
+                    <div class="row">
+                        <div class="col-lg-2 fw-500" style="text-align:center; margin-top: 38px;">Attached document</div>
+                        <div>
+                            <div><label for="staticEmail2">&nbsp;Purchase request form:</label><a href="~/Temp_File/@Model.txt_ATT_DOC_PURCHASE" target="_blank" id="staticEmail2">&nbsp; @Model.txt_ATT_DOC_PURCHASE</a></div>
+                            <div><label for="staticEmail2">&nbsp;Requirement document: </label><a href="~/Temp_File/@Model.txt_ATT_DOC_REQUIRE" target="_blank" id="staticEmail2">&nbsp; @Model.txt_ATT_DOC_REQUIRE</a></div>
+                            <div><label for="staticEmail2">&nbsp;Other: </label><a href="~/Temp_File/@Model.txt_ATT_DOC_OTHER" target="_blank" id="staticEmail2">&nbsp; @Model.txt_ATT_DOC_OTHER</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="br br-s br-r bg-form" style="width: 98%; margin:16px 16px 16px 16px;">
+                    <p class="fw-500 ml-2 mt-2">Consideration & confirmation</p>
+                    <div class="col-lg-9 table-responsive">
+                        <table class="tb-radius table table-hover table-striped">
+                            <thead style="background-color: #1F618D; color: white;">
+                                <tr>
+                                    @*<th>Position</th>*@
+                                    <th>Department</th>
+                                    <th>Name</th>
+                                    @*<th>Signature</th>*@
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var l in Model.TE_APPROVE_LIST)
+                                {
+                                    <tr>
+                                        <td>@l.APPROVE_DEPT</td>
+                                        <td>@l.APPROVE_NAME</td>
+                                        @if (l.APPROVE_DATE == null)
+                                        {
+                                            <td>-</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@l.APPROVE_DATE</td>
+                                        }
+                                        <td>@l.STATUS</td>
+                                        <td>@l.COMMENT</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+
+                </div>
+
+            </div>
+        </div>
+            
+        @*</div>*@
+
+    </div>
+    
+        
+    }
+
+
+
+
+</div>
+
+
+
+
