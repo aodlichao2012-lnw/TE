@@ -18,7 +18,7 @@ namespace Information_System.Controllers
         string constr = new InFunction().connString;
 
         public ActionResult Index()
-        {
+       {
             if (Session["login_id"] == null)
             {
                 return View("Login");
@@ -74,7 +74,7 @@ namespace Information_System.Controllers
                 using (SqlCommand cmd = new SqlCommand(null, conn))
                 {
                     StringBuilder sql = new StringBuilder();
-                    sql.Append(" SELECT USR.userId userId, USR.userName userName, USR.Emp_ID EmpID, EMP.deptId deptId , EMP.PlantID , AC.*,P.plant_mark, D.Dept_Remark ");
+                    sql.Append(" SELECT USR.userId userId, USR.userName userName, USR.Emp_ID EmpID, EMP.deptId deptId, EMP.PlantID , AC.*,P.plant_mark, D.Dept_Remark ");
                     sql.Append(" FROM tbl_user USR INNER JOIN tbl_employee EMP ON USR.Emp_ID = EMP.empId LEFT JOIN tbl_access_right AC ON AC.empId = EMP.empId ");
                     sql.Append(" LEFT JOIN tbl_Dept D ON EMP.deptId = D.Dept_ID LEFT JOIN tbl_plant P ON EMP.PlantID = P.plant_id");
                     sql.Append(" WHERE userId = ").Append(Fn.getSQL(user));
@@ -87,18 +87,23 @@ namespace Information_System.Controllers
                         if (dr["IS_ADMIN"].ToString() != null && (dr["IS_ADMIN"].ToString() != "")) {
                             ac.IS_ADMIN = dr.GetBoolean(dr.GetOrdinal("IS_ADMIN"));
                         }
-
                         ac.IS_RECEIVE = dr["IS_RECEIVE"].ToString();
                         if (dr["IS_APP_LEVEL1"].ToString() != null && dr["IS_APP_LEVEL1"].ToString() != "")
                         {
                             ac.IS_APP_LEVEL1 = dr.GetBoolean(dr.GetOrdinal("IS_APP_LEVEL1"));
                         }
-
                         if (dr["IS_APP_LEVEL2"].ToString() != null && dr["IS_APP_LEVEL2"].ToString() != "")
                         {
                             ac.IS_APP_LEVEL2 = dr.GetBoolean(dr.GetOrdinal("IS_APP_LEVEL2"));
                         }
-
+                        if (dr["IS_TE"].ToString() != null && dr["IS_TE"].ToString() != "")
+                        {
+                            ac.IS_TE = dr.GetBoolean(dr.GetOrdinal("IS_TE"));
+                        }
+                        if (dr["IS_IT"].ToString() != null && dr["IS_IT"].ToString() != "")
+                        {
+                            ac.IS_IT = dr.GetBoolean(dr.GetOrdinal("IS_IT"));
+                        }
                         //if (dr["IS_APPROVE"].ToString() != null && dr["IS_APPROVE"].ToString() != "")
                         //{
                         //    ac.IS_APPROVE = dr.GetBoolean(dr.GetOrdinal("IS_APPROVE"));
@@ -144,7 +149,7 @@ namespace Information_System.Controllers
             {
                 conn.Open();
                 string sql = @" SELECT INFO_NO, D.STATUS, CONCAT(P.plant_mark,'/', DEP.Dept_Remark) PLANT, CONCAT(EMP.empTitleEng,' ', EMP.empNameEng) ISSUE_NAME, convert(varchar(10), D.ISSUE_DATE, 120) ISSUE_DATE " +
-                              " , DOC_TYPE, M.NAME DOC_FLOW, R.SUBJECT , R.REASON_EXPLAIN, D.DOC_DETAIL, R.IS_NO DETAIL_REFERNCE, D.EFFECTIVE, D.ADD_ORDER_NO, D.PIC_REF_1 " +
+                              " , DOC_TYPE, M.NAME DOC_FLOW, R.SUBJECT , R.REASON_EXPLAIN, D.DOC_DETAIL, EMP.empNameEng + ' '+empLnameEng as RequestName , R.IS_NO DETAIL_REFERNCE, D.EFFECTIVE, D.ADD_ORDER_NO, D.PIC_REF_1 " +
                               " , D.PIC_REF_2,D.ATT_DOC_PURCHASE, D.ATT_DOC_REQUIRE, D.ATT_DOC_OTHER " +
                               " FROM TBL_TECH_IS_DOCINFO D " +
                               " JOIN TBL_TECH_IS_REQUEST R ON D.REQUEST_NO = R.IS_ID " +
@@ -196,7 +201,9 @@ namespace Information_System.Controllers
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(null, conn))
                 {
-                    cmd.CommandText = " SELECT IS_ID, IS_NO, ISSUE_DATE, SUBJECT, APPROVE_STATUS FROM TBL_TECH_IS_REQUEST WHERE ISSUE_ID = " + Fn.getSQL(Session["emp_id"].ToString());
+                    cmd.CommandText = $@" SELECT * , a2.APPROVE_ID as APPROVE_ID , a2.STATUS as sta  FROM TBL_TECH_IS_REQUEST  a1
+                         LEFT JOIN[db_test].[dbo].[TBL_TECH_IS_REQUEST_APPROVE] a2
+                        ON a1.IS_ID = a2.[REQUEST_ID] WHERE ISSUE_ID = " + Fn.getSQL(Session["emp_id"].ToString());
                     SqlDataReader dr = cmd.ExecuteReader();
                     while(dr.Read())
                     {
@@ -206,6 +213,15 @@ namespace Information_System.Controllers
                         res.ISSUE_DATE = DateTime.Parse(dr["ISSUE_DATE"].ToString());
                         res.SUBJECT = dr["SUBJECT"].ToString();
                         res.APPROVE_STATUS = dr["APPROVE_STATUS"].ToString();
+                        if(res.APPROVE_STATUS == "CREATE")
+                        {
+                            res.APPROVE_ID = dr["APPROVE_ID"].ToString();
+                        }
+                        else
+                        {
+                            res.APPROVE_ID = "";
+                        }
+                       
                         model.Add(res);
                     }
                 }
@@ -220,8 +236,8 @@ namespace Information_System.Controllers
             con.Open();
             SqlCommand cmd = new SqlCommand(null, con);
             string plant = Session["plant_id"].ToString();
-            cmd.CommandText = " SELECT (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE PLANT = "+Fn.getSQL(plant) +" ) TOTAL" +
-                              " , (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('APPROVED','REJECT') AND PLANT = " + Fn.getSQL(plant) + ") IN_PROGRESS " +
+            cmd.CommandText = " SELECT (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('REVISE') AND PLANT = " + Fn.getSQL(plant) +" ) TOTAL" +
+                              " , (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('APPROVED','REJECT','REVISE') AND PLANT = " + Fn.getSQL(plant) + ") IN_PROGRESS " +
                               " , (SELECT COUNT(ID) FROM TBL_TECH_IS_DOCINFO WHERE STATUS = 'APPROVED' AND PLANT = " + Fn.getSQL(plant) + ") APPROVED " +
                               " , (SELECT COUNT(ID) FROM TBL_TECH_IS_DOCINFO WHERE STATUS = 'REJECT' AND PLANT = " + Fn.getSQL(plant) + ") REJECT ";
             SqlDataReader dr = cmd.ExecuteReader();
@@ -250,8 +266,8 @@ namespace Information_System.Controllers
             SqlCommand cmd = new SqlCommand(null, con);
             string plant = Session["plant_id"].ToString();
             cmd.CommandText = " SELECT * , TOTAL.IN_PROGRESS *100 / NULLIF(TOTAL.TOTAL, 0) as P_IN_PROGRESS, TOTAL.APPROVED *100 / NULLIF(TOTAL.TOTAL, 0) as P_APPROVED, TOTAL.REJECT *100 / NULLIF(TOTAL.TOTAL, 0) as P_REJECT FROM ( " +
-                              " SELECT (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = "+ year + condition_month +" ) TOTAL" +
-                              " , (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('APPROVED','REJECT') AND PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = " + year + condition_month + " ) IN_PROGRESS " +
+                              " SELECT (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('REVISE') AND PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = "+ year + condition_month +" ) TOTAL" +
+                              " , (SELECT COUNT(ID)  FROM TBL_TECH_IS_DOCINFO WHERE STATUS NOT IN ('APPROVED','REJECT','REVISE') AND PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = " + year + condition_month + " ) IN_PROGRESS " +
                               " , (SELECT COUNT(ID) FROM TBL_TECH_IS_DOCINFO WHERE STATUS = 'APPROVED' AND PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = " + year + condition_month + " ) APPROVED " +
                               " , (SELECT COUNT(ID) FROM TBL_TECH_IS_DOCINFO WHERE STATUS = 'REJECT' AND PLANT = " + Fn.getSQL(plant) + " AND YEAR(ISSUE_DATE) = " + year + condition_month + " ) REJECT " +
                               " ) AS TOTAL ";

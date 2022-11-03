@@ -38,18 +38,21 @@ namespace Information_System.Models
         public string DOC_SUBJECT { get; set; }
         public string REASON_EXPLAIN { get; set; }
         public string DETAIL_REF { get; set; }
+        public string WARNNIG_DATE { get; set; }
 
         public HttpPostedFileBase PIC_REF_1 { get; set; }
         public HttpPostedFileBase PIC_REF_2 { get; set; }
         public HttpPostedFileBase ATT_DOC_PURCHASE { get; set; }
         public HttpPostedFileBase ATT_DOC_REQUIRE { get; set; }
-        public HttpPostedFileBase ATT_DOC_OTHER { get; set; }
+        public HttpPostedFileBase[] ATT_DOC_OTHER { get; set; }
+        public HttpPostedFileBase ATT_DOC_IMPORTANT { get; set; }
 
         public string txt_PIC_REF_1 { get; set; }
         public string txt_PIC_REF_2 { get; set; }
         public string txt_ATT_DOC_PURCHASE { get; set; }
         public string txt_ATT_DOC_REQUIRE { get; set; }
-        public string txt_ATT_DOC_OTHER { get; set; }
+        public string txt_DOC_IMPORTANT { get; set; }
+        public string[] txt_ATT_DOC_OTHER { get; set; }
 
         public string APPROVE_LIST { get; set; }
         public string REQUEST_NAME { get; set; }
@@ -57,8 +60,8 @@ namespace Information_System.Models
         public List<DocInfoApprove> TE_APPROVE_LIST { get; set; }
         public List<MailGroup> MAIL_GRP { get; set; }
         public string APPROVE_NAME { get; set; }
-        public string REVIEW_NAME { get; set; }
-
+        public string REVIEW_NAME { get; set; }        
+        public List<RevDoc> RevDoc { get; set; }
     }
 
     public class FilePatch
@@ -67,7 +70,8 @@ namespace Information_System.Models
         public string txt_PIC_REF_2 { get; set; }
         public string txt_ATT_DOC_PURCHASE { get; set; }
         public string txt_ATT_DOC_REQUIRE { get; set; }
-        public string txt_ATT_DOC_OTHER { get; set; }
+        public string[] txt_ATT_DOC_OTHER { get; set; }
+        public string txt_ATT_DOC_IMPORTANT { get; set; }
     }
 
     public class DocInfoApprove
@@ -79,5 +83,6 @@ namespace Information_System.Models
         public string STATUS { get; set; }
         public DateTime? APPROVE_DATE { get; set; }
         public string APPROVE_DEPT { get; set; }
+        public string APPROVE_EMAIL { get; set; }
     }
 }

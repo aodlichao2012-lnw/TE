@@ -10,7 +10,7 @@
     @Styles.Render("~/Content/GlobalStyle.css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @{ 
+    @{
         Information_System.Models.AccessRightModel p = null;
         p = Session["permission"] as Information_System.Models.AccessRightModel;
         string userName = Session["login_name"].ToString();
@@ -35,30 +35,30 @@
             background: rgb(255,203,225);
             background: linear-gradient(128deg, rgba(255,203,225,1) 0%, rgba(205,221,255,1) 73%, rgba(163,194,255,1) 100%);
         }
-
     </style>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body style="background-color: #F1F1F1;">
     @*<div class="navbar navbar-inverse navbar-fixed-top fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>*@
- 
+        </div>*@
+
     <div class="container body-content fixed-top col-md-12 col-lg-10">
         <nav class="navbar navbar-expand-lg navbar-light hr" style="height: 75px; background-color: #FEFEFE;">
             <a class="navbar-brand" href="@Url.Action("Index","Home")" onclick="Highlight('home')"><b>INFORMATION SYSTEM</b></a>
@@ -66,39 +66,40 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent"> @*navbar*@
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                @*navbar*@
                 <ul class="navbar-nav ml-auto" style="height: 75px;">
-                    <li id="Index" class="nav-item active" >
+                    <li id="Index" class="nav-item active">
                         <a class="nav-link mt-lg-3" href="@Url.Action("Index","Home")" onclick="Highlight('home')"><b>HOME</b>  </a>
                     </li>
                     <li class="nav-item" id="CreateRequirementDoc">
                         <a class="nav-link mt-lg-3" href="@Url.Action("CreateRequirementDoc","Create")" onclick="Highlight('create')"><b>CREATE DOC.</b>  </a>
                     </li>
-                    
+
                     @*@if (p.IS_APP_LEVEL1 || p.IS_APP_LEVEL2 || p.IS_APPROVE)
-                    {
-                        <li class="nav-item" id="ApproveList">
-                            <a class="nav-link mt-lg-3" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')"><b>APPROVE LIST</b>  </a>
-                        </li>
-                    }*@
+                        {
+                            <li class="nav-item" id="ApproveList">
+                                <a class="nav-link mt-lg-3" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')"><b>APPROVE LIST</b>  </a>
+                            </li>
+                        }*@
 
                     <li class="nav-item dropdown" id="approve">
-                            <a class="nav-link dropdown-toggle mt-lg-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Highlight('approve')">
-                                <b>APPROVE</b>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -12px;">
-                                @*@if (p.IS_APP_LEVEL1 || p.IS_APP_LEVEL2 || p.IS_APPROVE)
+                        <a class="nav-link dropdown-toggle mt-lg-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Highlight('approve')">
+                            <b>APPROVE</b>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: -12px;">
+                            @*@if (p.IS_APP_LEVEL1 || p.IS_APP_LEVEL2 || p.IS_APPROVE)
                                 {
                                     <a class="dropdown-item" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')">APPROVE LIST</a>
                                 }*@
-                                <a class="dropdown-item" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')">APPROVE LIST</a>
-                                <a class="dropdown-item" href="@Url.Action("ApproveRequirement","Approve")">APPROVE REQUIREMENT</a>
-                            </div>
+                            <a class="dropdown-item" href="@Url.Action("ApproveList","Approve")" onclick="Highlight('ApproveList')">APPROVE LIST</a>
+                            <a class="dropdown-item" href="@Url.Action("ApproveRequirement","Approve")">APPROVE REQUIREMENT</a>
+                        </div>
                     </li>
 
                     @*@if (p.IS_ADMIN)
-                    {*@
-                        @*<li class="nav-item dropdown" id="approve">
+                        {*@
+                    @*<li class="nav-item dropdown" id="approve">
                             <a class="nav-link dropdown-toggle mt-lg-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="Highlight('approve')">
                                 <b>APPROVE</b>
                             </a>
@@ -109,13 +110,13 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>*@
-                        <li class="nav-item" id="ReportList">
-                            <a class="nav-link mt-lg-3" onclick="Highlight('ReportList')" href="@Url.Action("ReportList","Report")"><b>REPORT</b>  </a>
-                        </li>
+                    <li class="nav-item" id="ReportList">
+                        <a class="nav-link mt-lg-3" onclick="Highlight('ReportList')" href="@Url.Action("ReportList","Report")"><b>REPORT</b>  </a>
+                    </li>
                     @*}*@
-                    
+
                     <li class="nav-item">
-                        <a class="nav-link mt-lg-3" data-toggle="modal" data-target="#logoutModel"><b>SIGN OUT</b> </a>
+                        <a class="nav-link mt-lg-3" onclick="signout();"><b>SIGN OUT</b> </a>
                     </li>
 
                 </ul>
@@ -135,25 +136,26 @@
     </div>
 
     @*Logout Model*@
-    <div class="modal fade" id="logoutModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Sign Out</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Do you want to sign out?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="signout();">Yes</button>
+    @*data-toggle="modal" data-target="#logoutModel"
+        <div class="modal fade" id="logoutModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Sign Out</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Do you want to sign out?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="signout();">Yes</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -185,8 +187,8 @@
 
     </script>
 
-    
 
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 
 </body>
 </html>

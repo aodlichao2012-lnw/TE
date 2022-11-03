@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information_System", "Information_System\Information_System.csproj", "{5B356CAA-4F1A-4799-B14C-8F536153ECF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Information_System", "C:\Users\suparatj\Documents\GitHub\TE\Information_System.csproj", "{5B356CAA-4F1A-4799-B14C-8F536153ECF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C78F25F0-BE91-47BE-BD87-365154D14163}
 	EndGlobalSection
 EndGlobal

@@ -2,12 +2,11 @@
 @{
     ViewBag.Title = "Create Requirement";
     ViewData["Plant"] = Session["plantRemark"];
-    ViewData["IssueName"] = Session["login_name"].ToString() ;
+    ViewData["IssueName"] = Session["login_name"].ToString();
 
-    //string s = "Drawing,b,Other ddddd";
     string action = "Create";
 
-    if (ViewData["NEWID"] == null)
+    if (Model != null)
     {
         action = "Edit";
         ViewData["NEWID"] = Model.IS_ID;
@@ -15,9 +14,13 @@
         ViewData["APPROVE_EMAIL"] = Model.APPROVE_EMAIL;
         ViewData["APPROVE_NAME"] = Model.APPROVE_NAME;
     }
+
+    if (Model != null && Model.APPROVE_STATUS == "TE-REJECT")
+    {
+        action = "Revise";
+    }
 }
 <style>
-
     .hrr {
         border-right-style: solid;
         border-right-color: #646464;
@@ -40,16 +43,15 @@
         border-width: 2px;
     }
 
-   
+
     .width20 {
         width: 19%;
     }
-
 </style>
 
 <div style="background-color: white;">
     <div style=" margin: 24px;" class="pb-4">
-        
+
         @if (TempData["createRequestDoc"] != null)
         {
             <div id="createRequestDoc" class="alert alert-success" role="alert">
@@ -67,79 +69,100 @@
 
         <h2 style="padding-top: 12px;">@action Requirement detail</h2>
         <form method="post" enctype="multipart/form-data">
-            <div class="form-group row">
-                <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label">Plant / Department</label>
-                <div class="col-sm-8 col-lg-10">
-                    <input type="text" readonly class="form-control" id="txtPlant" name="PLANT" value="@ViewData["Plant"]">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group row">
+                        <label for="txtPlant" class="col-sm-4 col-lg-3 col-form-label">Plant / Department</label>
+                        <div class="col-sm-8 col-lg-9">
+                            <input type="text" readonly class="form-control" id="txtPlant" name="PLANT" value="@ViewData["Plant"]">
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -15px;">
+                        <label for="txtIssueName" class="col-sm-4 col-lg-3 col-form-label">Issue Name</label>
+                        <div class="col-sm-8 col-lg-9">
+                            @if (Model != null && Model.IS_ID != null)
+                            {
+                                <input type="text" readonly class="form-control" id="ISSUE_NAME" value="@Model.ISSUE_NAME">
+                            }
+                            else
+                            {
+                                <input type="text" readonly class="form-control" id="ISSUE_NAME" value="@ViewData["IssueName"]">
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="opSubject" class="col-sm-4 col-lg-3 col-form-label"><b>SUBJECT :</b></label>
+                        <div class="col-sm-8 col-lg-9">
+                            <select class="form-control" id="opSubject" name="opSubject">
+                                @foreach (var sj in ViewData["subject"] as List<string>)
+                                {
+                                    if (Model != null && Model.IS_ID != null && Model.SUBJECT == sj)
+                                    {
+                                        <option value="@sj" selected>@sj</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@sj">@sj</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -15px;">
+                        <label for="txtReason" class="col-sm-4 col-lg-3 col-form-label"><b>REASON EXPLAIN :</b></label>
+                        <div class="col-sm-8 col-lg-9">
+                            @if (Model != null && Model.IS_ID != null)
+                            {
+                                <input type="text" class="form-control" id="txtReason" maxlength="255" name="REASON_EXPLAIN" value="@Model.REASON_EXPLAIN">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="txtReason" maxlength="255" name="REASON_EXPLAIN" value="">
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -15px;">
+                        <label for="txtStrProMonth" class="col-sm-4 col-lg-3 col-form-label"><b>START PROD.MONTH</b></label>
+                        <div class="col-sm-8 col-lg-9">
+                            @if (Model != null && Model.IS_ID != null)
+                            {
+                                <input type="text" class="form-control" id="txtStrProMonth" name="START_PROD_MONTH" value="@Model.START_PROD_MONTH">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" id="txtStrProMonth" name="START_PROD_MONTH" value="">
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row" style="margin-top: -15px;">
+                        <label for="txtPlant" class="col-sm-4 col-lg-3 col-form-label"><label style="color:red;">*</label><b>APPROVE LIST :</b></label>
+                        <div class="col-sm-8 col-lg-9">
+                            <select class="form-control" onchange="getAppList()" id="optAppFlow" name="optAppFlow">
+                                @foreach (var ap in ViewData["approveList"] as List<string>)
+                                {
+                                    if ((Model != null && Model.IS_ID != null) && Model.ROUTING_ID == ap)
+                                    {
+                                        <option value="@ap" selected>@ap</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@ap">@ap</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row" style="margin-top: -15px;">
-                <label for="txtIssueName" class="col-sm-4 col-lg-2 col-form-label">Issue Name</label>
-                <div class="col-sm-8 col-lg-10">
-                    @if (Model != null && Model.IS_ID != null)
-                    {
-                        <input type="text" readonly class="form-control" id="ISSUE_NAME" value="@Model.ISSUE_NAME">
-                    }
-                    else
-                    {
-                       <input type="text" readonly class="form-control" id="ISSUE_NAME" value="@ViewData["IssueName"]">
-                    }
+
+                <div class="col-lg-6">
+                    <p><b>APPROVE FLOW</b></p>
+                    <div id="approveFlow">
+
+                    </div>
                 </div>
-            </div>
-            
-            <div class="form-group row">
-                <label for="txtSubject" class="col-sm-4 col-lg-2 col-form-label"><b>SUBJECT :</b></label>
-                <div class="col-sm-8 col-lg-10">
-                    @if (Model != null && Model.IS_ID != null)
-                    {
-                        <input type="text" class="form-control" id="txtSubject" name="SUBJECT" value="@Model.SUBJECT">
-                    }
-                    else
-                    {
-                        <input type="text" class="form-control" id="txtSubject" name="SUBJECT" value="">
-                    }
-                    
-                </div>
-            </div>
-            <div class="form-group row" style="margin-top: -15px;">
-                <label for="txtReason" class="col-sm-4 col-lg-2 col-form-label"><b>REASON EXPLAIN :</b></label>
-                <div class="col-sm-8 col-lg-10">
-                    @if (Model != null && Model.IS_ID != null)
-                    {
-                        <input type="text" class="form-control" id="txtReason" maxlength="255" name="REASON_EXPLAIN" value="@Model.REASON_EXPLAIN">
-                    }
-                    else
-                    {
-                        <input type="text" class="form-control" id="txtReason" maxlength="255" name="REASON_EXPLAIN" value="">
-                    }
-                </div>
-            </div>
-            <div class="form-group row" style="margin-top: -15px;">
-                <label for="txtStrProMonth" class="col-sm-4 col-lg-2 col-form-label"><b>START PROD.MONTH</b></label>
-                <div class="col-sm-8 col-lg-10">
-                    @if (Model != null && Model.IS_ID != null)
-                    {
-                        <input type="text" class="form-control" id="txtStrProMonth" name="START_PROD_MONTH" value="@Model.START_PROD_MONTH">
-                    }
-                    else
-                    {
-                        <input type="text" class="form-control" id="txtStrProMonth" name="START_PROD_MONTH" value="">
-                    }
-                </div>
-            </div>
-            <div class="form-group row" style="margin-top: -15px;">
-                <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label"><label style="color:red;">*</label><b>Approve ID :</b></label>
-                <div class="col-sm-8 col-lg-3">
-                    @if (Model != null && Model.IS_ID != null)
-                    {
-                        <input type="text" required style="display:inline-table" readonly class="form-control" id="txtApproveID" name="APPROVE_ID" value="@Model.APPROVE_ID">
-                    }
-                    else
-                    {
-                        <input type="text" required style="display:inline-table" class="form-control" id="txtApproveID" name="APPROVE_ID">
-                    }
-                    <img width='18' style="display:inline-table" src="~/Image/bi-exclamation-circle.svg" title='Enter employee ID of the approver, for example 9999.' />
-                </div>
+
             </div>
 
             <div style="margin: 16px;">
@@ -152,7 +175,7 @@
                         <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="BOM Master"><b>BOM Master</b></label>
                         <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="PO"><b>PO</b></label>
                         <label class="col-lg-4 checkbox-inline"><input type="checkbox" value="Method (WI)"><b>Method (WI)</b></label>
-                        <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="PDM"><b>PDM</b></label>
+                        <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="CECIL"><b>CECIL</b></label>
                         <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="SAP"><b>SAP</b></label>
                         <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Production Plan"><b>Production Plan</b></label>
                         <label class="col-lg-5 checkbox-inline">
@@ -208,70 +231,118 @@
                         <label class="col-lg-2 checkbox-inline"><input type="checkbox" value="Market Request"><b> Market Request</b></label>
                         <label class="col-lg-5 checkbox-inline">
                             <input type="checkbox" value="Other" id="otherClas" onclick="disableBtnClas();"><b> Other</b>
-                            <input type="text" class="col-lg-9 " id="txtOtherClas" disabled/>
+                            <input type="text" class="col-lg-9 " id="txtOtherClas" disabled />
                         </label>
                     </div>
                 </div>
 
                 <div class="row hr1 hrb">
-                    <div class="col-4 mt-lg-4" style="text-align: center;">
-                        <p><b>Attached Docurment</b></p>
+                    <div class="col-12 mt-lg-12">
+                        <label for="txtDeatils"><b>DETAILS :</b></label>
+                        @if (Model != null && Model.IS_ID != null)
+                        {
+                            <textarea class="form-control" style="min-width: 100%" id="txtDeatils" name="DETAILS" rows="3" placeholder="Enter Deatils.">@Model.DETAILS</textarea>
+                        }
+                        else
+                        {
+                            <textarea class="form-control" style="min-width: 100%" id="txtDeatils" name="DETAILS" rows="3" placeholder="Enter Details."></textarea>
+                        }
+                    </div>
+
+                    <div class="col-4 mt-lg-4">
+                        <p><b>ATTACHED DOCUMENT</b></p>
                     </div>
                     <div class="col-8 mt-2 mb-2 mt-lg-4">
                         <div class="row col-8" id="fileLink">
-                        
+
                             @if (Model != null)
                             {
                                 foreach (var f in Model.GET_FILE_LIST)
                                 {
-                                    <p class='row col-8'><a href="@Url.Content("~/Temp_File/")@f" target="_blank">@f</a><button type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@f');">X</button></p>
+                                    <p class='row col-8'>
+                                        <a href="@Url.Content("~/Temp_File/")@f" target="_blank">@f</a>
+                                        @if (Model.APPROVE_STATUS != "APPROVED")
+                                        {
+                                            <button type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@f');">X</button>
+                                        }
+                                    </p>
                                 }
                             }
                         </div>
-                        @if (Model != null && (Model.APPROVE_STATUS == "TE-REJECT"))
+
+                        <div class="row mb-1">
+                            <input type="file" name="fileUpload" id="fileUpload" multiple />
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#txtWarning').datepicker({
+                                //format: 'dd/mmm/yyyy hh:mm',
+                                //ignoreReadonly: true,
+                            });
+                        })
+                    </script>
+                    <div class="col-12 mt-lg-12">
+                        <label for="Warning"><b>WARNING DATE :</b></label>
+                        @if (Model != null && Model.IS_ID != null)
                         {
+
+                            <input id="txtWarning" type="text" style="background-color:aquamarine;" class="form-control" value="@Model.WARNING_DATE.Value.ToString("dd-MMM-yyyy 08:00")" />
                         }
                         else
                         {
-                            <div class="row mb-1">
-                                <input type="file" name="fileUpload" id="fileUpload" multiple />
-                            </div>
+                            <div></div>
+                            <input id="txtWarning" style="background-color:aquamarine;" type="text" class="form-control" />
                         }
                     </div>
+
                 </div>
             </div>
-            @if (Model != null && (Model.APPROVE_STATUS == "TE-REJECT"))
+          
+            @if (Model != null && action != "Create")
             {
-            }
-            else
-            {
-                <div class="row justify-content-end mt-2" style="margin: 8px;">
-                    <div class="mr-3 mt-1" id="err" style="display: none; color: red;"><small style="color: red;">Sorry! Please try again.</small></div>
-                    <button type="button" class="btn btn-success mr-2" onclick="AddRequirementDoc();">Save and Sent Mail</button>
-                    <button type="button" class="btn btn-danger" onclick="cancel();">Cancel</button>
+                <div style="margin: 16px;">
+                    <div class="row">
+                        <label for="txtDeatils"><b>APPROVER COMMENT :</b></label>
+                        <p class="pl-1"> @Model.APPROVE_COMMENT</p>
+                    </div>
+                    @if (Model.APPROVE_STATUS == "TE-REJECT")
+                    {
+                        <div class="row">
+                            <label for="txtDeatils"><b>TE COMMENT :</b></label>
+                            <p class="pl-1"> @Model.TE_COMMENT</p>
+                        </div>
+                    }
                 </div>
             }
+
+            <div class="row justify-content-end mt-2" style="margin: 8px;">
+                <div class="mr-3 mt-1" id="err" style="display: none; color: red;"><small style="color: red;">Sorry! Please try again.</small></div>
+                <button type="button" class="btn btn-success mr-2" id="btnSave" onclick="AddRequirementDoc();">Save and Sent Mail</button>
+                <button type="button" class="btn btn-danger" id="btnCancel" onclick="cancel();">Cancel</button>
+            </div>
         </form>
-        
+
     </div>
-    
+
 </div>
 
 <div class="modal fade" id="loadingModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" style="top: 30%;" role="document">
-            <div>
-                <div style="align-items: center;">
-                    <div class="loader-cycle" style="margin:0 auto;"></div>
-                    <h4 class="mt-3" style="color:#3498db; text-align:center; text-shadow: 1px 1px #000000;">In-Progress</h4>
-                </div>
+    <div class="modal-dialog" style="top: 30%;" role="document">
+        <div>
+            <div style="align-items: center;">
+                <div class="loader-cycle" style="margin:0 auto;"></div>
+                <h4 class="mt-3" style="color:#3498db; text-align:center; text-shadow: 1px 1px #000000;">In-Progress</h4>
             </div>
         </div>
+    </div>
 </div>
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
     function cancel() {
-        if (confirm("Do you want to cancel information?")) {
+        if (confirm("Do you want to cancel requirement?")) {
             var fileLink = document.getElementById("fileLink");
             var chks = fileLink.getElementsByTagName("a");
             var fileArr = [];
@@ -306,14 +377,15 @@
     }
 
     function AddRequirementDoc() {
-        if ($('#txtApproveID').val() == null || $('#txtApproveID').val() == "") {
-            var txtError = document.getElementById("err");
-            txtError.style.display = "block";
-            txtError.style.color = "red";
-            txtError.innerText = "Please enter Approve ID."
-        }
-        else
-        {
+
+        //if ($('#txtApproveID').val() == null || $('#txtApproveID').val() == "") {
+        //    var txtError = document.getElementById("err");
+        //    txtError.style.display = "block";
+        //    txtError.style.color = "red";
+        //    txtError.innerText = "Please enter Approve ID."
+        //}
+        //else
+        //{
             document.getElementById("err").style.display = "none";
             var fileLink = document.getElementById("fileLink");
             var chks = fileLink.getElementsByTagName("a");
@@ -325,7 +397,7 @@
 
             var data = {
                 IS_ID: '@ViewData["NEWID"]',
-                SUBJECT: $('#txtSubject').val(),
+                SUBJECT: $('#opSubject').val(),
                 REASON_EXPLAIN: $('#txtReason').val(),
                 START_PROD_MONTH: $('#txtStrProMonth').val(),
                 DOCUMENT_DATA_OF_CHANGE: getChkValue(),
@@ -338,38 +410,44 @@
                 APPROVE_NAME: '@ViewData["APPROVE_NAME"]',
                 FILE_LIST: fileArr,
                 action: "@action",
+                DETAILS: $('#txtDeatils').val(),
+                ROUTING_ID: $('#optAppFlow').val(),
+                WARNING_DATE: $('#txtWarning').val(),
             }
-            
-            if (confirm("Do you want to save requirement?")) {
-                $('#loadingModel').modal('show');
-                $.ajax({
-                    type: "post",
-                    data: data,
-                    //contentType: false,
-                    //processData: false,
-                    url: "@Url.Action("addrequirementdoc", "create")",
-                    success: function (data) {
-                        if (data == "True") {
-                            window.location.reload();
-                            window.scrollTo({ top: 0, behavior: `smooth` })
-                        } else if (data == "errFindApprover") {
-                            hideLoadingModal();
-                            document.getElementById("err").style.display = "block";
-                            document.getElementById("err").innerText = "Please enter new approver ID.";
-                        }
-                        else {
-                            hideLoadingModal();
-                            document.getElementById("err").style.display = "block";
-                            document.getElementById("err").innerText = "Sorry! Please try again.";                            
-                        }
 
+            if ($('#optAppFlow').val() == null) {
+                document.getElementById("err").style.display = "";
+            } else {
+                if (confirm("Do you want to save requirement?")) {
+                    if ("@action" != "Create") {
+                        AddRequirementLog();
                     }
-                });
-                
+                    $('#loadingModel').modal('show');
+                    $.ajax({
+                        type: "post",
+                        data: data,
+                        url: "@Url.Action("addrequirementdoc", "create")",
+                        success: function (data) {
+                            if (data == "True") {
+                                window.location.reload();
+                                window.scrollTo({ top: 0, behavior: `smooth` })
+                            } else if (data == "errFindApprover") {
+                                hideLoadingModal();
+                                document.getElementById("err").style.display = "block";
+                                document.getElementById("err").innerText = "Please enter new approver ID.";
+                            }
+                            else {
+                                hideLoadingModal();
+                                document.getElementById("err").style.display = "block";
+                                document.getElementById("err").innerText = "Sorry! Please try again.";
+                            }
+                        }
+                    });
+                }
             }
-        }
-    }
 
+        //}
+    }
 
     document.getElementById("fileUpload").onchange = function () {
         var fileUpload = $("#fileUpload").get(0);
@@ -434,9 +512,6 @@
                 xhr.send();
          }
     }
-
-
-
 
     function disableBtn() {
         if (document.getElementById("other").checked == false) {
@@ -519,11 +594,43 @@
         return arr;
     }
 
+    function getAppList() {
+        const id = document.getElementById("optAppFlow").value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                var list = JSON.parse(xhr.responseText);
+                $('#approveFlow').empty();
+                for (var i = 0; i < list.length; i++) {
+                    var html = "";
+                    html += "<p>" + list[i].ROUTING_NO +". "+ list[i].NAME +"</p>"
+                    $('#approveFlow').append(html);
+                }
+            }
+        }
+        xhr.open("GET", "@Url.Action("getRoutingPerson", "Create")" + "?routing_id=" + id, true);
+        xhr.send(null);
+    }
+    getAppList();
 
 </script>
 
-@if (Model != null && Model.IS_ID != "") {
-    <script>
+@if (Model != null && Model.IS_ID != "")
+{
+<script>
+
+        document.getElementById("optAppFlow").disabled = true;
+        document.getElementById("btnCancel").style.display = "none";
+
+        if ("@Model.APPROVE_STATUS" == "APPROVED") {
+            document.getElementById("btnSave").style.display = "none";
+        }
+        else
+        {
+            document.getElementById("btnSave").style.display = "";
+        }
+
         function setClassification() {
             var checked = 0;
             var tbl = document.getElementById("Clas");
@@ -540,7 +647,7 @@
                 }
             }
         }
-    
+
         function setDataChange() {
 
             var checked = 0;
@@ -564,6 +671,39 @@
         function unescape(string) {
             return new DOMParser().parseFromString(string, 'text/html').querySelector('html').textContent;
         }
-        
-    </script>
+
+
+        function AddRequirementLog() {
+            var model = @Html.Raw(Json.Encode(Model));
+            var data = {
+                    IS_ID: "@Model.IS_ID",
+                    SUBJECT: model.SUBJECT,
+                    @*REASON_EXPLAIN: unescape("@Model.REASON_EXPLAIN"),*@
+                    REASON_EXPLAIN: model.REASON_EXPLAIN,
+                    START_PROD_MONTH: model.START_PROD_MONTH,
+                    DOCUMENT_DATA_OF_CHANGE: unescape("@Model.DOCUMENT_DATA_OF_CHANGE"),
+                    PARTS_CODE: model.PARTS_CODE,
+                    WATCH_CODE: model.WATCH_CODE,
+                    CLASSIFICATION: unescape("@Model.CLASSIFICATION"),
+                    ISSUE_ID: "@Model.ISSUE_ID",
+                    ISSUE_DATE: "@Model.ISSUE_DATE",
+                    APPROVE_ID: "@Model.APPROVE_ID",
+                    APPROVE_STATUS: "@Model.APPROVE_STATUS",
+                    APPROVE_COMMENT: model.APPROVE_COMMENT,
+                    DETAILS: model.DETAILS,
+                    TE_COMMENT: model.TE_COMMENT,
+                    WARNING_DATE: model.WARNING_DATE,
+            }
+            
+            $.ajax({
+                        type: "post",
+                        data: data,
+                        url: "@Url.Action("addrequirementdocLog", "create")",
+                        success: function (data) {
+                            return true;
+                        }
+            });
+        }
+
+</script>
 }

@@ -16,6 +16,11 @@
     {
         fp = ViewData["fp"] as Information_System.Models.FilePatch;
     }
+    string warnning = string.Empty;
+    if (ViewData["warn"] != null)
+    {
+        warnning = ViewData["warn"].ToString();
+    }
 
 }
 <style>
@@ -34,9 +39,10 @@
 </style>
 
 <div style="background-color: white; padding: 16px;" class="mt-2">
-   
+
     @if (p.IS_ADMIN)
     {
+
         if (TempData["CreateSucess"] != null)
         {
             <div id="createRequestDoc" class="alert alert-success" role="alert">
@@ -61,6 +67,14 @@
             </div>
         }
 
+        if (d != null && d.STATUS_ALL == "REVISE")
+        {
+            <div class="alert alert-danger" role="alert">
+                @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+                <strong>Revise! </strong>This document has been revise
+            </div>
+        }
+
         if (d != null && d.STATUS_ALL == "IN-PROGRESS")
         {
             <div class="alert alert-warning" role="alert">
@@ -71,265 +85,357 @@
 
         if (d != null && (d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT" || d.STATUS_ALL == "IN-PROGRESS"))
         {
-            <h2>View Information Docurment</h2>
+            <h2>View Information Document</h2>
         }
         else
         {
-            <h2>Create Information Docurment</h2>
+            <h2>Create Information Document</h2>
         }
 
 
         <form method="post" enctype="multipart/form-data">
-        <hr />
-        @if (d != null && (d.INFO_NO != "")) {
-            <div class="form-group row">
-                <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label">Information No.</label>
+            <hr />
+            @if (d != null && (d.INFO_NO != ""))
+            {
+                <div class="form-group row">
+                    <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label">Information No.</label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input type="text" readonly class="form-control col-lg-4" id="txtInfoNo" name="INFO_NO" value="@d.INFO_NO" style="font-weight: bold;">
+                    </div>
+                </div>
+            }
+
+            <div class="form-group row mtd-10">
+                <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label">Plant / Department</label>
                 <div class="col-sm-8 col-lg-10">
-                    <input type = "text" readonly class="form-control col-lg-4" id="txtInfoNo" name="INFO_NO" value="@d.INFO_NO">
+                    <input type="text" readonly class="form-control col-lg-4" id="txtPlant" name="PLANT_DEP" value="@ViewData["Plant"]">
                 </div>
             </div>
-        }
-
-        <div class="form-group row mtd-10">
-            <label for="txtPlant" class="col-sm-4 col-lg-2 col-form-label">Plant / Department</label>
-            <div class="col-sm-8 col-lg-10">
-                <input type="text" readonly class="form-control col-lg-4" id="txtPlant" name="PLANT_DEP" value="@ViewData["Plant"]">
+            <div class="form-group row mtd-10">
+                <label for="txtIssueName" class="col-sm-4 col-lg-2 col-form-label">Issue Name</label>
+                <div class="col-sm-8 col-lg-10">
+                    <input type="text" readonly class="form-control col-lg-4" id="txtIssueName" name="ISSUE_NAME" value="@ViewData["IssueName"]">
+                </div>
             </div>
-        </div>
-        <div class="form-group row mtd-10">
-            <label for="txtIssueName" class="col-sm-4 col-lg-2 col-form-label">Issue Name</label>
-            <div class="col-sm-8 col-lg-10">
-                <input type="text" readonly class="form-control col-lg-4" id="txtIssueName" name="ISSUE_NAME" value="@ViewData["IssueName"]">
-            </div>
-        </div>
-        
-        <div class="form-group row mtd-10">
-            <label for="txtDocType" class="col-sm-4 col-lg-2 col-form-label">Document Type</label>
-            <div class="row col-sm-8 col-lg-10">
-                @if (d != null && d.ID != null)
-                {
-                    <input class="form-control col-lg-4 ml-3" type="text" id="txtDocType" name="DOC_TYPE" placeholder="Enter Document Type" value="@d.DOC_TYPE">
-                }
-                else
-                {
-                    <input class="form-control col-lg-4 ml-3" type="text" id="txtDocType" name="DOC_TYPE" placeholder="Enter Document Type" value="Information">
-                }
 
-                @*<label class="col-lg-2 checkbox-inline text-center" style="margin-top: 8px;"><input type="checkbox" value="Approved" id="APPROVED_FLAX" name="APPROVED_FLAX"> Approved</label>*@
-                <label class="col-lg-2 checkbox-inline text-center" style="margin-top: 8px;"><input type="checkbox" value="Acknowlage" id="ACKNOWLAGE_FLEX" name="ACKNOWLAGE_FLEX" onclick="isShowCCCList();"> Acknowlage</label>
-                <div class="form-group" style="width: 200px;">
-                    <select class="form-control" id="txtCC" name="txtCC" onchange="getCCList()" style="display: none; margin-bottom: -12px;">
-                        @foreach (var cclist in ViewData["CC_list"] as List<Information_System.Models.ApproveGroup>)
-                        {
-                            if (d != null && cclist.ID == d.CC_GRP)
+            <div class="form-group row mtd-10">
+                <label for="txtDocType" class="col-sm-4 col-lg-2 col-form-label">Document Type</label>
+                <div class="row col-sm-8 col-lg-10">
+                    @if (d != null)
+                    {
+                        <input class="form-control col-lg-4 ml-3" type="text" id="txtDocType" name="DOC_TYPE" placeholder="Enter Document Type" value="@d.DOC_TYPE">
+                    }
+                    else
+                    {
+                        <input class="form-control col-lg-4 ml-3" type="text" id="txtDocType" name="DOC_TYPE" placeholder="Enter Document Type" value="Information">
+                    }
+
+                    @*<label class="col-lg-2 checkbox-inline text-center" style="margin-top: 8px;"><input type="checkbox" value="Approved" id="APPROVED_FLAX" name="APPROVED_FLAX"> Approved</label>*@
+                    <label class="col-lg-2 checkbox-inline text-center" style="margin-top: 8px;"><input type="checkbox" value="Acknowlage" id="ACKNOWLAGE_FLEX" name="ACKNOWLAGE_FLEX" onclick="isShowCCCList();"> Acknowlage</label>
+                    <div class="form-group" style="width: 200px;">
+                        <select class="form-control" id="txtCC" name="txtCC" onchange="getCCList()" style="display: none; margin-bottom: -12px;">
+                            @foreach (var cclist in ViewData["CC_list"] as List<Information_System.Models.ApproveGroup>)
                             {
-                                 <option value="@cclist.ID" onclick="getAppList(@cclist.ID)" selected>@cclist.NAME</option>
+                                if (d != null && cclist.ID == d.CC_GRP)
+                                {
+                                    <option value="@cclist.ID" onclick="getAppList(@cclist.ID)" selected>@cclist.NAME</option>
+                                }
+                                else
+                                {
+                                    <option value="@cclist.ID">@cclist.NAME</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" style="margin-top: -12px;">
+                <label for="txtDocumentFlow" class="col-sm-4 col-lg-2 col-form-label">Document flow</label>
+                <div class="col-sm-8 col-lg-10">
+                    <select class="form-control col-lg-4" id="txtDocumentFlow" name="txtDocumentFlow" onchange="getAppList()">
+                        @foreach (var aplist in ViewData["app_list"] as List<Information_System.Models.ApproveGroup>)
+                        {
+                            if (d != null && aplist.ID == d.DOC_FLOW_ID)
+                            {
+                                <option value="@aplist.ID" onclick="getAppList(@aplist.ID)" selected>@aplist.NAME</option>
                             }
                             else
                             {
-                                 <option value="@cclist.ID">@cclist.NAME</option>
+                                <option value="@aplist.ID" onclick="getAppList(@aplist.ID)">@aplist.NAME</option>
                             }
                         }
                     </select>
                 </div>
             </div>
-        </div>
-        
-        <div class="form-group row" style="margin-top: -12px;">
-            <label for="txtDocumentFlow" class="col-sm-4 col-lg-2 col-form-label">Document flow</label>
-            <div class="col-sm-8 col-lg-10">
-                <select class="form-control col-lg-4" id="txtDocumentFlow" name="txtDocumentFlow" onchange="getAppList()">
-                    @foreach (var aplist in ViewData["app_list"] as List<Information_System.Models.ApproveGroup>)
-        {
-            if (d != null && aplist.ID == d.DOC_FLOW_ID)
-            {
-                            <option value="@aplist.ID" onclick="getAppList(@aplist.ID)" selected>@aplist.NAME</option>
-                        }
-            else
-            {
-                            <option value="@aplist.ID" onclick="getAppList(@aplist.ID)">@aplist.NAME</option>
-                        }
 
-        }
-                </select>
-            </div>
-        </div>
-        
-        <div class="form-group row mtd-10">
-            <label for="txtDocumentSubject" class="col-sm-4 col-lg-2 col-form-label">Document subject</label>
-            <div class="col-sm-8 col-lg-10">
-                @if (d != null)
-        {
-                    <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" value="@d.DOC_SUBJECT">
-                }
-                else
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" placeholder="Enter Document Subject">
-                }
-            </div>
-        </div>
-        <div class="form-group row mtd-10">
-            <label for="txtResonExplain" class="col-sm-4 col-lg-2 col-form-label">Reson Explain</label>
-            <div class="col-sm-8 col-lg-10">
-                @if (d != null)
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtResonExplain" name="txtResonExplain" value="@d.REASON_EXPLAIN">
-                }
-                else
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtResonExplain" name="txtResonExplain" placeholder="Enter Reson Explain">
-                }
-               
-            </div>
-        </div>
-        @if (d != null)
-        {
-        <div class="form-group row mtd-10">
-            <label for="txtDetailReference " class="col-sm-4 col-lg-2 col-form-label">Detail Reference </label>
-            <div class="col-sm-8 col-lg-10">
-                    <input type="text" class="form-control col-lg-4" id="txtDetailReference" name="txtDetailReference" value = "@d.DETAIL_REF" >
-                @*else
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtDetailReference" name="txtDetailReference" readonly placeholder="Enter Detail Reference">
-                }*@
-            </div>
-        </div>
-        }
-
-        <div class="form-group row mt-4">
-            <div class="col-sm-2 col-lg-2">
-                <label for="txtDocumentDetail">Document Detail</label>
-            </div>
-            <div class="col-sm-8 col-lg-8">
-                @if (d != null && d.ID != null)
-                {
-                    <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail">@d.DOC_DETAIL</textarea>
-                }
-                else
-                {
-                    <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail"></textarea>
-                }
-                
-            </div>
-        </div>
-
-        <div class="form-group row mtd-10">
-            <label for="txtEffective " class="col-sm-4 col-lg-2 col-form-label">Effective</label>
-            <div class="col-sm-8 col-lg-10">
-                @if (d != null && d.ID != null)
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtEffective" name="txtEffective" placeholder="Enter Effective" value="@d.EFFECTIVE">
-                }
-                else
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtEffective" name="txtEffective" placeholder="Enter Effective">
-                }
-            </div>
-        </div>
-        <div class="form-group row mtd-10">
-            <label for="txtAddOrderNo" class="col-sm-4 col-lg-2 col-form-label">Add order no</label>
-            <div class="col-sm-8 col-lg-10">
-                @if (d != null && d.ID != null)
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtAddOrderNo" name="txtAddOrderNo" placeholder="Enter Effective" value="@d.ADD_ORDER_NO">
-                }
-                else
-                {
-                    <input type="text" class="form-control col-lg-4" id="txtAddOrderNo" name="txtAddOrderNo" placeholder="Enter Add order no">
-                }
-            </div>
-        </div>
-
-        <div class="form-group row mtd-10">
-            <label for="txtRelation" class="col-sm-4 col-lg-2 col-form-label">Relation system </label>
-            <div class="col-sm-8 col-lg-10">
-                <select class="form-control col-lg-4" id="txtRelation" name="txtRelation" onchange="getRelation();">
-                    @foreach (var list in ViewData["relation"] as List<Information_System.Models.Relation>)
-                    {
-                        if (d != null && list.ID == d.RELATION_ID)
+            <div class="form-group row mtd-10">
+                <label for="txtDocumentSubject" class="col-sm-4 col-lg-2 col-form-label">Document subject</label>
+                <div class="col-sm-8 col-lg-10">
+                    @*@if (d != null)
                         {
-                            <option value="@list.ID" selected>@list.NAME</option>
+                            <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" value="@d.DOC_SUBJECT">
                         }
                         else
                         {
-                            <option value="@list.ID">@list.NAME</option>
+                            <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" placeholder="Enter Document Subject">
+                        }*@
+
+                    <select class="form-control col-lg-4" id="txtDocumentSubject" name="opSubject">
+                        @foreach (var sj in ViewData["subject"] as List<string>)
+                        {
+                            if (d != null && d.DOC_SUBJECT == sj)
+                            {
+                                <option value="@sj" selected>@sj</option>
+                            }
+                            else
+                            {
+                                <option value="@sj">@sj</option>
+                            }
                         }
-                    }
-                </select>
-                <label id="Relation"></label>
-            </div>
-        </div>
+                    </select>
 
-        <div class="form-group row mtd-10">
-            <label for="filePicture" class="col-sm-4 col-lg-2 col-form-label">Picture reference</label>
-            <div class="col-sm-8 col-lg-10">
-                @*<div style="float: left;">Detail #1:</div>*@
-                <div id="PIC_REF_1" class="mb-2">Detail #1:
-                    @if (d != null && fp.txt_PIC_REF_1 != null && fp.txt_PIC_REF_1 != "")
-                    {
-                        <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_1">@fp.txt_PIC_REF_1</a> <button id="btnPic1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_1)','PIC_REF_1');">X</button>
-                    }
-                    else
-                    {
-                        <input type="file" class="ml-5" name="_PIC_REF_1" id="_PIC_REF_1" accept="image/*" />
-                    }
-                </div>
-
-                @*<div style="float: left;">Detail #2:</div>*@
-                <div id="PIC_REF_2" class="mb-2">Detail #2:
-                    @if (d != null && fp.txt_PIC_REF_2 != null && fp.txt_PIC_REF_2 != "")
-                    {
-                        <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_2">@fp.txt_PIC_REF_2</a> <button id="btnPic2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_2)','PIC_REF_2');">X</button>
-                    }
-                    else
-                    {
-                        <input type="file" class="ml-5" name="_PIC_REF_2" id="_PIC_REF_2" accept="image/*" />
-                    }
                 </div>
             </div>
-        </div>
+            <div class="form-group row mtd-10">
+                <label for="txtResonExplain" class="col-sm-4 col-lg-2 col-form-label">Reson Explain</label>
+                <div class="col-sm-8 col-lg-10">
+                    @if (d != null)
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtResonExplain" name="txtResonExplain" value="@d.REASON_EXPLAIN">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtResonExplain" name="txtResonExplain" placeholder="Enter Reson Explain">
+                    }
 
-        <div class="form-group row mtd-10">
-            <label for="filePicture" class="col-sm-4 col-lg-2 col-form-label">Attacched document</label>
-            <div class="col-sm-8 col-lg-10">
-                <div id="ATT_DOC_PURCHASE" class="mb-2">Purchase request form: 
-                    @if (d != null && fp.txt_ATT_DOC_PURCHASE != null && fp.txt_ATT_DOC_PURCHASE != "")
-                    {
-                        <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_PURCHASE">@fp.txt_ATT_DOC_PURCHASE</a> <button id="btnAtt1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_PURCHASE)','ATT_DOC_PURCHASE');">X</button>
-                    }
-                    else
-                    {
-                        <input class="ml-5" type="file" name="_ATT_DOC_PURCHASE" id="_ATT_DOC_PURCHASE" />
-                    }
                 </div>
-                <div id="ATT_DOC_REQUIRE" class="mb-2">Requirement document: 
-                    @if (d != null && fp.txt_ATT_DOC_REQUIRE != null && fp.txt_ATT_DOC_REQUIRE != "")
-                    {
-                        <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_REQUIRE">@fp.txt_ATT_DOC_REQUIRE</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_REQUIRE)','ATT_DOC_REQUIRE');">X</button>
-                    }
-                    else
-                    {
-                        <input class="ml-5" type="file" name="_ATT_DOC_REQUIRE" id="_ATT_DOC_REQUIRE" />
-                    }
+            </div>
+            @if (d != null)
+            {
+                <div class="form-group row mtd-10">
+                    <label for="txtDetailReference " class="col-sm-4 col-lg-2 col-form-label">Detail Reference </label>
+                    <div class="col-sm-8 col-lg-10">
+                        <input type="text" class="form-control col-lg-4" id="txtDetailReference" name="txtDetailReference" value="@d.DETAIL_REF">
+                        @*else
+                            {
+                                <input type="text" class="form-control col-lg-4" id="txtDetailReference" name="txtDetailReference" readonly placeholder="Enter Detail Reference">
+                            }*@
+                    </div>
                 </div>
-                <div id="ATT_DOC_OTHER" class="mb-2">Other: 
-                    @if (d != null && fp.txt_ATT_DOC_OTHER != null && fp.txt_ATT_DOC_OTHER != "")
+            }
+
+            <div class="form-group row mt-4">
+                <div class="col-sm-2 col-lg-2">
+                    <label for="txtDocumentDetail">Document Detail</label>
+                </div>
+                <div class="col-sm-8 col-lg-8">
+                    @if (d != null && d.ID != null)
                     {
-                        <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_OTHER">@fp.txt_ATT_DOC_OTHER</a> <button id="btnAtt3" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_OTHER)','ATT_DOC_OTHER');">X</button>
+                        <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail">@d.DOC_DETAIL</textarea>
                     }
                     else
                     {
-                        <input class="ml-5" type="file" name="_ATT_DOC_OTHER" id="_ATT_DOC_OTHER" />
+                        <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail"></textarea>
+                    }
+
+                </div>
+            </div>
+
+            <div class="form-group row mtd-10">
+                <label for="txtEffective " class="col-sm-4 col-lg-2 col-form-label">Effective</label>
+                <div class="col-sm-8 col-lg-10">
+                    @if (d != null && d.ID != null)
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtEffective" name="txtEffective" placeholder="Enter Effective" value="@d.EFFECTIVE">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtEffective" name="txtEffective" placeholder="Enter Effective">
                     }
                 </div>
             </div>
-        </div>
+            <div class="form-group row mtd-10">
+                <label for="txtAddOrderNo" class="col-sm-4 col-lg-2 col-form-label">Add order no</label>
+                <div class="col-sm-8 col-lg-10">
+                    @if (d != null && d.ID != null)
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtAddOrderNo" name="txtAddOrderNo" placeholder="Enter Effective" value="@d.ADD_ORDER_NO">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control col-lg-4" id="txtAddOrderNo" name="txtAddOrderNo" placeholder="Enter Add order no">
+                    }
+                </div>
+            </div>
+
+            <div class="form-group row mtd-10">
+                <label for="txtRelation" class="col-sm-4 col-lg-2 col-form-label">Relation system </label>
+                <div class="col-sm-8 col-lg-10">
+                    <select class="form-control col-lg-4" id="txtRelation" name="txtRelation" onchange="getRelation();">
+                        @foreach (var list in ViewData["relation"] as List<Information_System.Models.Relation>)
+                        {
+                            if (d != null && list.ID == d.RELATION_ID)
+                            {
+                                <option value="@list.ID" selected>@list.NAME</option>
+                            }
+                            else
+                            {
+                                <option value="@list.ID">@list.NAME</option>
+                            }
+                        }
+                    </select>
+                    <label id="Relation"></label>
+                </div>
+            </div>
+            <div class="form-group row mtd-10">
+                <label for="txtRelation" class="col-sm-4 col-lg-2 col-form-label">Warning Date</label>
+                <div class="col-sm-8 col-lg-10">
+                    <input name="warnning" type="text" id="txt_warn" value="@warnning" disabled="disabled" />
+                </div>
+            </div>
+            <div class="form-group row mtd-10">
+                <label for="filePicture" class="col-sm-4 col-lg-2 col-form-label">Picture reference</label>
+                <div class="col-sm-8 col-lg-10">
+                    @*<div style="float: left;">Detail #1:</div>*@
+                    <div id="PIC_REF_1" class="mb-2">
+                        Detail #1:
+                        @if (d != null && fp.txt_PIC_REF_1 != null && fp.txt_PIC_REF_1 != "")
+                        {
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_1">@fp.txt_PIC_REF_1</a> <button id="btnPic1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_1)','PIC_REF_1');">X</button>
+                        }
+                        else
+                        {
+                            <input type="file" class="ml-5" name="_PIC_REF_1" id="_PIC_REF_1" accept="image/*" />
+                        }
+                    </div>
+
+                    @*<div style="float: left;">Detail #2:</div>*@
+                    <div id="PIC_REF_2" class="mb-2">
+                        Detail #2:
+                        @if (d != null && fp.txt_PIC_REF_2 != null && fp.txt_PIC_REF_2 != "")
+                        {
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_2">@fp.txt_PIC_REF_2</a> <button id="btnPic2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_2)','PIC_REF_2');">X</button>
+                        }
+                        else
+                        {
+                            <input type="file" class="ml-5" name="_PIC_REF_2" id="_PIC_REF_2" accept="image/*" />
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row mtd-10">
+                <label for="filePicture" class="col-sm-4 col-lg-2 col-form-label">Attacched document</label>
+                <div class="col-sm-8 col-lg-10">
+                    <div id="ATT_DOC_PURCHASE" class="mb-2">
+                        Purchase request form:
+                        @if (d != null && fp.txt_ATT_DOC_PURCHASE != null && fp.txt_ATT_DOC_PURCHASE != "")
+                        {
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_PURCHASE">@fp.txt_ATT_DOC_PURCHASE</a> <button id="btnAtt1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_PURCHASE)','ATT_DOC_PURCHASE');">X</button>
+                        }
+                        else
+                        {
+                            <input class="ml-5" type="file" name="_ATT_DOC_PURCHASE" id="_ATT_DOC_PURCHASE" />
+                        }
+                    </div>
+                    <div id="ATT_DOC_REQUIRE" class="mb-2">
+                        Important notice Document:
+                        @if (d != null && fp.txt_ATT_DOC_IMPORTANT != null && fp.txt_ATT_DOC_IMPORTANT != "")
+                        {
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_IMPORTANT">@fp.txt_ATT_DOC_IMPORTANT</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_IMPORTANT)','ATT_DOC_IMPORTANT');">X</button>
+                        }
+                        else
+                        {
+                            <input class="ml-5" type="file" name="_ATT_DOC_IMPORTANT" id="_ATT_DOC_IMPORTANT" />
+                        }
+                    </div>
+                    <div id="ATT_DOC_REQUIRE" class="mb-2">
+                        Requirement document:
+                        @if (d != null && fp.txt_ATT_DOC_REQUIRE != null && fp.txt_ATT_DOC_REQUIRE != "")
+                        {
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_REQUIRE">@fp.txt_ATT_DOC_REQUIRE</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_REQUIRE)','ATT_DOC_REQUIRE');">X</button>
+                        }
+                        else
+                        {
+                            <input class="ml-5" type="file" name="_ATT_DOC_REQUIRE" id="_ATT_DOC_REQUIRE" />
+                        }
+                    </div>
+
+                    <div id="ATT_DOC_OTHER" class="mb-2">
+                        Other: *จำกัดไม่เกิน 5 ไฟล์
+                        @if (d != null && fp.txt_ATT_DOC_OTHER != null)
+                        {
+                            foreach (string item in fp.txt_ATT_DOC_OTHER)
+                            {
+                                if (item != null && item != "")
+                                {
+                                    <a class="ml-3 test" target="_blank" href="~/Temp_File/@item">@item</a> <button id="btnAtt3" type="button" class="btn btn-danger btn-sm test" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(item)','ATT_DOC_OTHER');">X</button>
+                                }
+                                else
+                                {
+                                }
+
+                            }
+                            <input class="ml-5" type="file" name="_ATT_DOC_OTHER" id="_ATT_DOC_OTHER" multiple />
+                        }
+                        else
+                        {
+                        
+                        <input class="ml-5" type="file" name="_ATT_DOC_OTHER" id="_ATT_DOC_OTHER" multiple />
+
+                        }
+
+
+
+                    </div>
+
+                    <div class="row col-8" id="fileLink">
+
+                        @if (Model != null)
+                        {
+                            foreach (var f in Model.ATT_DOC_OTHER)
+                            {
+                                <p class='row col-8'>
+                                    <a href="@Url.Content("~/Temp_File/")@f" target="_blank">@f</a>
+                                    @if (Model.STATUS != "APPROVED")
+                                    {
+                                        <button type="button" class="btn btn-danger btn-sm" style="margin-left: 16px"  onclick="deleteFile('@f');">X</button>
+                                    }
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            @if (ViewData["revDoc"] != null)
+            {
+                <div class="form-group row">
+                    <label for="txtRelDoc" class="col-sm-4 col-lg-2 col-form-label">Related documents</label>
+                    <div class="col-lg-7 ">
+                        @foreach (var list in ViewData["revDoc"] as List<Information_System.Models.RevDoc>)
+                        {
+                            string parameter = @list.REQ_ID + "?info_id=" + @list.INFO_ID;
+                            <p><a href="~/Create/CreateInfoDoc/@parameter" target="_blank">@list.INFO_NAME [@list.STATUS]</a></p>
+                        }
+                    </div>
+                </div>
+            }
+
             <div class="row justify-content-end mt-2 mb-4" style="margin: 8px;">
                 <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
+
+                @if (d != null && d.STATUS_ALL == "IN-PROGRESS")
+                {
+                    <button type="button" class="btn btn-danger mr-2" id="reviseInfo" data-toggle="modal" data-target="#reviseModel">Revise and save Information</button>
+                }
+
                 @if (d != null && d.ID != null && (d.STATUS_ALL != "APPROVED" || d.STATUS_ALL != "IN-PROGRESS" || d.STATUS_ALL != "REJECT"))
                 {
                     <button type="button" class="btn btn-danger mr-2" id="btnEdit" data-toggle="modal" data-target="#editModel">Edit and save Information</button>
                 }
+
                 @if (d == null || (d.STATUS_ALL == null || d.STATUS_ALL == ""))
                 {
                     <button type="button" class="btn mr-2" id="btnTemp" style="background-color: #E67E22 ; color: white;" data-toggle="modal" data-target="#tempModel">Temporary and Sent E-mail</button>
@@ -343,12 +449,12 @@
                 <button type="button" class="btn btn-secondary mr-2" id="btnCancel" data-toggle="modal" data-target="#cancelModel">Cancel</button>
             </div>
         </form>
-
-    }
+        }
+ 
     else
-    {
-        <p style="color: red;">You don't have access right.</p>
-    }
+        {
+            <p style="color: red;">You don't have access right.</p>
+        }
 
 </div>
 
@@ -358,11 +464,11 @@
             <table class="tb-radius table table-hover table-striped">
                 <thead style="background-color: #D6EAF8;">
                     <tr>
-                        <th class="text-center">Oper No.</th>
+                        @*<th class="text-center">Oper No.</th>*@
                         <th class="text-center">Approved ID</th>
                         <th class="text-center">Approved Name</th>
                         <th class="text-center">Approved E-Mail</th>
-                        @if (d != null && (d.STATUS_ALL == "IN-PROGRESS" || d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT"))
+                        @if (d != null && (d.STATUS_ALL == "IN-PROGRESS" || d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT" || d.STATUS_ALL == "REVISE"))
                         {
                             <th class="text-center">Approved Status</th>
                             <th class="text-center">Approved Command</th>
@@ -389,7 +495,7 @@
             </table>
         </div>
     </div>
-    
+
 </div>
 
 <div class="modal fade" id="saveModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -446,6 +552,26 @@
     </div>
 </div>
 
+<div class="modal fade" id="reviseModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Revise information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to revise information?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="createInfo('Revise');">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="cancelModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -477,10 +603,10 @@
 
 @if (ViewData["requestInfo"] != null)
 {
-   
-   <script>
 
-       if ('@d.STATUS_ALL' == "APPROVED" || '@d.STATUS_ALL' == "REJECT" || '@d.STATUS_ALL' == "IN-PROGRESS") {
+<script>
+
+       if ('@d.STATUS_ALL' == "APPROVED" || '@d.STATUS_ALL' == "REJECT" || '@d.STATUS_ALL' == "REVISE") {
            document.getElementById('btnEdit').style.display = "none";
            document.getElementById('btnCancel').style.display = "none";
            const btnPic1 = document.getElementById('btnPic1');
@@ -499,6 +625,7 @@
            const _ATT_DOC_PURCHASE = document.getElementById('_ATT_DOC_PURCHASE');
            const _ATT_DOC_REQUIRE = document.getElementById('_ATT_DOC_REQUIRE');
            const _ATT_DOC_OTHER = document.getElementById('_ATT_DOC_OTHER');
+           const _ATT_DOC_IMPORTANT = document.getElementById('_ATT_DOC_IMPORTANT');
            if (_PIC_REF_1 != null) { _PIC_REF_1.style.display = "none"; }
            if (_PIC_REF_2 != null) { _PIC_REF_2.style.display = "none"; }
            if (_ATT_DOC_PURCHASE != null) { _ATT_DOC_PURCHASE.style.display = "none"; }
@@ -509,9 +636,23 @@
            //document.getElementById('btnAtt1').style.display = "none";
            //document.getElementById('btnAtt2').style.display = "none";
            //document.getElementById('btnAtt3').style.display = "none";
+
+           //Disabled
+           document.getElementById("ACKNOWLAGE_FLEX").setAttribute('disabled', 'disabled');
+           document.getElementById("txtDocumentFlow").setAttribute('disabled', 'disabled');
+           document.getElementById("txtCC").setAttribute('disabled', 'disabled');
+           document.getElementById("txtRelation").setAttribute('disabled', 'disabled');
+           document.getElementById("txtDocType").setAttribute('disabled', 'disabled');
+           document.getElementById("txtDocumentDetail").setAttribute('disabled', 'disabled');
+           document.getElementById("txtEffective").setAttribute('disabled', 'disabled');
+           document.getElementById("txtAddOrderNo").setAttribute('disabled', 'disabled');
+       } else if ('@d.STATUS_ALL' == "IN-PROGRESS") {
+           document.getElementById('btnEdit').style.display = "none";
+           document.getElementById('btnCancel').style.display = "none";
        }
 
-       document.getElementById('txtDocumentSubject').readOnly = true;
+       //document.getElementById('txtDocumentSubject').readOnly = true;
+       document.getElementById('txtDocumentSubject').setAttribute('disabled', 'disabled');
        document.getElementById('txtResonExplain').readOnly = true;
        document.getElementById('txtDetailReference').readOnly = true;
 
@@ -522,8 +663,16 @@
            document.getElementById('ACKNOWLAGE_FLEX').checked = "checked";
        }
 
-       function deleteFile(patch, field) {
-            var id = '@d.ID';
+        function deleteFile(patch, field) {
+           @if(TempData["NEWID"] != null)
+           {
+               @:var id = '@TempData["NEWID"].ToString()';
+           }
+                else
+                {
+                 @:var id = '@d.ID';
+                }
+
             var accept = "";
             if (field == "PIC_REF_1" || field == "PIC_REF_2") {
                 accept = "accept='image/*'";
@@ -537,9 +686,11 @@
                     xhr.open("POST", "@Url.Action("deleteOneFile", "create")" + "?patch=" + patch + "&id="+ id + "&field=" + field);
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState == 4 && xhr.status == 200) {
-                            $('#' + field).empty();
-                            var a = "<input type='file' class='ml-5' name='_" + field + "' id='_" + field + "'" + accept +" />"
-                            $('#' + field).append(a);
+                            //$('#' + field).empty();
+                            //var a = "<input type='file' class='ml-5' name='_" + field + "' id='_" + field + "'" + accept +" />"
+                            //$('#' + field).append(a);
+
+                            window.location.reload();
                         }
                     }
                     xhr.send();
@@ -593,7 +744,7 @@
 
        }
 
-   </script>
+</script>
 }
 
 <script>
@@ -647,7 +798,11 @@
         var PIC_REF_2 = $("#_PIC_REF_2").get(0);
         var ATT_DOC_PURCHASE = $("#_ATT_DOC_PURCHASE").get(0);
         var ATT_DOC_REQUIRE = $("#_ATT_DOC_REQUIRE").get(0);
-        var ATT_DOC_OTHER = $("#_ATT_DOC_OTHER").get(0);
+        var ATT_DOC_OTHER = $("#_ATT_DOC_OTHER").get(0).files;
+
+        console.log(ATT_DOC_OTHER)
+        var ATT_DOC_IMPORTANT = $("#_ATT_DOC_IMPORTANT").get(0);
+        var txt_warn = $("#txt_warn").val();
         var txtRelation = document.getElementById("txtRelation");
         var txtDocumentFlow = document.getElementById("txtDocumentFlow");
         var txtCC = document.getElementById("txtCC");
@@ -664,15 +819,22 @@
         if (ATT_DOC_REQUIRE != undefined) {
             data.append('ATT_DOC_REQUIRE', ATT_DOC_REQUIRE.files[0]);
         }
-        if (ATT_DOC_OTHER != undefined) {
-            data.append('ATT_DOC_OTHER', ATT_DOC_OTHER.files[0]);
+        for (var i = 0; i < ATT_DOC_OTHER.length; i++) {
+            if (ATT_DOC_OTHER != undefined) {
+                data.append('ATT_DOC_OTHER', ATT_DOC_OTHER[i]);
+            }
+
+        }
+
+        if (ATT_DOC_IMPORTANT != undefined) {
+            data.append('ATT_DOC_IMPORTANT', ATT_DOC_IMPORTANT.files[0]);
         }
         //data.append('ATT_DOC_PURCHASE', ATT_DOC_PURCHASE.files[0]);
         ////data.append('ATT_DOC_REQUIRE', ATT_DOC_REQUIRE.files[0]);
         //data.append('ATT_DOC_OTHER', ATT_DOC_OTHER.files[0]);
         @if(d != null)
         {
-            @Html.Raw("data.append('ID', '"+ d.ID +"');");
+            @Html.Raw("data.append('ID', '"+ d.ID + "');");
             @Html.Raw("data.append('REQUEST_NO', '"+ d.REQUEST_NO +"');");
         }
         data.append('DOC_TYPE',  $('#txtDocType').val());
@@ -692,6 +854,10 @@
         data.append('ACKNOWLAGE_FLEX', ACKNOWLAGE_FLEX);
         data.append('PLANT_DEP', '@ViewData["Plant"]');
         data.append('APPROVE_LIST', Applist);
+        data.append('WARNNIG_DATE', txt_warn);
+
+        data.append('INFO_NO', $('#txtInfoNo').val());
+
         data.append('DOC_SUBJECT', $('#txtDocumentSubject').val());
         @if (d != null)
         {
@@ -704,12 +870,12 @@
         }*@
         data.append('action', action);
 
-        var textAction = "";
-        if (action == "Edit") {
-            textAction = "edit";
-        } else {
-            textAction = "create";
-        }
+        //var textAction = "";
+        //if (action == "Edit") {
+        //    textAction = "edit";
+        //} else {
+        //    textAction = "create";
+        //}
         $.ajax({
                     type: "post",
                     data: data,
@@ -720,9 +886,11 @@
                     success: function (data) {
                         if (data == "True") {
                             window.location.reload();
-                        } else {
+                        } else if (data == "False") {
                             hideLoadingModal();
                             document.getElementById("err").style.display = "block";
+                        } else {
+                            window.location.replace("@Url.Action("CreateInfoDoc", "Create")" + data)
                         }
                     }
          });
@@ -740,9 +908,16 @@
         const id = document.getElementById("txtDocumentFlow").value;
         var xhr = new XMLHttpRequest();
         var url;
-        @if (d != null && (d.STATUS_ALL == "IN-PROGRESS" || d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT")) {
-            @Html.Raw(" url = '" + Url.Action("getApproveLists", "Create") + "?id=" + d.ID + "';");
+
+        @if (d != null && (d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT" || d.STATUS_ALL == "REVISE")) {
+            @Html.Raw(" url = '" + Url.Action("getApproveLists", "Create") + "?id=" + TempData["NEWID"].ToString() + "';");
             @Html.Raw(" document.getElementById('AppTable').className = 'table-responsive col-lg-10'; ");
+        } else if (d != null && (d.STATUS_ALL == "IN-PROGRESS"))
+        {
+            @Html.Raw(" if ('"+@d.DOC_FLOW_ID+"' == id) { url = '" + Url.Action("getApproveLists", "Create") + "?id=" + TempData["NEWID"].ToString() + "'; } ");
+            @Html.Raw(" else { url = '" + Url.Action("getMailGrp", "Create") + "?id=appID&issueID=" + d.REQUIREMENT_ISSUE_ID + "'; } ");
+            @Html.Raw(" document.getElementById('AppTable').className = 'table-responsive col-lg-10'; ");
+
         } else if (d != null && (d.REQUIREMENT_ISSUE_ID != null || d.REQUIREMENT_ISSUE_ID != "")) {
             @Html.Raw(" url = '"+ Url.Action("getMailGrp", "Create")+ "?id=appID&issueID="+ d.REQUIREMENT_ISSUE_ID +"'");
         } else {
@@ -761,11 +936,11 @@
                         date = formatDate(new Date(Math.floor(subDateStr(list[i].EMP_DATE))))
                     }
                     var html = "";
-                    html += "<tr> <td></td> <td>" + list[i].EMP_ID + "</td> <td>" + list[i].EMP_NAME + "</td> <td>" + list[i].EMP_EMAIL + "</td>";
-                     @if (d != null && (d.STATUS_ALL == "IN-PROGRESS" || d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT"))
+                    html += "<tr> <td>" + list[i].EMP_ID + "</td> <td>" + list[i].EMP_NAME + "</td> <td>" + list[i].EMP_EMAIL + "</td>";
+                    @if (d != null && (d.STATUS_ALL == "IN-PROGRESS" || d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT" || d.STATUS_ALL == "REVISE"))
                      {
-                         @Html.Raw(" html += '<td>' + list[i].EMP_STATUS + '</td><td>' + list[i].EMP_COMMENT + '</td><td>' + date + '</td>' ;");
-                     }
+                        @Html.Raw(" html += '<td>' + list[i].EMP_STATUS + '</td><td>' + list[i].EMP_COMMENT + '</td><td>' + date + '</td>' ;");
+                    }
                     html += "</tr>";
                     $('#Appbody').append(html);
                     Applist.push(list[i].EMP_ID);
@@ -819,5 +994,111 @@
         document.getElementById("Relation").innerText = x.DETAIL;
     }
     getRelation();
+
+
+    document.getElementById("_ATT_DOC_OTHER").onchange = function () {
+        var fileUpload = $("#_ATT_DOC_OTHER").get(0);
+        var files = fileUpload.files;
+        var data = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+        @if(d != null)
+        {
+           @: data.append('id', '@d.ID');
+        }
+        $.ajax({
+                type: "post",
+                data: data,
+                contentType: false,
+                processData: false,
+                url: "@Url.Action("UploadFile", "create")",
+                success: function (data) {
+                    $('#fileLink').empty();
+                    $(".test").hide();
+                    $('#fileUpload').val('');
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var a = "'"+data[i] +"'";
+                        html += "<p class='row col-8'><a id='F" + i + "' href=" + "'@Url.Content("~/Temp_File/")" + escape(data[i]) + "'" + " target='_blank'>" + data[i] + "</a><button id='" + data[i] + "' onclick='deleteFile("+i+");' type='button' class='btn btn-danger btn-sm' style='margin-left: 16px'>X</button></p><br>";
+                    }
+                    $('#fileLink').append(html)
+                    //$('#btnAtt3').each(
+                    //    this.hide()
+                    //)
+
+
+                }
+        });
+
+    }
+
+    function deleteFile(btnid) {
+        @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+        const f = document.getElementById("F" + btnid);
+        if (f == null) {
+            var patch = btnid
+        } else {
+            var patch = f.innerText;
+        }
+
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile", "create")" + "?patch=" + patch + "&id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        data = JSON.parse(xhr.responseText);
+                        $('#fileLink').empty();
+                        var html = "";
+                        for (var i = 0; i < data.length; i++) {
+                            var a = "'" + data[i] + "'";
+                            html += "<p class='row col-8'><a id='F" + i + "' href=" + "'@Url.Content("~/Temp_File/")" + data[i] + "'" + " target='_blank'>" + data[i] + "</a><button id='" + data[i] + "' onclick='deleteFile(" + i + ");' type='button' class='btn btn-danger btn-sm' style='margin-left: 16px'>X</button></p><br>";
+                        }
+                          $('#fileLink').append(html)
+                    }
+                }
+                xhr.send();
+         }
+    }
+
+     document.getElementById("_ATT_DOC_OTHER").onchange = function () {
+        var fileUpload = $("#_ATT_DOC_OTHER").get(0);
+        var files = fileUpload.files;
+        var data = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+        @if(d != null)
+        {
+           @: data.append('id', '@d.ID');
+        }
+        $.ajax({
+                type: "post",
+                data: data,
+                contentType: false,
+                processData: false,
+                url: "@Url.Action("UploadFile_INFO", "create")",
+                success: function (data) {
+                    $('#fileLink').empty();
+                    $(".test").hide();
+                    $('#fileUpload').val('');
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var a = "'"+data[i] +"'";
+                        html += "<p class='row col-8'><a id='F" + i + "' href=" + "'@Url.Content("~/Temp_File/")" + escape(data[i]) + "'" + " target='_blank'>" + data[i] + "</a><button id='" + data[i] + "' onclick='deleteFile("+i+");' type='button' class='btn btn-danger btn-sm' style='margin-left: 16px'>X</button></p><br>";
+                    }
+                    $('#fileLink').append(html)
+                    //$('#btnAtt3').each(
+                    //    this.hide()
+                    //)
+
+
+                }
+        });
+
+    }
 
 </script>

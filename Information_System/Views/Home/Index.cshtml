@@ -8,7 +8,7 @@
     string year = DateTime.Now.Year.ToString();
     System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("en-US");
     string month = DateTime.Now.ToString("MMM yyyy", culture);
-    string[] months;
+    //string[] months;
 
 }
 
@@ -30,6 +30,11 @@
 
     .requirement {
         background-color: #E67E22;
+        right: 50%;
+    }
+
+    .download {
+        background-color: #10a31c;
         right: 50%;
     }
 
@@ -89,15 +94,19 @@
 
 <div style="background-color: #AED6F1; padding: 50px, 50px, 50px, 50px;">
     <div class="row" style="height:150px;">
-        @if (p.IS_ADMIN)
-        {
-            <div class="col col-sm-12 col-lg-6 text-center">
+        @*@if (p.IS_ADMIN)
+        {*@
+            <div class="col-sm-3">
                 <button class="btn-lg createbtn btn-very-big create" style="width: 350px" onclick="hrefCreateInfoDoc();">CREATE INFORMATION</button>
             </div>
-        }
-        
-        <div class="col col-sm-12 col-lg-6  text-center align-middle">
+        @*}*@
+
+        <div class="col-sm-3">
             <button class="btn-lg requirementebtn btn-very-big requirement" style="width: 350px" onclick="hrefRequirementDoc()">REQUIREMENT DOCUMENT</button>
+        </div>
+
+        <div class="col-sm-3">
+            <button class="btn-lg requirementebtn btn-very-big download" style="width: 350px" onclick="hrefRequirementDoc2()">Important notice download</button>
         </div>
     </div>
 </div>
@@ -153,6 +162,7 @@
                                     <th scope="col">Issue Date</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Wait Approve</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody"></tbody>
@@ -162,7 +172,7 @@
                 </div>
                 
             </div>
-
+            
             <div class="row mt-5 justify-content-lg-end ml-5">
                 @*@using (Html.BeginForm("exportExcel", "Home", FormMethod.Post))
                 {*@
@@ -287,10 +297,15 @@
         window.location = '@Url.Action("CreateRequirementDoc", "Create")';
     }
 
+    function hrefRequirementDoc2() {
+        //window.open("I:\4-A0XMN-01.csv");
+        window.location.assign("http://10.145.163.10/Cloud/ELECTRONICS-DOC/1400/0009/1400/FR-TE-00-041-Rev.00%20Important%20notice%20(4M%20change%20or%20Claim%20measures).xlsx");
+    }
+
     function hrefCreateInfoDoc() {
         window.location = '@Url.Action("RequirementInfoList", "Create")';
     }
-    
+
     function linkTotol() {
         window.location = '@Url.Action("ReportList", "Report")';
     }
@@ -300,7 +315,7 @@
 @*Total*@
 <script>
     window.onload = function () {
-        
+
         var d = new Date();
         var n = d.getFullYear();
         var m = d.getMonth();
@@ -317,7 +332,7 @@
             option.value = years[i];
             if (years[i] === n) {
                 option.selected = "selected";
-            }            
+            }
             optYear.add(option);
         }
 
@@ -332,14 +347,14 @@
             }
             optMonth.add(option);
         }
-        
+
         getInfoList();
         getInfoYear();
         getInfoPop();
         getInfoTotal();
 
     }
-    
+
     function getInfoList() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -350,16 +365,21 @@
                     for (var i = 0; i < data.length; i++) {
                         var dar_no_link;
                         if (data[i].IS_NO == "" || data[i].IS_NO == null) {
-                            dar_no_link = "-";
+                            //dar_no_link = "-";
+                            dar_no_link = "<a href='@Url.Action("CreateRequirementDoc", "Create")/" + data[i].IS_ID + "' target='_Blank'>-</a>";
                         }
-                        else
-                        {
-                            dar_no_link = "<a href='@Url.Action("ReceivedRequirment", "Create")/" + data[i].IS_ID + "' target='_Blank'>" + data[i].IS_NO + "</a>";
+                        else {
+                            if (data[i].APPROVE_STATUS == "TE-REJECT" || data[i].APPROVE_STATUS == "CREATE") {
+                                dar_no_link = "<a href='@Url.Action("CreateRequirementDoc", "Create")/" + data[i].IS_ID + "' target='_Blank'>" + data[i].IS_NO + "</a>";
+                            }
+                            else {
+                                dar_no_link = "<a href='@Url.Action("ReceivedRequirment", "Create")/" + data[i].IS_ID + "' target='_Blank'>" + data[i].IS_NO + "</a>";
+                            }
                         }
                         var date = formatDate(new Date(Math.floor(subDateStr(data[i].ISSUE_DATE))))
                         var index = i + 1;
                         var html = "";
-                        html += "<tr><th scope='row'>" + index + "</th><td> " + dar_no_link + " </td><td>" + date + "</td><td>" + data[i].SUBJECT + "</td><td>" + data[i].APPROVE_STATUS + "</td> </tr>";
+                        html += "<tr><th scope='row'>" + index + "</th><td> " + dar_no_link + " </td><td>" + date + "</td><td>" + data[i].SUBJECT + "</td><td>" + data[i].APPROVE_STATUS + "</td> <td>" + data[i].APPROVE_ID + "</td> </tr>";
                         $('#tbody').append(html);
                     }
                 }
@@ -370,7 +390,7 @@
     }
 
     function getInfoYear() {
-        
+
         var m = document.getElementById("optMonth").value;
         var y = document.getElementById("optYear").value;
         var xhr = new XMLHttpRequest();

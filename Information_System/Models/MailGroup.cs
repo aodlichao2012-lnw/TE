@@ -34,4 +34,13 @@ namespace Information_System.Models
         public string EMP_EMAIL { get; set; }
         public string EMP_NAME { get; set; }
     }
+
+    public class RevDoc
+    {
+        public string INFO_NAME { get; set; }
+        public string INFO_ID { get; set; }
+        public string STATUS { get; set; }
+        public string REQ_ID { get; set; }
+        public string WARNNINGDATE { get; set; }
+    }
 }

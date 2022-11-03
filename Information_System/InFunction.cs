@@ -13,8 +13,10 @@ namespace Information_System
 {
     public class InFunction
     {
-        public string connString = "data source=10.145.163.10; initial catalog=db_employee; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
-        public string conRTCStr = "data source=10.145.163.10; initial catalog=db_rtc; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
+        public string connString = "data source=10.145.163.14; initial catalog=db_employee; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
+        public string conRTCStr = "data source=10.145.163.14; initial catalog=db_test; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
+        //public string connString = "Data Source=RTC19-6001-0269;initial catalog=db_employee;Integrated Security=True;";
+        //public string conRTCStr = "Data Source=RTC19-6001-0269; initial catalog=db_test;Integrated Security=True;";
 
         public string GetSHA1(string text)
         {
@@ -65,6 +67,13 @@ namespace Information_System
 
         public Boolean sendMail(string mailSubject, List<string> mailTo, string mailContent, List<string> atth = null, List<string> mailCC = null, string action = null)
         {
+            //For test 
+            //mailTo = new List<string>();
+            //mailCC = new List<string>();
+            //mailTo.Add("yutidap@citizen.co.jp");
+            //mailTo.Add("wiparats@citizen.co.jp");
+            //
+
             Boolean result = false;
             var myMail = new MailMessage();
             myMail.From = new MailAddress("Information System<ssimsystem@citizen.co.jp>");
@@ -79,7 +88,11 @@ namespace Information_System
             {
                 foreach (string mail in mailCC)
                 {
-                    myMail.CC.Add(new MailAddress(mail));
+                    if(mail != null)
+                    {
+                        myMail.CC.Add(new MailAddress(mail));
+                    }
+                   
                 }
             }
             if (atth != null)
