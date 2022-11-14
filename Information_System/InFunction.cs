@@ -14,7 +14,7 @@ namespace Information_System
     public class InFunction
     {
         public string connString = "data source=10.145.163.14; initial catalog=db_employee; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
-        public string conRTCStr = "data source=10.145.163.14; initial catalog=db_test; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
+        public string conRTCStr = "data source=10.145.163.14; initial catalog=db_rtc; user id=sa; password=p@ssw0rd002;MultipleActiveResultSets=True;";
         //public string connString = "Data Source=RTC19-6001-0269;initial catalog=db_employee;Integrated Security=True;";
         //public string conRTCStr = "Data Source=RTC19-6001-0269; initial catalog=db_test;Integrated Security=True;";
 

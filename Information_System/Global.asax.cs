@@ -23,7 +23,7 @@ namespace Information_System
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            JobScheduler.Start();
+            //JobScheduler.Start();
 
             //AutoSendMail autoSend = new AutoSendMail();
             //autoSend.Autosend();

@@ -11,11 +11,11 @@ using Quartz.Impl;
 
 namespace Information_System
 {
-    public class AutoSendMail : IJob
+    public class AutoSendMail 
     {
         InFunction Fn = new InFunction();
         public string url = "http://10.145.163.10/TE-IS"; //System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-        public void Execute(IJobExecutionContext context)
+        public void Execute(/*IJobExecutionContext context*/)
         {
             List<DocInfoModel> docList = new List<DocInfoModel>();
             List<string> mailto = new List<string>();
@@ -131,27 +131,27 @@ namespace Information_System
 
     }
 
-    public class JobScheduler
-    {
-        public static void Start()
-        {
-            IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            scheduler.Start();
+    //public class JobScheduler
+    //{
+    //    public static void Start()
+    //    {
+    //        IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
+    //        scheduler.Start();
 
-            IJobDetail job = JobBuilder.Create<AutoSendMail>().Build();
+    //        IJobDetail job = JobBuilder.Create<AutoSendMail>().Build();
 
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithDailyTimeIntervalSchedule
-                  (s =>
-                     s.WithIntervalInHours(24)
-                    .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(13, 25))
-                  )
-                .Build();
+    //        ITrigger trigger = TriggerBuilder.Create()
+    //            .WithDailyTimeIntervalSchedule
+    //              (s =>
+    //                 s.WithIntervalInHours(24)
+    //                .OnEveryDay()
+    //                .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(13, 25))
+    //              )
+    //            .Build();
 
-            scheduler.ScheduleJob(job, trigger);
+    //        scheduler.ScheduleJob(job, trigger);
 
-        }
-    }
+    //    }
+    //}
 
 }

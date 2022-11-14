@@ -112,7 +112,7 @@ namespace Information_System.Controllers
                         {
                             DocInfoModel doc = new DocInfoModel();
                             doc.ISSUE_NAME = reader["ISSUE_NAME"].ToString();
-                            doc.ISSUE_DATE = Convert.ToDateTime(reader["ISSUE_DATE"].ToString() , new CultureInfo("en-En"));
+                            doc.ISSUE_DATE = Convert.ToDateTime(reader["ISSUE_DATE"].ToString() , CultureInfo.InvariantCulture);
                             doc.REQUEST_NO = reader["IS_NO"].ToString();
                             doc.REQUEST_ID = reader["IS_ID"].ToString();
                             doc.REQUEST_NAME = reader["REQUESY_NAME"].ToString();
@@ -133,6 +133,7 @@ namespace Information_System.Controllers
         public JsonResult getInfoList(string NO, string RequestID, string RequestBy, string MAXRESULT, string STATUS, string ID, string DocumentFlow, string Details)
         {
             List<DocInfoModel> res = new List<DocInfoModel>();
+
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
             {
                 con.Open();
@@ -189,7 +190,7 @@ namespace Information_System.Controllers
                         sql.AppendLine(" AND (R.PARTS_CODE like '%" + Details + "%' or R.WATCH_CODE like '%" + Details + "%' or R.REASON_EXPLAIN like '%" + Details + "%' or R.DETAILS like '%" + Details + "%') ");
                     }
 
-                    sql.AppendLine(" order by INFO_NO desc");
+                    sql.AppendLine("  order by D.ISSUE_DATE DESC");
               
                     cmd.CommandText = sql.ToString();
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -220,6 +221,7 @@ namespace Information_System.Controllers
         [HttpGet]
         public JsonResult getInformation(string id)
         {
+            RevDoc rev = new RevDoc();
             DocInfoModel res = new DocInfoModel();
             string REQUEST_ID = "";
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
@@ -242,6 +244,7 @@ namespace Information_System.Controllers
                     sql.AppendLine(" JOIN [db_employee].[dbo].[tbl_plant] P ON P.plant_id = R.PLANT ");
                     sql.AppendLine(" WHERE D.ID = " + Fn.getSQL(id));
                     cmd.CommandText = sql.ToString();
+
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -264,6 +267,7 @@ namespace Information_System.Controllers
                         res.txt_ATT_DOC_PURCHASE = dr["ATT_DOC_PURCHASE"].ToString();
                         res.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                         res.txt_ATT_DOC_REQUIRE = dr["ATT_DOC_REQUIRE"].ToString();
+                        res.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                   
                         REQUEST_ID = dr["RID"].ToString();
                         res.STATUS_ALL = dr["STATUS_ALL"].ToString();
@@ -277,7 +281,8 @@ namespace Information_System.Controllers
 
                     List<DocInfoApprove> doc = new List<DocInfoApprove>();
                     sql.Clear();
-                    sql.AppendLine(" SELECT A.*, UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng))) NAME FROM TBL_TECH_IS_DOCINFO_APPROVE A ");
+                    //sql.AppendLine(" SELECT A.*, UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng))) NAME FROM TBL_TECH_IS_DOCINFO_APPROVE A ");
+                    sql.AppendLine(" SELECT A.*, CONCAT(EMP.empTitleEng,' ',UPPER(LEFT(EMP.empNameEng,1))+LOWER(SUBSTRING(EMP.empNameEng,2,LEN(EMP.empNameEng)))) NAME FROM TBL_TECH_IS_DOCINFO_APPROVE A ");
                     sql.AppendLine(" JOIN [db_employee].[dbo].[tbl_employee] EMP ON EMP.empId = A.APPROVE_ID ");
                     sql.AppendLine(" WHERE DOCINFO_ID = " + Fn.getSQL(id));
                     cmd.CommandText = sql.ToString();
@@ -322,7 +327,8 @@ namespace Information_System.Controllers
                     }
 
                     //if (res.STATUS_ALL == "REVISE")
-                    //{
+                    //{ RevDoc rev 
+               
                         List<RevDoc> revDoc = new List<RevDoc>();
                         dr.Close();
                         cmd.CommandText = " SELECT INFO_NO, ID, STATUS from TBL_TECH_IS_DOCINFO WHERE REQUEST_NO = " + Fn.getSQL(REQUEST_ID) +
@@ -330,7 +336,7 @@ namespace Information_System.Controllers
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
-                            RevDoc rev = new RevDoc();
+                             rev = new RevDoc();
                             rev.INFO_ID = dr["ID"].ToString();
                             rev.INFO_NAME = dr["INFO_NO"].ToString();
                             rev.STATUS = dr["STATUS"].ToString();
@@ -342,7 +348,7 @@ namespace Information_System.Controllers
                   
                     int count = 0;
                     cmd.CommandText = $@"SELECT TOP (4) [PATCH]
-                                      FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{res.ID}' AND [PATCH] is not null ";
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{id}' ";
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {

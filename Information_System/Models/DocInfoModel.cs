@@ -38,7 +38,7 @@ namespace Information_System.Models
         public string DOC_SUBJECT { get; set; }
         public string REASON_EXPLAIN { get; set; }
         public string DETAIL_REF { get; set; }
-        public string WARNNIG_DATE { get; set; }
+        public DateTime WARNNIG_DATE { get; set; }
 
         public HttpPostedFileBase PIC_REF_1 { get; set; }
         public HttpPostedFileBase PIC_REF_2 { get; set; }

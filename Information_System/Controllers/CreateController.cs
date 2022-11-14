@@ -17,7 +17,7 @@ namespace Information_System.Controllers
         InFunction Fn = new InFunction();
         public string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
         static string Newid = null;
-
+        DateTime dtwarn = DateTime.Parse( DateTime.UtcNow.ToString("dd/MMM/yyyy HH:mm:ss"));
 
         //REQ
         public ActionResult RequirementInfoList()
@@ -67,7 +67,7 @@ namespace Information_System.Controllers
                     using (SqlCommand cmd = new SqlCommand(null, con))
                     {
                         SqlDataReader reader = null;
-                        cmd.CommandText = $@" SELECT TOP 1 DO.STATUS INFO_STATUS, r.*, CONCAT(EMP.empTitleEng,' ', emp.empNameEng) AS ISSUE_NAME, EMP.empEmail , empa.empEmail as APPROVE_EMAIL 
+                        cmd.CommandText = $@" SELECT TOP 1 DO.STATUS INFO_STATUS, r.*,  CONCAT(EMP.empTitleEng,' ', emp.empNameEng) AS ISSUE_NAME, EMP.empEmail , empa.empEmail as APPROVE_EMAIL 
                                           ,APPROVE_NAME = STUFF((SELECT ', ' + CONCAT(emp2.empTitleEng, emp2.empNameEng) FROM TBL_TECH_IS_REQUEST_APPROVE RA JOIN db_employee.dbo.tbl_employee EM ON RA.APPROVE_ID = EM.empId
                                             JOIN db_employee.dbo.tbl_employee emp2 ON RA.APPROVE_ID = emp2.empId
                                            WHERE REQUEST_ID = { Fn.getSQL(id) } ORDER BY APPROVE_LEVEL ASC FOR XML PATH('')), 1, 1, '') 
@@ -109,9 +109,13 @@ namespace Information_System.Controllers
                             model.INFO_STATUS = reader["INFO_STATUS"].ToString();
                             model.APPROVE_COMMENT = reader["APPROVE_COMMENT"].ToString();
                             model.DETAILS = reader["DETAILS"].ToString();
-                            if (reader["WARNING_DATE"].ToString() != "")
+                            if(reader["WARNING_DATE"] != null)
                             {
-                                model.WARNING_DATE = Convert.ToDateTime(reader["WARNING_DATE"]).AddHours(8);
+                                if (reader["WARNING_DATE"].ToString() != "")
+                                {
+                                    model.WARNING_DATE = Convert.ToDateTime(reader["WARNING_DATE"]).AddHours(8);
+                                }
+
                             }
 
                         }
@@ -537,7 +541,7 @@ namespace Information_System.Controllers
                         dr.Close();
 
                         string query = "";
-                        query += " SELECT TOP 1 WARNING_DATE  FROM [db_test].[dbo].[TBL_TECH_IS_REQUEST]  WHERE ";
+                        query += " SELECT TOP 1 WARNING_DATE  FROM [db_rtc].[dbo].[TBL_TECH_IS_REQUEST]  WHERE ";
 
                         query += " ISSUE_ID = " + Fn.getSQL(Session["emp_id"].ToString()) + " order by WARNING_DATE desc";
 
@@ -549,7 +553,7 @@ namespace Information_System.Controllers
                             {
                                 if (dr["WARNING_DATE"].ToString() != "")
                                 {
-                                    ViewData["warn"] = Convert.ToDateTime(dr["WARNING_DATE"]).ToString("dd/MMM/yyyy 08:00");
+                                    ViewData["warn"] = Convert.ToDateTime(dr["WARNING_DATE"]).ToString("dd/MMM/yyyy HH:mm:ss");
                                 }
 
                             }
@@ -604,13 +608,31 @@ namespace Information_System.Controllers
                                     }
 
                                 }
+                                dr.Close();
+                                count = 0;
+                                cmd.CommandText = $@"SELECT  [PATCH]
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{info_id}' AND [PATCH] is not null ";
+                                dr = cmd.ExecuteReader();
+                                if (dr.HasRows)
+                                {
+                                    dm.txt_ATT_DOC_OTHER = new string[100];
+                                    fp.txt_ATT_DOC_OTHER = new string[100];
+                                    while (dr.Read())
+                                    {
+
+                                        dm.txt_ATT_DOC_OTHER[count] = dr[0].ToString();
+                                        fp.txt_ATT_DOC_OTHER[count] = dr[0].ToString();
+                                        count++;
+                                    }
+                                }
+                                dr.Close();
                             }
                             else
                             {
 
                                 count = 0;
                                 cmd.CommandText = $@"SELECT  [PATCH]
-                                      FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{info_id}' AND [PATCH] is not null ";
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{info_id}' AND [PATCH] is not null ";
                                 dr = cmd.ExecuteReader();
                                 if (dr.HasRows)
                                 {
@@ -632,7 +654,7 @@ namespace Information_System.Controllers
                             cmd.CommandText = " SELECT DO.*, e.empTitleEng + ' ' +e.empNameEng name, dp.STATUS STATUS_TE FROM TBL_TECH_IS_DOCINFO DO join db_employee.dbo.tbl_employee e on e.empId = DO.ISSUE_ID" +
                                               " join TBL_TECH_IS_DOCINFO_APPROVE dp on do.ID = dp.DOCINFO_ID and dp.APPROVE_LEVEL = '2' " +
                                               " WHERE " +
-                                              " do.ID = " + Fn.getSQL(id);
+                                              " do.ID = " + Fn.getSQL(info_id);
                             dr = cmd.ExecuteReader();
                             if (dr.Read())
                             {
@@ -658,8 +680,17 @@ namespace Information_System.Controllers
                                 dm.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                                 dr.Close();
                                 int countse = 0;
-                                cmd.CommandText = $@"SELECT  [PATCH]
-                                          FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{Newid}' AND [PATCH] is not null ";
+                                if(Newid != null)
+                                {
+                                    cmd.CommandText = $@"SELECT  [PATCH]
+                                          FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{Newid}' AND [PATCH] is not null ";
+                                }
+                                else
+                                {
+                                    cmd.CommandText = $@"SELECT  [PATCH]
+                                          FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{info_id}' AND [PATCH] is not null ";
+                                }
+                           
                                 dr = cmd.ExecuteReader();
                                 if (dr.HasRows)
                                 {
@@ -684,7 +715,7 @@ namespace Information_System.Controllers
                             {
                                 int countse = 0;
                                 cmd.CommandText = $@"SELECT  [PATCH]
-                                          FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{Newid}' AND [PATCH] is not null ";
+                                          FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{Newid}' AND [PATCH] is not null ";
                                 dr = cmd.ExecuteReader();
                                 if (dr.HasRows)
                                 {
@@ -703,7 +734,7 @@ namespace Information_System.Controllers
                             System.Diagnostics.Debug.WriteLine($@"---------dm.REQUEST_NO-----{dm.REQUEST_NO}---------------");
                             ViewData["requestInfo"] = dm;
 
-                            cmd.CommandText = " SELECT INFO_NO, ID, STATUS, REQUEST_NO , WARNNING_DATE  from TBL_TECH_IS_DOCINFO WHERE REQUEST_NO = " + Fn.getSQL(dm.REQUEST_NO) +
+                            cmd.CommandText = " SELECT INFO_NO, ID, STATUS, REQUEST_NO , WARNING_DATE  from TBL_TECH_IS_DOCINFO WHERE REQUEST_NO = " + Fn.getSQL(dm.REQUEST_NO) +
                                               " AND ID <> '" + id + "' ORDER BY INFO_NO ASC ";
                             dr = cmd.ExecuteReader();
                             while (dr.Read())
@@ -713,12 +744,12 @@ namespace Information_System.Controllers
                                 rev.INFO_NAME = dr["INFO_NO"].ToString();
                                 rev.STATUS = dr["STATUS"].ToString();
                                 rev.REQ_ID = dr["REQUEST_NO"].ToString();
-                                rev.WARNNINGDATE = dr["WARNNING_DATE"].ToString();
+                                rev.WARNNINGDATE = dr["WARNING_DATE"].ToString();
 
                                 revDoc.Add(rev);
-                                if (dr["WARNNING_DATE"].ToString() != "")
+                                if (dr["WARNING_DATE"].ToString() != "")
                                 {
-                                    ViewData["warn"] = Convert.ToDateTime(dr["WARNNING_DATE"]).ToString("dd/MMM/yyyy 08:00");
+                                    ViewData["warn"] = Convert.ToDateTime(dr["WARNING_DATE"]).ToString("dd/MMM/yyyy 08:00");
                                 }
 
                             }
@@ -766,9 +797,26 @@ namespace Information_System.Controllers
         [HttpPost]
         public string createInfoDoc(DocInfoModel doc, string action, string update_app_flow)
         {
+          
+            try
+            {
+                dtwarn = doc.WARNNIG_DATE;
+                //string dtwans = DateTime.Parse(doc.WARNNIG_DATE.Trim()).ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
+                //dtwarn = Convert.ToDateTime(dtwans, CultureInfo.InvariantCulture)
+
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($@"--------error-----{ex.Message.ToString()}------------------");
+                ex.Message.ToString();
+            }
+       
             System.Diagnostics.Debug.WriteLine("createInfoDoc");
             System.Diagnostics.Debug.WriteLine($@"--------action-----{action}------------------");
-            DateTime dtwarn = DateTime.ParseExact(doc.WARNNIG_DATE.Replace("/", "-"), "dd-MMM-yyyy 08:00", CultureInfo.InvariantCulture);
+            //if(doc.WARNNIG_DATE != null)
+            //{
+            //     dtwarn = DateTime.ParseExact(doc.WARNNIG_DATE.ToString().Replace("/", "-"), "dd-MMM-yyyy 08:00", CultureInfo.InvariantCulture);
+            //}
             string IS_ID = string.Empty;
             List<string> mailTo = new List<string>();
             List<string> mailToName = new List<string>();
@@ -852,7 +900,7 @@ namespace Information_System.Controllers
                                 sql.AppendLine(", getdate() ");
                                 sql.AppendLine(", 'NO REQUEST') ");
                                 cmd.CommandText = sql.ToString();
-                                cmd.Parameters.AddWithValue("@DOC_SUBJECT", (doc.DOC_SUBJECT == null) ? (object)DBNull.Value : (object)doc.DOC_SUBJECT);
+                                cmd.Parameters.AddWithValue("@DOC_SUBJECT", (doc.DOC_FLOW_TEXT == null) ? (object)DBNull.Value : (object)doc.DOC_FLOW_TEXT);
                                 cmd.Parameters.AddWithValue("@REASON_EXPLAIN", (doc.REASON_EXPLAIN == null) ? (object)DBNull.Value : (object)doc.REASON_EXPLAIN);
                                 cmd.ExecuteNonQuery();
 
@@ -892,7 +940,7 @@ namespace Information_System.Controllers
 
                             if (doc.WARNNIG_DATE != null)
                             {
-                                sql.AppendLine(" , WARNNING_DATE ");
+                                sql.AppendLine(" , WARNING_DATE ");
                             }
                             sql.AppendLine(" )  VALUES ( '" + Newid + "'," + Fn.getSQL(doc.REQUEST_NO) + ", " + Fn.getSQL(Session["emp_id"].ToString()) + ", GETDATE() " + ", " + Fn.getSQL(doc.DOC_TYPE));
                             sql.AppendLine(", " + Fn.getSQL(Session["plant_id"].ToString()) + ", " + Fn.getSQL(Session["dep_id"].ToString()) + ", " + Fn.getSQL(doc.ACKNOWLAGE_FLEX));
@@ -927,10 +975,10 @@ namespace Information_System.Controllers
                             if (doc.WARNNIG_DATE != null)
                             {
                                 //sql.AppendLine(", " + Fn.getSQL(random + "_" + doc.ATT_DOC_OTHER.FileName));
-                                sql.AppendLine(", @WARNNING_DATE ");
+                                sql.AppendLine(", @WARNING_DATE ");
                             }
                             sql.Append(" )");
-
+                            doc.ID = Newid;
                             cmd.CommandText = sql.ToString();
                             cmd.Parameters.AddWithValue("@DOC_DETAIL", (doc.DOC_DETAIL == null) ? (object)DBNull.Value : (object)doc.DOC_DETAIL);
                             cmd.Parameters.AddWithValue("@EFFECTIVE", (doc.EFFECTIVE == null) ? (object)DBNull.Value : (object)doc.EFFECTIVE);
@@ -941,8 +989,10 @@ namespace Information_System.Controllers
                             cmd.Parameters.AddWithValue("@ATT_DOC_PURCHASE", (doc.ATT_DOC_PURCHASE == null) ? (object)DBNull.Value : (object)random + "_" + doc.ATT_DOC_PURCHASE.FileName.Replace(" ", "_"));
                             cmd.Parameters.AddWithValue("@ATT_DOC_REQUIRE", (doc.ATT_DOC_REQUIRE == null) ? (object)DBNull.Value : (object)random + "_" + doc.ATT_DOC_REQUIRE.FileName.Replace(" ", "_"));
                             cmd.Parameters.AddWithValue("@ATT_DOC_IMPORTANT", (doc.ATT_DOC_IMPORTANT == null) ? (object)DBNull.Value : (object)random + "_" + doc.ATT_DOC_IMPORTANT.FileName.Replace(" ", "_"));
-                            cmd.Parameters.AddWithValue("@WARNNING_DATE", (doc.WARNNIG_DATE == null) ? (object)DBNull.Value : dtwarn);
-
+                            if (doc.WARNNIG_DATE != null)
+                            {
+                                cmd.Parameters.AddWithValue("@WARNING_DATE", (doc.WARNNIG_DATE == null) ? (object)DBNull.Value : dtwarn);
+                            }
                             cmd.ExecuteNonQuery();
                             sql.Clear();
                             //if(doc.ATT_DOC_OTHER != null)
@@ -1503,13 +1553,15 @@ namespace Information_System.Controllers
                         StringBuilder sql = new StringBuilder();
                         sql.Clear();
                         sql.AppendLine(" INSERT INTO TBL_TECH_IS_FILES ");
-                        sql.AppendLine(" (IS_ID, PATCH) ");
+                        sql.AppendLine(" (IS_ID, PATCH , ISSUE_DATE) ");
                         sql.AppendLine(" VALUES ( ");
                         sql.AppendLine(Fn.getSQL(NEWID));
-                        sql.AppendLine(", @fname )");
+                        sql.AppendLine(", @fname ");
+                        sql.AppendLine(", @date )");
                         //sql.AppendLine("," + Fn.getSQL(fname) + ")");
                         cmd.CommandText = sql.ToString();
                         cmd.Parameters.AddWithValue("@fname", fname);
+                        cmd.Parameters.AddWithValue("@date", $@"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
                         cmd.ExecuteNonQuery();
                     }
                     conn.Close();
@@ -1541,11 +1593,20 @@ namespace Information_System.Controllers
         }
         
         [HttpPost]
-        public JsonResult UploadFile_INFO()
+        public JsonResult UploadFile_INFO(string id)
         {
             string NEWID;
-            NEWID = Fn.newID();
-            Newid = NEWID;
+            if (id != null)
+            {
+                NEWID = id;
+                Newid = id;
+            }
+            else
+            {
+                NEWID = Fn.newID();
+                Newid = NEWID;
+            }
+          
             System.Diagnostics.Debug.WriteLine($@"---------UploadFile_INFO-----NEWID----{NEWID}---------------");
 
             Random generator = new Random();
@@ -1579,13 +1640,15 @@ namespace Information_System.Controllers
                         StringBuilder sql = new StringBuilder();
                         sql.Clear();
                         sql.AppendLine(" INSERT INTO TBL_TECH_IS_FILES ");
-                        sql.AppendLine(" (IS_ID, PATCH) ");
+                        sql.AppendLine(" (IS_ID, PATCH , ISSUE_DATE) ");
                         sql.AppendLine(" VALUES ( ");
                         sql.AppendLine(Fn.getSQL(NEWID));
-                        sql.AppendLine(", @fname )");
+                        sql.AppendLine(", @fname ");
+                        sql.AppendLine(", @date )");
                         //sql.AppendLine("," + Fn.getSQL(fname) + ")");
                         cmd.CommandText = sql.ToString();
                         cmd.Parameters.AddWithValue("@fname", fname);
+                        cmd.Parameters.AddWithValue("@date", $@"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
                         cmd.ExecuteNonQuery();
                     }
                     conn.Close();
@@ -1616,6 +1679,7 @@ namespace Information_System.Controllers
             return Json(fileList, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+ 
         public JsonResult deleteFile(string patch, string id)
         {
             List<string> fileList = new List<string>();
@@ -1968,6 +2032,7 @@ namespace Information_System.Controllers
         }
         [HttpGet]
         public JsonResult getMailGrpCC(string id)
+   
         {
             List<MailGroup> grp = new List<MailGroup>();
             if (id == null) { id = "1"; }
@@ -2093,7 +2158,7 @@ namespace Information_System.Controllers
 
         }
         [HttpPost]
-        public bool saveInformation(string id)
+        public bool saveInformation(string id , ref List<string> email)
         {
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
             {
@@ -2117,7 +2182,7 @@ namespace Information_System.Controllers
                         string subject_cc = "";
                         string template_cc = "";
 
-                        cmd.CommandText = " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'IN-PROGRESS' WHERE ID = " + Fn.getSQL(id);
+                        cmd.CommandText = $" UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'IN-PROGRESS' WHERE ID = {id}";
                         cmd.ExecuteNonQuery();
 
                         DocInfoModel dm = new DocInfoModel();
@@ -2125,7 +2190,7 @@ namespace Information_System.Controllers
                                           " FROM TBL_TECH_IS_DOCINFO DO JOIN TBL_TECH_IS_REQUEST R ON DO.REQUEST_NO = R.IS_ID JOIN [db_employee].[dbo].[tbl_employee] EMP ON DO.ISSUE_ID = EMP.empId " +
                                           " JOIN TBL_TECH_IS_MAILGRP MG ON DO.DOC_FLOW_ID = MG.ID JOIN [db_employee].[dbo].[tbl_Dept] DEP ON R.DEPARTMENT = DEP.Dept_ID " +
                                           " JOIN [db_employee].[dbo].[tbl_plant] P ON P.plant_id = R.PLANT JOIN TBL_TECH_IS_RELATION RL ON RL.ID = DO.RELATION_ID " +
-                                          " WHERE DO.ID = " + Fn.getSQL(id);
+                                          " WHERE DO.ID = " + id + " ";
                         dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -2166,7 +2231,7 @@ namespace Information_System.Controllers
                         dm.txt_ATT_DOC_OTHER = new string[5];
                         int count = 0;
                         cmd.CommandText = $@"SELECT TOP (5) [PATCH]
-                                      FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{Newid}'";
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = {id}";
                         dr = cmd.ExecuteReader();
                         if(dr.HasRows)
                         {
@@ -2176,9 +2241,9 @@ namespace Information_System.Controllers
                                 count++;
                             }
                         }
-                       
+                        dr.Close();
                         cmd.CommandText = " SELECT * FROM TBL_TECH_IS_MAILGRP_CC " +
-                                          " WHERE ID =  " + Fn.getSQL(dm.CC_GRP);
+                                          " WHERE ID =  " + Fn.getSQL(dm.CC_GRP) + "";
                         dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -2193,7 +2258,7 @@ namespace Information_System.Controllers
                             dr = cmd.ExecuteReader();
                             while (dr.Read())
                             {
-                                mailCC.Add(dr["EMAIL"].ToString());
+                                email.Add(dr["EMAIL"].ToString());
                             }
                         }
 
@@ -2213,7 +2278,7 @@ namespace Information_System.Controllers
                         dr.Close();
 
                         cmd.CommandText = " SELECT USERID FROM TBL_TECH_IS_MAILGRP " +
-                                          " WHERE ID =  " + Fn.getSQL(dm.DOC_FLOW_ID);
+                                          " WHERE ID =  '" + Fn.getSQL(dm.DOC_FLOW_ID) + "'";
                         dr = cmd.ExecuteReader();
                         if (dr.Read())
                         {
@@ -2257,22 +2322,22 @@ namespace Information_System.Controllers
                         }
                        
 
-                        //send mail to approve list
-                        subject = " Information System:" + dm.INFO_NO + " Information Document is waiting for your approval.";
-                        template += "<p><b>Dear Approver </b></p><p>Information Document is waiting for your approval.</p>";
-                        template += getTemplateEmailCreate(dm, "save");
-                        TempData["CreateSucess"] = "Successfully save and send email the information document.";
+                        ////send mail to approve list
+                        //subject = " Information System:" + dm.INFO_NO + " Information Document is waiting for your approval.";
+                        //template += "<p><b>Dear Approver </b></p><p>Information Document is waiting for your approval.</p>";
+                        //template += getTemplateEmailCreate(dm, "save");
+                        //TempData["CreateSucess"] = "Successfully save and send email the information document.";
 
-                        Fn.sendMail(subject, mailTo, template, att, mailCC_TE);
+                        //Fn.sendMail(subject, mailTo, template, att, mailCC_TE);
 
-                        //send mail to CC group
-                        if (dm.ACKNOWLAGE_FLEX == "True")
-                        {
-                            subject_cc = " Information System: Information Document is for your acknowledgement.";
-                            template_cc += "<p><b>Dear Acknowledge person</b></p><p>Information Document is for your acknowledgement.</p>";
-                            template_cc += getTemplateEmailCreate(dm, "cc_grp");
-                            Fn.sendMail(subject_cc, mailCC, template_cc, att);
-                        }
+                        ////send mail to CC group
+                        //if (dm.ACKNOWLAGE_FLEX == "True")
+                        //{
+                        //    subject_cc = " Information System: Information Document is for your acknowledgement.";
+                        //    template_cc += "<p><b>Dear Acknowledge person</b></p><p>Information Document is for your acknowledgement.</p>";
+                        //    template_cc += getTemplateEmailCreate(dm, "cc_grp");
+                        //    Fn.sendMail(subject_cc, mailCC, template_cc, att);
+                        //}
 
                         con.Close();
                         return true;
@@ -2316,7 +2381,7 @@ namespace Information_System.Controllers
                 html += " </table><br/>";
                 if (action != "cc_grp")
                 {
-                    html += "<a href='" + url + "/TE-IS/Approve/ApproveList/" + model.ID + "'>Click link to approve information document </a>";
+                    html += "<a href='" + "http://10.145.163.14/te-is" + "/Approve/ApproveList/" + model.ID + "'>Click link to approve information document </a>";
                 }
 
                 html += "<div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";

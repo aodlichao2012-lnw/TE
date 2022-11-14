@@ -352,7 +352,12 @@
                     " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Picture reference</div><p><strong>Detail #1:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_1) + "'>&nbsp;" + json.txt_PIC_REF_1 + "</a></p>" +
                     " <p><strong>Detail #2:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_2) + "'>&nbsp;" + json.txt_PIC_REF_2 + "</a></p></div></div> " +
                     " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Attacched document</div><p><strong>Purchase request form:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + json.txt_ATT_DOC_PURCHASE + "'>&nbsp; " + json.txt_ATT_DOC_PURCHASE + "</a></p> " +
-                    " <p><strong>Requirement document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_REQUIRE) + "'>&nbsp; " + json.txt_ATT_DOC_REQUIRE + "</a></p><p><strong>Other:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_OTHER) + "'>&nbsp; " + json.txt_ATT_DOC_OTHER + "</a></p></div></div></div>";
+                    " <p><strong>Requirement document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_REQUIRE) + "'>&nbsp; "+ json.txt_ATT_DOC_REQUIRE + "</a ></p > <p><strong>Other:</strong>";
+
+                    for (var i = 0; i < json.txt_ATT_DOC_OTHER.length; i++) {
+                        html += "<a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_OTHER[i]) + "'>&nbsp; " + json.txt_ATT_DOC_OTHER[i] + "</a></p></div></div></div>";
+                }
+
                 var RevDoc_list = json.RevDoc;
                 if (RevDoc_list.length > 0) {
                     html += " <div><div class='fs'><strong>Related documents</strong></div> ";

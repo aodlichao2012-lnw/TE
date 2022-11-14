@@ -9,11 +9,13 @@
     {
         strlevel = "Accept";
         level = "1";
-    } else if (p.IS_APP_LEVEL2)
+    }
+    else if (p.IS_APP_LEVEL2)
     {
         strlevel = "Approve";
         level = "2";
-    } else
+    }
+    else
     {
         strlevel = "Approve";
         level = "0";
@@ -28,7 +30,6 @@
         width: 18px;
         height: 18px;
     }
-    
 </style>
 <div style="background-color: white; padding: 16px;" class="mt-2">
 
@@ -94,7 +95,7 @@
             <div id="divPending" class="col-lg-2 col-sm-1 col-md-4">
                 <button type="button" class="btn btn-warning width-200" id="btnPending" data-toggle="modal" data-target="#pendingModel" disabled="">Pending</button>
             </div>
-            <div id="divCancel"  class="col-lg-2 col-sm-1 col-md-4">
+            <div id="divCancel" class="col-lg-2 col-sm-1 col-md-4">
                 <button type="button" class="btn btn-danger width-200" id="btnCancel" data-toggle="modal" data-target="#cancelModel" disabled="">Cancel</button>
             </div>
             <div id="divFollow" class="col-lg-2 col-sm-1 col-md-4">
@@ -105,7 +106,7 @@
         <div class="col-lg-2 col-sm-1 col-md-4">
             <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
         </div>
-    </div>   
+    </div>
 
     <div id="divUnfollow" class="col-lg-2 col-sm-1 col-md-4" style="margin-left: -16px; display: none;">
         <button type="button" class="btn btn-primary width-200" id="btnUnfollow" disabled="" onclick="setFollowUnfollow('Unfollow');">Unfollow</button>
@@ -177,9 +178,9 @@
                     </div>
                 </div>
                 @*<div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="followChk">
-                    <b class="form-check-label" for="followChk">Follow</b>
-                </div>*@
+                        <input type="checkbox" class="form-check-input" id="followChk">
+                        <b class="form-check-label" for="followChk">Follow</b>
+                    </div>*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -308,7 +309,6 @@
                             "<td>" + data[i].REQUEST_NAME + "</td><td>" + data[i].REQUEST_NAME + "</td><td>" + filstList + "</td>" +
                             "<td>" + data[i].ISSUE_NAME + "</td><td>" + date.toLocaleDateString("th-TH") + "</td> " +
                             "<td class='text-center'><a target='_Blank' href='@Url.Action("InformationFormat", "Approve")/" + data[i].ID +"'><img src='@Url.Content("~/Image/file.svg")' width='20' title='View Details'/></a></td> </tr>";
-                        
                         $('#tbody').append(html);
                     }
                 }
@@ -408,10 +408,12 @@
             if (chks[i].checked === true && chks[i].type == 'checkbox') {
                 if (chks[i].id != 'chkAll') {
                     if (arr != "") {
-                        arr = arr.concat(",", "'"+ chks[i].id +"'");
+                        arr = arr.concat(",", "'" + chks[i].id + "'")
+                        alert(arr);
                     }
                     else {
-                        arr = arr.concat("'"+chks[i].id+"'");
+                        arr = arr.concat("'" + chks[i].id + "'");
+                        alert(arr)
                     }
                 }
             }
@@ -538,7 +540,7 @@
         $('#btnFollow').attr('disabled', 'disabled');
         $('#btnUnfollow').attr('disabled', 'disabled');
     }
-  
+
 </script>
 
 

@@ -14,7 +14,8 @@ namespace Information_System.Controllers
     {
         // GET: Approve
         InFunction Fn = new InFunction();
-        public string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+        //public string url = System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+        public string url = "http://10.145.163.14/te-is";
         public ActionResult ApproveList()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["login_id"])))
@@ -39,7 +40,7 @@ namespace Information_System.Controllers
                     StringBuilder sql = new StringBuilder();
                     sql.AppendLine(" SELECT TOP(1) DI.ID DIID, DI.INFO_NO, R.SUBJECT, DI.STATUS, CONCAT(P.plant_mark,'/',D.Dept_Remark) PD, R.REASON_EXPLAIN, R.IS_NO, R.IS_ID, DI.ISSUE_DATE, CONCAT(EMI.empTitleEng,' ',EMI.empNameEng) ISSUE_NAME ");
                     sql.AppendLine(" , CONCAT(EMR.empTitleEng,' ',EMR.empNameEng) CHECK_NAME, EMA.empNameEng as APP_NAME, DI.DOC_DETAIL  ");
-                    sql.AppendLine(" , DI.PIC_REF_1, DI.PIC_REF_2, ATT_DOC_PURCHASE, ATT_DOC_REQUIRE, ATT_DOC_OTHER, ATT_DOC_IMPORTANT ,DI.EFFECTIVE, DI.ADD_ORDER_NO, RL.NAME REALATION_NAME,RL.DETAILS RELATION_DETAIL  , EMI.EmpEmail as empemail");
+                    sql.AppendLine(" , DI.PIC_REF_1, DI.PIC_REF_2, ATT_DOC_PURCHASE, ATT_DOC_REQUIRE, ATT_DOC_OTHER, ATT_DOC_IMPORTANT ,DI.EFFECTIVE, DI.ADD_ORDER_NO, RL.NAME REALATION_NAME,RL.DETAILS RELATION_DETAIL  , EMI.EmpEmail as empemail , DI.WARNNIG_DATE as WARNNIG_DATE");
                     sql.AppendLine(" FROM TBL_TECH_IS_DOCINFO DI ");
                     sql.AppendLine(" JOIN TBL_TECH_IS_REQUEST R ON DI.REQUEST_NO = R.IS_ID ");
                     sql.AppendLine(" JOIN TBL_TECH_IS_DOCINFO_APPROVE DA ON DI.ID = DA.DOCINFO_ID ");
@@ -77,6 +78,7 @@ namespace Information_System.Controllers
                         model.ADD_ORDER_NO = dr["ADD_ORDER_NO"].ToString() != "" ? dr["ADD_ORDER_NO"].ToString() : "-";
                         model.RELATION_ID = dr["REALATION_NAME"].ToString();
                         model.RELATION_TEXT = dr["RELATION_DETAIL"].ToString() != "" ? dr["RELATION_DETAIL"].ToString() : "-";
+                        model.WARNNIG_DATE = Convert.ToDateTime( dr["WARNNIG_DATE"].ToString()) != null ? Convert.ToDateTime( dr["WARNNIG_DATE"].ToString()) : DateTime.Now;
                         //email.Add("aodlichao2012@hotmail.com");
 
                         email.Add(dr["empemail"].ToString());
@@ -101,7 +103,7 @@ namespace Information_System.Controllers
                         da.STATUS = dr["STATUS"].ToString() != "" ? dr["STATUS"].ToString() : "-";
                         if (da.STATUS != "APPROVED")
                         {
-                            checkonemorenonApprove_Emailtosend(model.ISSUE_DATE, model.ID, model.REQUEST_NO, model, da.STATUS, email, da.APPROVE_EMAIL);
+                            checkonemorenonApprove_Emailtosend(model.WARNNIG_DATE, model.ID, model.REQUEST_NO, model, da.STATUS, email, da.APPROVE_EMAIL);
                         }
                         da.APPROVE_DEPT = dr["Dept_Remark"].ToString() != "" ? dr["Dept_Remark"].ToString() : "-";
                         if (dr["APPROVE_DATE"].ToString() != null && dr["APPROVE_DATE"].ToString() != "")
@@ -136,7 +138,7 @@ namespace Information_System.Controllers
         public JsonResult getApproveList(string appLevel, string status_option)
         {
             //AutoSendMail a = new AutoSendMail();
-            //a.Autosend();
+            //a.Execute();
             List<DocInfoModel> dmList = new List<DocInfoModel>();
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
             {
@@ -145,8 +147,8 @@ namespace Information_System.Controllers
                 {
                     StringBuilder sql = new StringBuilder();
                     sql.AppendLine(" SELECT DISTINCT D.ID, CONCAT( EI.empTitleEng,' ', EI.empNameEng) AS ISSUE_NAME, CONCAT( EC.empTitleEng,' ', EC.empNameEng) AS CREATE_NAME, ");
-                    sql.AppendLine(" D.INFO_NO , R.SUBJECT, R.REASON_EXPLAIN, R.APPROVE_STATUS,  D.ISSUE_DATE   , EI.empEmail as empEmail ");
-                    sql.AppendLine(" ,STUFF((SELECT  ',' + FL.PATCH FROM TBL_TECH_IS_FILES FL WHERE FL.IS_ID = R.IS_ID FOR XML PATH('')), 1, 1, '') AS REQ_FILE_LIST  ");
+                    sql.AppendLine(" D.INFO_NO , R.SUBJECT, R.REASON_EXPLAIN, R.APPROVE_STATUS,  D.ISSUE_DATE ");
+                    sql.AppendLine(" ,STUFF((SELECT  ',' + FL.PATCH FROM TBL_TECH_IS_FILES FL WHERE FL.IS_ID = R.IS_ID FOR XML PATH('')), 1, 1, '') AS REQ_FILE_LIST ");
                     sql.AppendLine(" FROM TBL_TECH_IS_DOCINFO D INNER JOIN TBL_TECH_IS_REQUEST R ON D.REQUEST_NO = R.IS_ID ");
                     sql.AppendLine(" INNER JOIN TBL_TECH_IS_DOCINFO_APPROVE A ON D.ID = A.DOCINFO_ID ");
                     sql.AppendLine(" INNER JOIN [db_employee].[dbo].[tbl_employee] EI ON R.ISSUE_ID = EI.empId ");
@@ -161,7 +163,8 @@ namespace Information_System.Controllers
                     {
                         if (status_option == "Wait Approve")
                         {
-                            sql.AppendLine(" AND D.STATUS = 'IN-PROGRESS' ");
+                            //sql.AppendLine(" AND D.STATUS = 'IN-PROGRESS' ");
+                            sql.AppendLine(" AND D.STATUS = 'CREATE' ");
                         }
                     }
                     sql.AppendLine(" AND R.APPROVE_STATUS IN ('APPROVED','NO REQUEST') ");
@@ -192,7 +195,7 @@ namespace Information_System.Controllers
                             }
                         }
                     }
-                    sql.AppendLine("ORDER BY ISSUE_DATE DESC");
+
                     cmd.CommandText = sql.ToString();
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
@@ -202,19 +205,11 @@ namespace Information_System.Controllers
                         dm.ID = dr["ID"].ToString();
                         dm.INFO_NO = dr["INFO_NO"].ToString();
                         dm.DOC_SUBJECT = dr["SUBJECT"].ToString();
+                        dm.STATUS = dr["APPROVE_STATUS"].ToString();
                         dm.REASON_EXPLAIN = dr["REASON_EXPLAIN"].ToString();
                         dm.ISSUE_NAME = dr["CREATE_NAME"].ToString();
                         dm.ISSUE_DATE = DateTime.Parse(dr["ISSUE_DATE"].ToString());
                         dm.REQ_FILE_LIST = dr["REQ_FILE_LIST"].ToString().Split(',').ToList();
-                        dm.STATUS = dr["APPROVE_STATUS"].ToString();
-                        MailGroup mail = new MailGroup()
-                        {
-                            /*EMP_EMAIL = "aodlichao2012@hotmail.com"*/
-                            EMP_EMAIL = dr["empEmail"].ToString()
-                        };
-                        List<string> email = new List<string>();
-                        email.Add(mail.EMP_EMAIL);
-                        List<string> sendTo = new List<string>();
                         dmList.Add(dm);
                     }
 
@@ -229,7 +224,7 @@ namespace Information_System.Controllers
         {
             List<string> CC = new List<string>();
             CC.Add(APPROVE_EMAIL);
-            DateTime dtst = iSSUE_DATE.AddMonths(1);
+            DateTime dtst = iSSUE_DATE;
             DateTime dtNow = DateTime.Now;
             double sum = double.Parse((dtNow - dtst).TotalDays.ToString());
             if (sum <= 0.99)
@@ -298,29 +293,36 @@ namespace Information_System.Controllers
                                 string template = "";
                                 if (action == "Approve" && level == "2")
                                 {
-                                    string info_no = "";
-                                    cmd.CommandText = " SELECT INFO_NO FROM TBL_TECH_IS_DOCINFO WHERE ID = " + d;
-                                    if (cmd.ExecuteScalar() != null)
-                                    {
-                                        info_no = cmd.ExecuteScalar().ToString();
-                                    }
 
-                                    if (info_no != null && info_no != "")
-                                    {
-                                        cmd.CommandText = " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'TECH-APPROVE' " +
-                                                           " WHERE ID = " + d;
-                                        cmd.ExecuteNonQuery();
-                                    }
-                                    else
-                                    {
-                                        cmd.CommandText = " DECLARE @no_max int; SELECT TOP 1 @no_max = SUBSTRING(INFO_NO, 8, 3) FROM TBL_TECH_IS_DOCINFO ORDER BY SUBSTRING(INFO_NO, 4, 7) DESC; " +
-                                                         " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'TECH-APPROVE' " +
-                                                         " , INFO_NO = (SELECT CASE WHEN (SELECT TOP 1 SUBSTRING(INFO_NO, 4, 4) AS INT FROM TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) = (SELECT YEAR(GETDATE())) THEN " +
-                                                         " CASE WHEN (select COUNT(*)  from TBL_TECH_IS_DOCINFO) > 0  then (select TOP 1 CONCAT('TE-', YEAR(GETDATE()), FORMAT( CAST(@no_max AS int)+1, '00#')) from TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) " +
-                                                         " ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END AS INFO_NO) " +
-                                                         " WHERE ID = " + d;
-                                        cmd.ExecuteNonQuery();
-                                    }
+                                    cmd.CommandText = " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'TECH-APPROVE' " +
+                                                     " , INFO_NO = (SELECT CASE WHEN (SELECT TOP 1 SUBSTRING(INFO_NO, 4, 4) AS INT FROM TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) = (SELECT YEAR(GETDATE())) THEN " +
+                                                     " CASE WHEN (select COUNT(*)  from TBL_TECH_IS_DOCINFO) > 0  then (select TOP 1 CONCAT('TE-', YEAR(GETDATE()), FORMAT( CAST(right(INFO_NO,3) AS int)+1, '00#')) from TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) " +
+                                                     " ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END AS INFO_NO) " +
+                                                     " WHERE ID = " + d;
+                                    cmd.ExecuteNonQuery();
+                                    //string info_no = "";
+                                    //cmd.CommandText = " SELECT INFO_NO FROM TBL_TECH_IS_DOCINFO WHERE ID = " + d;
+                                    //if (cmd.ExecuteScalar() != null)
+                                    //{
+                                    //    info_no = cmd.ExecuteScalar().ToString();
+                                    //}
+
+                                    //if (info_no != null && info_no != "")
+                                    //{
+                                    //    cmd.CommandText = " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'TECH-APPROVE' " +
+                                    //                       " WHERE ID = " + d;
+                                    //    cmd.ExecuteNonQuery();
+                                    //}
+                                    //else
+                                    //{
+                                    //    cmd.CommandText = " DECLARE @no_max int; SELECT TOP 1 @no_max = SUBSTRING(INFO_NO, 8, 3) FROM TBL_TECH_IS_DOCINFO ORDER BY SUBSTRING(INFO_NO, 4, 7) DESC; " +
+                                    //                     " UPDATE TBL_TECH_IS_DOCINFO SET STATUS = 'TECH-APPROVE' " +
+                                    //                     " , INFO_NO = (SELECT CASE WHEN (SELECT TOP 1 SUBSTRING(INFO_NO, 4, 4) AS INT FROM TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) = (SELECT YEAR(GETDATE())) THEN " +
+                                    //                     " CASE WHEN (select COUNT(*)  from TBL_TECH_IS_DOCINFO) > 0  then (select TOP 1 CONCAT('TE-', YEAR(GETDATE()), FORMAT( CAST(@no_max AS int)+1, '00#')) from TBL_TECH_IS_DOCINFO ORDER BY INFO_NO DESC) " +
+                                    //                     " ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END ELSE CONCAT('TE-', YEAR(GETDATE()), '001') END AS INFO_NO) " +
+                                    //                     " WHERE ID = " + d;
+                                    //    cmd.ExecuteNonQuery();
+                                    //}
 
                                 }
                                 else if (action == "REJECT")
@@ -343,6 +345,8 @@ namespace Information_System.Controllers
                                 List<MailTo> mt = getMailToList(cmd, actionStatus, level, d);
                                 //เพิ่ม CC TE ชั่วคราวเพื่อให้ TE
                                 List<string> mailCC_TE = new List<string>();
+                                //CreateController create = new CreateController();
+                                //create.saveInformation(id ,ref mailCC_TE);
                                 foreach (var m in mt)
                                 {
                                     mailTo.Add(m.EMP_EMAIL);
@@ -355,14 +359,15 @@ namespace Information_System.Controllers
                                     {
                                         subject = "Information System: Information Document is waiting for your approval.";
                                         template += "<p><b>Dear K." + mt[0].EMP_NAME + " </b></p><p>Information Document is waiting for your approval.</p>";
-                                        hrefTo = " <a href='" + url + "/TE-IS/Approve/ApproveList/" + dm.ID + "'>Click link to Information System </a>" +
+                                        hrefTo = " <a href='" + "http://10.145.163.14/te-is" + "/Approve/ApproveList/" + dm.ID + "'>Click link to Information System </a>" +
                                                  " <div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";
+
                                     }
                                     else
                                     {
                                         subject = "Information system: The information document has been approved.";
                                         template += "<p><b>Dear K." + mt[0].EMP_NAME + " </b></p><p>Documents are waiting for you to save and send to approver list.</p>";
-                                        hrefTo = " <a href='" + url + "/TE-IS/Create/CreateInfoDoc/" + dm.REQUEST_ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
+                                        hrefTo = " <a href='" + "http://10.145.163.14/te-is" + "/Report/getInformation/" + dm.ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
                                                  " <div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";
                                     }
 
@@ -386,12 +391,21 @@ namespace Information_System.Controllers
                                     {
                                         att.Add(Server.MapPath("~/Temp_File/").ToString() + dm.txt_DOC_IMPORTANT);
                                     }
+                                    //if (dm.txt_ATT_DOC_OTHER != null)
+                                    //{
+                                    //    foreach (var item in dm.txt_ATT_DOC_OTHER)
+                                    //    {
+
+                                    //        att.Add(Server.MapPath("~/Temp_File/").ToString() + item);
+
+                                    //    }
+                                    //}
                                     TempData["statusApprove"] = " successfully!";
 
                                 }
                                 else if (action == "REJECT")
                                 {
-                                    hrefTo = " <a href='" + url + "/TE-IS/Create/CreateInfoDoc/" + dm.REQUEST_ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
+                                    hrefTo = " <a href='" + "http://10.145.163.14/te-is" + "/Create/CreateInfoDoc/" + dm.REQUEST_ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
                                                  " <div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";
                                     subject = "Information system: The Information document has been rejected.";
                                     template += "<p><b>Dear K." + mt[0].EMP_NAME + " </b></p><p>Documents has been rejected.</p>";
@@ -404,7 +418,7 @@ namespace Information_System.Controllers
                                     mailCC_TE.Add("wiparats@citizen.co.jp");
                                     mailCC_TE.Add("jariyac@citizen.co.jp");
 
-                                    hrefTo = " <a href='" + url + "/TE-IS/Create/CreateInfoDoc/" + dm.REQUEST_ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
+                                    hrefTo = " <a href='" + "http://10.145.163.14/te-is" + "/Create/CreateInfoDoc/" + dm.REQUEST_ID + "?info_id=" + dm.ID + "'>Click link to Information System </a>" +
                                                  " <div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";
                                     subject = "Information system: The Information document has been cancel.";
                                     template += "<p><b>Dear All </b></p><p>Documents has been cancel.</p>";
@@ -440,9 +454,9 @@ namespace Information_System.Controllers
                                     string hrefTo = "";
                                     foreach (var m in mt)
                                     {
-                                        mailTo.Add(m.EMP_EMAIL);
+                                        mailTo.Add("aodlichao2012@hotmail.com");
                                     }
-                                    hrefTo = " <a href='" + url + "/TE-IS/Approve/InformationFormat/" + dm.ID + "'>Click link to Information System </a>" +
+                                    hrefTo = " <a href='" + "http://10.145.163.14/te-is" + "/Approve/InformationFormat/" + dm.ID + "'>Click link to Information System </a>" +
                                                  " <div>If you have any question please do not hesitate to contact me. Thank you & Best Regards</div><div>IT developer team (363)</div>";
                                     subject = "Information system: The information document has already been approved by all approvers.";
                                     template += "<p><b>Dear All </b></p><p>Documents has been approved by all approvers.</p>";
@@ -491,7 +505,19 @@ namespace Information_System.Controllers
                 " <table border='1' width='60%' style='border-collapse: collapse;font-family:monospace;'> " +
                 " <thead style='background-color:#65A4FF;'><tr><th>Approve Name</th><th>Approve Date</th><th>Status</th></tr></thead> " +
                 " <tbody class='table-body' id='tbody'>";
-                html += " <tr> <td> " + model.APPROVE_NAME + " </td><td>  " + model.ISSUE_DATE + " </td><td>  " + model.STATUS + " </td></tr>";
+                if(model.TE_APPROVE_LIST != null)
+                {
+                    foreach (var l in model.TE_APPROVE_LIST)
+                    {
+                        html += " <tr> <td> " + l.APPROVE_NAME + " </td><td>  " + l.APPROVE_DATE + " </td><td>  " + l.STATUS + " </td></tr>";
+                    }
+                }
+                else
+                {
+                    html += " <tr> <td>  </td><td>  </td><td>  </td></tr>";
+                }
+               
+                //html += " <tr> <td> " + model.APPROVE_NAME + " </td><td>  " + model.ISSUE_DATE + " </td><td>  " + model.STATUS + " </td></tr>";
                 html += "</tbody> " +
                 " </table><br/>";
 
@@ -514,7 +540,7 @@ namespace Information_System.Controllers
                 {
                     try
                     {
-                        cmd.CommandText = " SELECT mg.NAME DOC_FLOW, DO.*, r.*, e.empTitleEng + ' ' +e.empNameEng ISSUE_NAME , CONCAT(p.plant_mark,'/',d.Dept_Remark) plant_dep, er.empTitleEng + ' ' +er.empNameEng request_name FROM TBL_TECH_IS_DOCINFO DO " +
+                        cmd.CommandText = " SELECT mg.NAME DOC_FLOW, DO.*, r.*, e.empTitleEng + ' ' +e.empNameEng ISSUE_NAME , CONCAT(p.plant_mark,'/',d.Dept_Remark) plant_dep, er.empTitleEng + ' ' +er.empNameEng request_name , DO.ATT_DOC_OTHER FROM TBL_TECH_IS_DOCINFO DO " +
                                           " join TBL_TECH_IS_REQUEST r on r.IS_ID = DO.REQUEST_NO left join db_employee.dbo.tbl_plant p on p.plant_id = DO.PLANT left join db_employee.dbo.tbl_Dept d on d.Dept_ID = DO.DEPARTMENT" +
                                           " left join db_employee.dbo.tbl_employee e on e.empId = DO.ISSUE_ID join db_employee.dbo.tbl_employee er on er.empId = r.ISSUE_ID join TBL_TECH_IS_MAILGRP mg on mg.ID = DOC_FLOW_ID " +
                                           " WHERE DO.ID = " + id;
@@ -545,6 +571,22 @@ namespace Information_System.Controllers
                             dm.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                             dm.REQUEST_NAME = dr["request_name"].ToString();
                             dm.REQUEST_ID = dr["IS_ID"].ToString();
+
+                        }
+                        dr.Close();
+                        int count = 0;
+                        cmd.CommandText = $@"SELECT  [PATCH]
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = {id} AND [PATCH] is not null ";
+                        dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            dm.txt_ATT_DOC_OTHER = new string[100];
+                            while (dr.Read())
+                            {
+
+                                dm.txt_ATT_DOC_OTHER[count] = dr[0].ToString();
+                                count++;
+                            }
                         }
 
                         dr.Close();
@@ -582,6 +624,8 @@ namespace Information_System.Controllers
                         }
                         dm.TE_APPROVE_LIST = m.ToList();
 
+
+
                     }
                     catch (Exception ex)
                     {
@@ -600,6 +644,9 @@ namespace Information_System.Controllers
             List<MailTo> mtList = new List<MailTo>();
             using (SqlConnection con = new SqlConnection(Fn.conRTCStr))
             {
+
+
+
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand(null, con))
                 {
@@ -632,6 +679,9 @@ namespace Information_System.Controllers
                         mtList.Add(mt);
                     }
                     con.Close();
+
+                   
+             
                     return mtList;
                 }
                 //con.Close();
@@ -699,8 +749,10 @@ namespace Information_System.Controllers
                             email.Add(dr["empemail"].ToString());
                             int count = 0;
                             dr.Close();
-                            cmd.CommandText = $@"SELECT TOP (4) [PATCH]
-                                      FROM [db_test].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{model.ID}' AND [PATCH] is not null ";
+                            cmd.CommandText = $@"SELECT TOP (1000) [IS_ID]
+                                                              ,[PATCH]
+                                                          FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES]
+                                                          where IS_ID  =  '{id}'  ";
                             dr = cmd.ExecuteReader();
                             if (dr.HasRows)
                             {
@@ -711,7 +763,7 @@ namespace Information_System.Controllers
                                     if (count < 5)
                                     {
 
-                                        model.txt_ATT_DOC_OTHER[count] = dr[0].ToString();
+                                        model.txt_ATT_DOC_OTHER[count] = dr[1].ToString();
                                         count++;
                                     }
                                     else

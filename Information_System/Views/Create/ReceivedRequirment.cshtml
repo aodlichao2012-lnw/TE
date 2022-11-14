@@ -253,12 +253,12 @@
             <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#rejectModel">Reject Requirement</button>*@
             @if (Model.APPROVE_STATUS == "APPROVED" && (Model.INFO_STATUS == "" || Model.INFO_STATUS == null))
             {
-                if (p.IS_RECEIVE.IndexOf("W") != -1)
-                {
+                //if (p.IS_RECEIVE.IndexOf("W") != -1)
+                //{
                     <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
                     <button type="button" class="btn btn-primary mr-2" style="width: 250px;" onclick="linkToCreateDoc();">Approved / Create information</button>
                     <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#rejectModel">Reject Requirement</button>
-                }
+                
             }
 
             @*@if (Model.APPROVE_STATUS == "APPROVED" && (Model.INFO_STATUS == "" || Model.INFO_STATUS == null))

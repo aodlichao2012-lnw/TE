@@ -291,7 +291,40 @@
             <div class="form-group row mtd-10">
                 <label for="txtRelation" class="col-sm-4 col-lg-2 col-form-label">Warning Date</label>
                 <div class="col-sm-8 col-lg-10">
-                    <input name="warnning" type="text" id="txt_warn" value="@warnning" disabled="disabled" />
+                    @if (warnning != "")
+                    {
+                        <input name="warnning" type="text" id="txt_warn" value="@warnning" disabled="disabled" />
+                    }
+                    else
+                    {
+                        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+                        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#txt_warn').datepicker({
+                                    format: 'dd/mmm/yyyy',
+                                    //ignoreReadonly: true,
+                                });
+                            })
+                        </script>
+                        <input type="text" class="form-control" placeholder="dd-mmm-yyyy" id="txt_warn">
+
+
+                        @*<script>
+                $('.datepicker').datepicker({
+                    format: 'dd-MMM-yyyy'
+                });
+            </script>
+            <style type="text/css">
+                .ui-datepicker {
+                    background: #333;
+                    border: 1px solid #555;
+                    color: #EEE;
+                }
+            </style>*@
+                    }
+
+
                 </div>
             </div>
             <div class="form-group row mtd-10">
@@ -652,7 +685,7 @@
        }
 
        //document.getElementById('txtDocumentSubject').readOnly = true;
-       document.getElementById('txtDocumentSubject').setAttribute('disabled', 'disabled');
+  /*     document.getElementById('txtDocumentSubject').setAttribute('disabled', 'disabled');*/
        document.getElementById('txtResonExplain').readOnly = true;
        document.getElementById('txtDetailReference').readOnly = true;
 
@@ -798,7 +831,8 @@
         var PIC_REF_2 = $("#_PIC_REF_2").get(0);
         var ATT_DOC_PURCHASE = $("#_ATT_DOC_PURCHASE").get(0);
         var ATT_DOC_REQUIRE = $("#_ATT_DOC_REQUIRE").get(0);
-        var ATT_DOC_OTHER = $("#_ATT_DOC_OTHER").get(0).files;
+        var fileUpload = $("#_ATT_DOC_OTHER").get(0);
+       
 
         console.log(ATT_DOC_OTHER)
         var ATT_DOC_IMPORTANT = $("#_ATT_DOC_IMPORTANT").get(0);
@@ -819,15 +853,13 @@
         if (ATT_DOC_REQUIRE != undefined) {
             data.append('ATT_DOC_REQUIRE', ATT_DOC_REQUIRE.files[0]);
         }
-        for (var i = 0; i < ATT_DOC_OTHER.length; i++) {
-            if (ATT_DOC_OTHER != undefined) {
-                data.append('ATT_DOC_OTHER', ATT_DOC_OTHER[i]);
-            }
-
-        }
 
         if (ATT_DOC_IMPORTANT != undefined) {
             data.append('ATT_DOC_IMPORTANT', ATT_DOC_IMPORTANT.files[0]);
+        }
+        var files = fileUpload.files;
+        for (var i = 0; i < files.length; i++) {
+            data.append('ATT_DOC_OTHER', files[i]);
         }
         //data.append('ATT_DOC_PURCHASE', ATT_DOC_PURCHASE.files[0]);
         ////data.append('ATT_DOC_REQUIRE', ATT_DOC_REQUIRE.files[0]);
@@ -842,6 +874,7 @@
         data.append('DOC_FLOW_ID', txtDocumentFlow.value);
         if (ACKNOWLAGE_FLEX == 1) {
             data.append('CC_GRP', txtCC.value);
+            alert(txtCC.value)
         }
         data.append('DOC_FLOW_TEXT', txtDocumentFlow.options[txtDocumentFlow.selectedIndex].innerText);
         data.append('DETAIL_REF', $('#txtDetailReference').val());
