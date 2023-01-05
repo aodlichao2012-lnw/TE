@@ -8,6 +8,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Information_System
 {
@@ -73,17 +74,20 @@ namespace Information_System
             //mailTo.Add("yutidap@citizen.co.jp");
             //mailTo.Add("wiparats@citizen.co.jp");
             //
-
+     
             Boolean result = false;
             var myMail = new MailMessage();
             myMail.From = new MailAddress("Information System<ssimsystem@citizen.co.jp>");
 
             myMail.Subject = mailSubject;
-
-            foreach (string mail in mailTo)
+            if(mailTo != null)
             {
-                myMail.To.Add(new MailAddress(mail));
+                foreach (string mail in mailTo)
+                {
+                    myMail.To.Add(new MailAddress(mail));
+                }
             }
+           
             if (mailCC != null)
             {
                 foreach (string mail in mailCC)
@@ -101,7 +105,7 @@ namespace Information_System
                 {
                     foreach (string atthf in atth)
                     {
-                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://10.145.163.10/IS/" + atthf);
+                        FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://10.145.163.14/IS/" + atthf);
                         request.Credentials = new NetworkCredential("sodick", "Rtc0000", "rtc");
                         request.Method = WebRequestMethods.Ftp.DownloadFile;
                         Stream contentStream = request.GetResponse().GetResponseStream();

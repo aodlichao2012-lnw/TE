@@ -14,8 +14,8 @@ namespace Information_System
     public class AutoSendMail 
     {
         InFunction Fn = new InFunction();
-        public string url = "http://10.145.163.10/TE-IS"; //System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
-        public void Execute(/*IJobExecutionContext context*/)
+        public string url = "http://10.145.163.14/TE-IS"; //System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+        public async  void Execute(/*IJobExecutionContext context*/)
         {
             List<DocInfoModel> docList = new List<DocInfoModel>();
             List<string> mailto = new List<string>();

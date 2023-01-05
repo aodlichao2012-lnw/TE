@@ -244,7 +244,7 @@ namespace Information_System.Controllers
                     sql.AppendLine(" JOIN [db_employee].[dbo].[tbl_plant] P ON P.plant_id = R.PLANT ");
                     sql.AppendLine(" WHERE D.ID = " + Fn.getSQL(id));
                     cmd.CommandText = sql.ToString();
-
+                    res.txt_ATT_DOC_OTHER = new string[1];
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
@@ -268,13 +268,13 @@ namespace Information_System.Controllers
                         res.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
                         res.txt_ATT_DOC_REQUIRE = dr["ATT_DOC_REQUIRE"].ToString();
                         res.txt_DOC_IMPORTANT = dr["ATT_DOC_IMPORTANT"].ToString();
-                  
+                        res.txt_ATT_DOC_OTHER[0] = dr["ATT_DOC_OTHER"].ToString();
                         REQUEST_ID = dr["RID"].ToString();
                         res.STATUS_ALL = dr["STATUS_ALL"].ToString();
+                       
+                
 
-                        //res.txt_ATT_DOC_OTHER = dr["ATT_DOC_OTHER"].ToString();
 
-                   
                     }
 
                     dr.Close();
@@ -348,7 +348,7 @@ namespace Information_System.Controllers
                   
                     int count = 0;
                     cmd.CommandText = $@"SELECT TOP (4) [PATCH]
-                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{id}' ";
+                                      FROM [db_rtc].[dbo].[TBL_TECH_IS_FILES] where [IS_ID] = '{ res.ID}' ";
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {

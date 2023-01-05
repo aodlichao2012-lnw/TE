@@ -352,11 +352,17 @@
                     " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Picture reference</div><p><strong>Detail #1:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_1) + "'>&nbsp;" + json.txt_PIC_REF_1 + "</a></p>" +
                     " <p><strong>Detail #2:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_PIC_REF_2) + "'>&nbsp;" + json.txt_PIC_REF_2 + "</a></p></div></div> " +
                     " <div class='row'><div class='form-group col-lg-12'><div class='fs'>Attacched document</div><p><strong>Purchase request form:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + json.txt_ATT_DOC_PURCHASE + "'>&nbsp; " + json.txt_ATT_DOC_PURCHASE + "</a></p> " +
-                    " <p><strong>Requirement document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_REQUIRE) + "'>&nbsp; "+ json.txt_ATT_DOC_REQUIRE + "</a ></p > <p><strong>Other:</strong>";
-
+                    " <p><strong>Requirement document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_REQUIRE) + "'>&nbsp; " + json.txt_ATT_DOC_REQUIRE + "</a ></p> "+
+                    " <p><strong>Importanct document:</strong><a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_DOC_IMPORTANT) + "'>&nbsp; " + json.txt_DOC_IMPORTANT + "</a ></p ><p><strong>Other</strong></p>";
+                if (json.txt_ATT_DOC_OTHER != null) {
                     for (var i = 0; i < json.txt_ATT_DOC_OTHER.length; i++) {
-                        html += "<a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_OTHER[i]) + "'>&nbsp; " + json.txt_ATT_DOC_OTHER[i] + "</a></p></div></div></div>";
+                        if (json.txt_ATT_DOC_OTHER[i] != null) {
+                            html += "<a target='_blank' href='@url/TE-IS/Temp_File/" + escape(json.txt_ATT_DOC_OTHER[i]) + "'>&nbsp; " + json.txt_ATT_DOC_OTHER[i] + "</a></p></div></div></div>";
+                        }
+
                 }
+                }
+
 
                 var RevDoc_list = json.RevDoc;
                 if (RevDoc_list.length > 0) {
@@ -381,7 +387,7 @@
                         html += " <td class='text-center'>-</td></tr> ";
                     }
                     if ( approve_list[i].STATUS != "APPROVED") {
-                        html += "<tr><td class='text-center' > <a id='send' target='_blank'  href='@Url.Action("SendEmail", "Approve")/" + approve_list[i].APPROVE_ID + "' > Send Email Again</a ></td > </tr >";
+                        html += "<tr><td class='text-center' > <a id='send'   href='@Url.Action("SendEmail", "Approve")/" + approve_list[i].APPROVE_ID + "' > Send Email Again</a ></td > </tr >";
                         }
                 }
                 html += " </tbody></table></div></div> ";

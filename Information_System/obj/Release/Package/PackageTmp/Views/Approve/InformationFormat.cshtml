@@ -129,10 +129,14 @@
                                 <div><label for="staticEmail2">&nbsp;Purchase request form:</label><a href="~/Temp_File/@Model.txt_ATT_DOC_PURCHASE" target="_blank" id="staticEmail2">&nbsp; @Model.txt_ATT_DOC_PURCHASE</a></div>
                                 <div><label for="staticEmail2">&nbsp;Important notice form:</label><a href="~/Temp_File/@Model.txt_DOC_IMPORTANT" target="_blank" id="staticEmail2">&nbsp; @Model.txt_DOC_IMPORTANT</a></div>
                                 <div><label for="staticEmail2">&nbsp;Requirement document: </label><a href="~/Temp_File/@Model.txt_ATT_DOC_REQUIRE" target="_blank" id="staticEmail2">&nbsp; @Model.txt_ATT_DOC_REQUIRE</a></div>
-                                @foreach (var item in Model.txt_ATT_DOC_OTHER)
+                                @if (Model.txt_ATT_DOC_OTHER != null)
                                 {
-                                    <div><label for="staticEmail2">&nbsp;Other: </label><a href="~/Temp_File/@item" target="_blank" id="staticEmail2">&nbsp; @item</a></div>
+                                    foreach (var item in Model.txt_ATT_DOC_OTHER)
+                                    {
+                                        <div><label for="staticEmail2">&nbsp;Other: </label><a href="~/Temp_File/@item" target="_blank" id="staticEmail2">&nbsp; @item</a></div>
+                                    }
                                 }
+
 
                             </div>
                         </div>
@@ -326,10 +330,10 @@
                     {
                         var filetype = files[n].slice((files[n].lastIndexOf(".") - 1 >>> 0) + 2);
                         if (filetype == 'png' || filetype == 'PNG' || filetype == 'JPG' || filetype == 'jpg') {
-                            html += "<div><img class='mb-3 mt-1' style='max-width: 600px;' src='http://10.145.163.10/cloud/IS/IS_COMMENT/" + files[n] + "' /></div>"
+                            html += "<div><img class='mb-3 mt-1' style='max-width: 600px;' src='http://10.145.163.14/cloud/IS/IS_COMMENT/" + files[n] + "' /></div>"
                         }
                         else {
-                            html += "<div><a target='_blank' href='http://10.145.163.10/cloud/IS/IS_COMMENT/" + files[n] + "'>" + files[n] + "</a></div>";
+                            html += "<div><a target='_blank' href='http://10.145.163.14/cloud/IS/IS_COMMENT/" + files[n] + "'>" + files[n] + "</a></div>";
                         }
 
                     }

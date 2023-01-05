@@ -981,8 +981,14 @@ C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.AI.Depen
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.AI.Web.xml
-C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.csproj.AssemblyReference.cache
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.csproj.CoreCompileInputs.cache
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.csproj.CopyComplete
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.dll
 C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.pdb
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\obj\Release\Information_System.csproj.AssemblyReference.cache
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\System.Data.Common.dll
+C:\Users\suparatj\Documents\GitHub\TE2\Information_System\bin\System.Data.SqlClient.dll

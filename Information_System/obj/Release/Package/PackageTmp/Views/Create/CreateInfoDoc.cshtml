@@ -172,30 +172,44 @@
             <div class="form-group row mtd-10">
                 <label for="txtDocumentSubject" class="col-sm-4 col-lg-2 col-form-label">Document subject</label>
                 <div class="col-sm-8 col-lg-10">
-                    @*@if (d != null)
-                        {
-                            <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" value="@d.DOC_SUBJECT">
-                        }
-                        else
-                        {
-                            <input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" placeholder="Enter Document Subject">
-                        }*@
-
+                    @if (d != null)
+                    {
+                        @*<input type="text" class="form-control col-lg-4" id="txtDocumentSubject" name="txtDocumentSubject" value="@d.DOC_SUBJECT">*@
                     <select class="form-control col-lg-4" id="txtDocumentSubject" name="opSubject">
+                        <option value="@d.DOC_SUBJECT" selected>@d.DOC_SUBJECT</option>
                         @foreach (var sj in ViewData["subject"] as List<string>)
                         {
                             if (d != null && d.DOC_SUBJECT == sj)
                             {
-                                <option value="@sj" selected>@sj</option>
+                                <option value="@sj" >@sj</option>
                             }
                             else
                             {
                                 <option value="@sj">@sj</option>
                             }
                         }
-                    </select>
+                        </select>
+                        }
+                        else
+                        {
+                        <select class="form-control col-lg-4" id="txtDocumentSubject" name="opSubject">
+                            @foreach (var sj in ViewData["subject"] as List<string>)
+                            {
+                                if (d != null && d.DOC_SUBJECT == sj)
+                                {
+                                    <option value="@sj" selected>@sj</option>
+                                }
+                                else
+                                {
+                                    <option value="@sj">@sj</option>
+                                }
+                            }
+                        </select>
+                        }
 
-                </div>
+
+
+</div>
             </div>
             <div class="form-group row mtd-10">
                 <label for="txtResonExplain" class="col-sm-4 col-lg-2 col-form-label">Reson Explain</label>
@@ -236,7 +250,7 @@
                     }
                     else
                     {
-                        <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail"></textarea>
+                <textarea class="form-control" style="min-width: 100%" id="txtDocumentDetail" name="txtDocumentDetail" rows="3" placeholder="Enter Document Detail"></textarea>
                     }
 
                 </div>
@@ -293,7 +307,17 @@
                 <div class="col-sm-8 col-lg-10">
                     @if (warnning != "")
                     {
-                        <input name="warnning" type="text" id="txt_warn" value="@warnning" disabled="disabled" />
+                        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+                        <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#txt_warn').datepicker({
+                                    format: 'dd/mmm/yyyy',
+                                    //ignoreReadonly: true,
+                                });
+                            })
+                        </script>
+                        <input name="warnning" type="text" id="txt_warn" value="@warnning" />
                     }
                     else
                     {
@@ -335,7 +359,7 @@
                         Detail #1:
                         @if (d != null && fp.txt_PIC_REF_1 != null && fp.txt_PIC_REF_1 != "")
                         {
-                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_1">@fp.txt_PIC_REF_1</a> <button id="btnPic1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_1)','PIC_REF_1');">X</button>
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_1">@fp.txt_PIC_REF_1</a> <button id="btnPic1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile1('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_1)','PIC_REF_1');">X</button>
                         }
                         else
                         {
@@ -348,7 +372,7 @@
                         Detail #2:
                         @if (d != null && fp.txt_PIC_REF_2 != null && fp.txt_PIC_REF_2 != "")
                         {
-                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_2">@fp.txt_PIC_REF_2</a> <button id="btnPic2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_2)','PIC_REF_2');">X</button>
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_PIC_REF_2">@fp.txt_PIC_REF_2</a> <button id="btnPic2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile2('@HttpUtility.JavaScriptStringEncode(fp.txt_PIC_REF_2)','PIC_REF_2');">X</button>
                         }
                         else
                         {
@@ -365,7 +389,7 @@
                         Purchase request form:
                         @if (d != null && fp.txt_ATT_DOC_PURCHASE != null && fp.txt_ATT_DOC_PURCHASE != "")
                         {
-                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_PURCHASE">@fp.txt_ATT_DOC_PURCHASE</a> <button id="btnAtt1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_PURCHASE)','ATT_DOC_PURCHASE');">X</button>
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_PURCHASE">@fp.txt_ATT_DOC_PURCHASE</a> <button id="btnAtt1" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile3('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_PURCHASE)','ATT_DOC_PURCHASE');">X</button>
                         }
                         else
                         {
@@ -376,7 +400,7 @@
                         Important notice Document:
                         @if (d != null && fp.txt_ATT_DOC_IMPORTANT != null && fp.txt_ATT_DOC_IMPORTANT != "")
                         {
-                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_IMPORTANT">@fp.txt_ATT_DOC_IMPORTANT</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_IMPORTANT)','ATT_DOC_IMPORTANT');">X</button>
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_IMPORTANT">@fp.txt_ATT_DOC_IMPORTANT</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile4('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_IMPORTANT)','ATT_DOC_IMPORTANT');">X</button>
                         }
                         else
                         {
@@ -387,7 +411,7 @@
                         Requirement document:
                         @if (d != null && fp.txt_ATT_DOC_REQUIRE != null && fp.txt_ATT_DOC_REQUIRE != "")
                         {
-                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_REQUIRE">@fp.txt_ATT_DOC_REQUIRE</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_REQUIRE)','ATT_DOC_REQUIRE');">X</button>
+                            <a class="ml-3" target="_blank" href="~/Temp_File/@fp.txt_ATT_DOC_REQUIRE">@fp.txt_ATT_DOC_REQUIRE</a> <button id="btnAtt2" type="button" class="btn btn-danger btn-sm" style="margin-left: 16px" onclick="deleteFile5('@HttpUtility.JavaScriptStringEncode(fp.txt_ATT_DOC_REQUIRE)','ATT_DOC_REQUIRE');">X</button>
                         }
                         else
                         {
@@ -456,31 +480,37 @@
                 </div>
             }
 
-            <div class="row justify-content-end mt-2 mb-4" style="margin: 8px;">
-                <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
+        <div class="row justify-content-end mt-2 mb-4" style="margin: 8px;">
+            <div class="mr-3 mt-1" id="err" style="display: none;"><small style="color: red;">Sorry! Please try again!</small></div>
 
-                @if (d != null && d.STATUS_ALL == "IN-PROGRESS")
-                {
-                    <button type="button" class="btn btn-danger mr-2" id="reviseInfo" data-toggle="modal" data-target="#reviseModel">Revise and save Information</button>
-                }
+            @if (d != null && d.STATUS_ALL == "IN-PROGRESS")
+            {
+               
+                <button type="button" class="btn btn-danger mr-2" id="reviseInfo" data-toggle="modal" data-target="#reviseModel">Revise and save Information</button>
+            }
 
-                @if (d != null && d.ID != null && (d.STATUS_ALL != "APPROVED" || d.STATUS_ALL != "IN-PROGRESS" || d.STATUS_ALL != "REJECT"))
-                {
-                    <button type="button" class="btn btn-danger mr-2" id="btnEdit" data-toggle="modal" data-target="#editModel">Edit and save Information</button>
-                }
+            @if (d != null && d.ID != null && (d.STATUS_ALL != "APPROVED" || d.STATUS_ALL != "IN-PROGRESS" || d.STATUS_ALL != "REJECT"))
+            {
 
-                @if (d == null || (d.STATUS_ALL == null || d.STATUS_ALL == ""))
-                {
-                    <button type="button" class="btn mr-2" id="btnTemp" style="background-color: #E67E22 ; color: white;" data-toggle="modal" data-target="#tempModel">Temporary and Sent E-mail</button>
-                }
+                <button type="button" class="btn btn-danger mr-2" id="btnEdit" data-toggle="modal" data-target="#editModel">Edit and save Information</button>
+            }
 
-                @if (d != null && (d.STATUS_ALL == "TECH-APPROVE"))
-                {
-                    <button type="button" class="btn btn-success mr-2" id="btnSave" data-toggle="modal" data-target="#saveModel">Save and Sent E-mail</button>
-                }
+            @if (d == null || (d.STATUS_ALL == null || d.STATUS_ALL == ""))
+            {
+                <button type="button" class="btn mr-2" id="btnTemp" style="background-color: #E67E22 ; color: white;" data-toggle="modal" data-target="#tempModel">Temporary and Sent E-mail</button>
+            }
 
-                <button type="button" class="btn btn-secondary mr-2" id="btnCancel" data-toggle="modal" data-target="#cancelModel">Cancel</button>
-            </div>
+            @if (d != null && (d.STATUS_ALL == "TECH-APPROVE"))
+            {
+                <button type="button" class="btn btn-success mr-2" id="btnSave" data-toggle="modal" data-target="#saveModel">Save and Sent E-mail</button>
+            }
+            @if (d.STATUS_ALL == "CREATE")
+            {
+                <button type="button" class="btn btn-success mr-2" id="btnSave" data-toggle="modal" data-target="#saveModel">Save and Sent E-mail</button>
+            }
+
+            <button type="button" class="btn btn-secondary mr-2" id="btnCancel" data-toggle="modal" data-target="#cancelModel">Cancel</button>
+        </div>
         </form>
         }
  
@@ -686,7 +716,7 @@
 
        //document.getElementById('txtDocumentSubject').readOnly = true;
   /*     document.getElementById('txtDocumentSubject').setAttribute('disabled', 'disabled');*/
-       document.getElementById('txtResonExplain').readOnly = true;
+       document.getElementById('txtResonExplain').readOnly = false;
        document.getElementById('txtDetailReference').readOnly = true;
 
        @*if ('@d.APPROVED_FLAX' == "True") {
@@ -725,6 +755,7 @@
 
                             window.location.reload();
                         }
+                        window.location.reload();
                     }
                     xhr.send();
              }
@@ -732,8 +763,32 @@
 
        function saveInformation() {
            $('#loadingModel').modal('show');
+           var PIC_REF_1 = $("#_PIC_REF_1").get(0);
+           var PIC_REF_2 = $("#_PIC_REF_2").get(0);
+           var ATT_DOC_PURCHASE = $("#_ATT_DOC_PURCHASE").get(0);
+           var ATT_DOC_REQUIRE = $("#_ATT_DOC_REQUIRE").get(0);
+
+           console.log(ATT_DOC_OTHER)
+           var ATT_DOC_IMPORTANT = $("#_ATT_DOC_IMPORTANT").get(0);
            var data = new FormData();
-           data.append('id', '@d.ID');
+           if (PIC_REF_1 != undefined) {
+               data.append('PIC_REF_1', PIC_REF_1.files[0]);
+           }
+           if (PIC_REF_2 != undefined) {
+               data.append('PIC_REF_2', PIC_REF_2.files[0]);
+           }
+           if (ATT_DOC_PURCHASE != undefined) {
+               data.append('ATT_DOC_PURCHASE', ATT_DOC_PURCHASE.files[0]);
+           }
+           if (ATT_DOC_REQUIRE != undefined) {
+               data.append('ATT_DOC_REQUIRE', ATT_DOC_REQUIRE.files[0]);
+           }
+
+           if (ATT_DOC_IMPORTANT != undefined) {
+               data.append('ATT_DOC_IMPORTANT', ATT_DOC_IMPORTANT.files[0]);
+           }
+           data.append('ID', '@d.ID');
+       
            $.ajax({
                     type: "post",
                     data: data,
@@ -781,6 +836,99 @@
 }
 
 <script>
+    function deleteFile1(id) {
+         @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile1", "create")" + "?id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                       
+                        window.location.reload();
+                    }
+                }
+                xhr.send();
+         }
+    }
+    function deleteFile2(id) {
+         @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+   
+
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile2", "create")" +  "?id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                       
+                        window.location.reload();
+                    }
+                }
+                xhr.send();
+         }
+    }
+    function deleteFile3(id) {
+         @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+
+
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile3", "create")" + "?id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                       
+                        window.location.reload();
+                    }
+                }
+                xhr.send();
+         }
+    }  function deleteFile4(id) {
+         @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+   
+
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile4", "create")" + "?id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                       
+                        window.location.reload();
+                    }
+                }
+                xhr.send();
+         }
+    }
+
+    function deleteFile5(id) {
+         @if (d != null) {
+              @:var id = '@d.ID';
+        }
+
+    
+        if (confirm("Do you want to delete an attachment?")) {
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "@Url.Action("deleteFile5", "create")" +  "?id="+ id);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                       
+                        window.location.reload();
+                    }
+                }
+                xhr.send();
+         }
+    }
        @*var data1 = {
            REQUEST_NO: '@d.IS_NO',
            DOC_TYPE: $('#txtDocType').val(),
@@ -832,7 +980,7 @@
         var ATT_DOC_PURCHASE = $("#_ATT_DOC_PURCHASE").get(0);
         var ATT_DOC_REQUIRE = $("#_ATT_DOC_REQUIRE").get(0);
         var fileUpload = $("#_ATT_DOC_OTHER").get(0);
-       
+
 
         console.log(ATT_DOC_OTHER)
         var ATT_DOC_IMPORTANT = $("#_ATT_DOC_IMPORTANT").get(0);
@@ -874,7 +1022,6 @@
         data.append('DOC_FLOW_ID', txtDocumentFlow.value);
         if (ACKNOWLAGE_FLEX == 1) {
             data.append('CC_GRP', txtCC.value);
-            alert(txtCC.value)
         }
         data.append('DOC_FLOW_TEXT', txtDocumentFlow.options[txtDocumentFlow.selectedIndex].innerText);
         data.append('DETAIL_REF', $('#txtDetailReference').val());
@@ -943,11 +1090,11 @@
         var url;
 
         @if (d != null && (d.STATUS_ALL == "APPROVED" || d.STATUS_ALL == "REJECT" || d.STATUS_ALL == "REVISE")) {
-            @Html.Raw(" url = '" + Url.Action("getApproveLists", "Create") + "?id=" + TempData["NEWID"].ToString() + "';");
+            @Html.Raw(" url = '" + Url.Action("getApproveLists", "Create") + "?id=" + d.ID + "';");
             @Html.Raw(" document.getElementById('AppTable').className = 'table-responsive col-lg-10'; ");
         } else if (d != null && (d.STATUS_ALL == "IN-PROGRESS"))
         {
-            @Html.Raw(" if ('"+@d.DOC_FLOW_ID+"' == id) { url = '" + Url.Action("getApproveLists", "Create") + "?id=" + TempData["NEWID"].ToString() + "'; } ");
+            @Html.Raw(" if ('"+@d.DOC_FLOW_ID+"' == id) { url = '" + Url.Action("getApproveLists", "Create") + "?id=" + d.ID + "'; } ");
             @Html.Raw(" else { url = '" + Url.Action("getMailGrp", "Create") + "?id=appID&issueID=" + d.REQUIREMENT_ISSUE_ID + "'; } ");
             @Html.Raw(" document.getElementById('AppTable').className = 'table-responsive col-lg-10'; ");
 
@@ -1090,7 +1237,8 @@
                             var a = "'" + data[i] + "'";
                             html += "<p class='row col-8'><a id='F" + i + "' href=" + "'@Url.Content("~/Temp_File/")" + data[i] + "'" + " target='_blank'>" + data[i] + "</a><button id='" + data[i] + "' onclick='deleteFile(" + i + ");' type='button' class='btn btn-danger btn-sm' style='margin-left: 16px'>X</button></p><br>";
                         }
-                          $('#fileLink').append(html)
+                        $('#fileLink').append(html)
+                        window.location.reload();
                     }
                 }
                 xhr.send();
